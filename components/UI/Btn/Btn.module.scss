@@ -1,0 +1,20 @@
+.myButton {
+  background: #5454d4;
+  border-radius: 5px;
+  padding: 10px 30px;
+  color: #fff;
+
+  &:hover {
+    opacity: 0.7;
+    transition: $trn;
+  }
+}
+.primary {
+  background: none;
+  border: 1px solid #fff;
+
+  &:hover {
+    opacity: 0.7;
+    transition: $trn;
+  }
+}

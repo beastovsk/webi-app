@@ -1,0 +1,45 @@
+.container {
+  @include fluid(margin-top, 20px, 40px);
+  display: flex;
+  align-items: center;
+  height: max-content;
+  gap: 30px;
+  position: relative;
+
+  @media screen and (max-width: $breakpoint-md) {
+    flex-direction: column;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    // left: -401.52px;
+    top: 0;
+    width: 505px;
+    height: 300px;
+    z-index: 10;
+    background: linear-gradient(180deg, rgba(84, 84, 212, 0.27) 0%, rgba(84, 84, 212, 0.1134) 100%);
+    filter: blur(100px);
+    border-radius: 233.5px;
+    transform: rotate(-54.37deg);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+
+    right: 10%;
+    top: 30%;
+    width: 467px;
+    height: 300px;
+    z-index: 10;
+    background: linear-gradient(180deg, rgba(251, 168, 28, 0.1066) 0%, rgba(224, 86, 136, 0.0615) 100%);
+    filter: blur(100px);
+    border-radius: 233.5px;
+    transform: rotate(65.71deg);
+  }
+}
+.title {
+  @include fluid(font-size, 38px, 56px);
+  font-weight: bold;
+}

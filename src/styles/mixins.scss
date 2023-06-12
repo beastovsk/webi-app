@@ -1,0 +1,146 @@
+@use 'sass:math';
+
+$breakpoint-to-fluid: 992px;
+$breakpoint-to-sm: 720px;
+$base-vw: 1920px;
+
+$breakpoint-lg: 992px;
+$breakpoint-md: 768px;
+$breakpoint-sm: 576px;
+
+$container-lg: 1230px;
+$container-md: 720px;
+$container-sm: 540px;
+
+$p: 15px;
+$textColor: var(--text-color);
+$background: var(--background);
+$secondary: var(--secondary);
+$primary: var(--primary);
+$block: var(--block);
+$shadow: var(--shadow);
+$gray: #858484;
+$trn: 0.38s ease-in-out;
+$blueGradient: linear-gradient(91.42deg, $secondary, $primary);
+$blue: #2e69ff;
+$green: rgb(0, 192, 169);
+$purple: #bc2fff;
+$neumorphismBg: var(--neumorphismBg);
+$neumorphismBorder: var(--neumorphismBorder);
+$neumorphismShadow: var(--neumorphismShadow);
+$formColor: var(--formColor);
+
+$purpleGradient: linear-gradient(140.58deg, rgba(46, 105, 255, 1) 13.96%, rgba(188, 47, 255, 1) 82.99%);
+$redGradient: linear-gradient(91.42deg, #ff3e3e 0%, #ff6969 100%), #1b1b1b;
+
+@mixin background {
+  background: $block;
+  box-shadow: $shadow;
+  border-radius: 35px;
+}
+
+@mixin neumorphism {
+  background: $neumorphismBg;
+  border: $neumorphismBorder;
+  box-shadow: $neumorphismShadow;
+  border-radius: 30px;
+}
+
+@mixin blueGradient {
+  background: linear-gradient(91.42deg, rgba(46, 105, 255, 0.5) 0%, rgba(0, 192, 169, 0.5) 100%);
+  background-size: 100% 100%;
+  transition: $trn;
+
+  &:hover {
+    background-size: 200% 100%;
+  }
+}
+
+@mixin textGradient {
+  color: #2f69ff;
+}
+
+@mixin flex {
+  display: flex;
+  align-items: center;
+}
+
+@mixin container {
+  width: 100%;
+  max-width: $container-lg;
+  padding-left: $p;
+  padding-right: $p;
+  margin: auto;
+
+  @media screen and (max-width: $breakpoint-lg) {
+    max-width: $container-md;
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    max-width: $container-sm;
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    max-width: none;
+  }
+}
+
+@mixin container-lg {
+  width: 65%;
+  max-width: 1400px;
+  margin: auto;
+
+  @media screen and (max-width: $breakpoint-lg) {
+    max-width: $container-lg;
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    max-width: $container-md;
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    max-width: none;
+  }
+}
+
+@mixin block {
+  background: rgba(91, 91, 91, 0.2);
+  border-radius: 20px;
+  width: fit-content;
+  @include fluid(padding, 10px, 15px);
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function calcFluidFontSize($f-min, $f-max, $w-min, $w-max, $units: px) {
+  $f-min: strip-unit($f-min);
+  $f-max: strip-unit($f-max);
+  $w-min: strip-unit($w-min);
+  $w-max: strip-unit($w-max);
+  $k: math.div($f-max - $f-min, $w-max - $w-min);
+  $b: $f-min - $k * $w-min;
+  $b: $b + $units;
+  @return calc(#{$k} * 100vw + #{$b});
+}
+
+@mixin fluid($property, $f-min, $f-max, $w-min: $breakpoint-to-fluid, $w-max: $base-vw, $fallback: false) {
+  #{$property}: $f-min;
+
+  @media (min-width: $w-min) {
+    @if ($fallback) {
+      #{$property}: $fallback;
+    }
+
+    #{$property}: calcFluidFontSize($f-min, $f-max, $w-min, $w-max, px);
+  }
+
+  @media (min-width: $w-max) {
+    #{$property}: $f-max;
+  }
+}

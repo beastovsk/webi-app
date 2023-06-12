@@ -1,0 +1,32 @@
+{
+    "extends": [
+        "next",
+        "prettier",
+        "standard"
+    ],
+    "ignorePatterns": [
+        "app/layout.tsx"
+    ],
+    "rules": {
+        "multiline-ternary": "off",
+        "semi": [
+            1,
+            "always"
+        ],
+        "indent": [
+            "error",
+            2
+        ],
+        "object-curly-spacing": "off",
+        "no-trailing-spaces": "off",
+        "space-before-function-paren": "off",
+        "jsx-quotes": [
+            1,
+            "prefer-single"
+        ],
+        "padded-blocks": [
+            "off",
+            "always"
+        ]
+    }
+}
