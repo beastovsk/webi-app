@@ -1,0 +1,15 @@
+.title {
+  @include fluid(font-size, 38px, 56px);
+  font-weight: bold;
+}
+.wrapper {
+  // display: flex;
+  // justify-content: center;
+  // flex-direction: column;
+  // flex-grow: 1;
+
+  // // width: 50% !important;
+  // background: #1e1e20;
+  // border-radius: 14px;
+  // padding: 30px;
+}
