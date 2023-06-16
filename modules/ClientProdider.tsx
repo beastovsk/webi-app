@@ -10,7 +10,7 @@ function ClientProvider({children}: {children: React.ReactNode}) {
   return (
     <QueryClientProvider client={queryClient}>
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      <ThemeProvider enableSystem={false} attribute='class'>
+      <ThemeProvider enableSystem={false} attribute='class' forcedTheme='dark' defaultTheme='dark'>
         {/* <AntdThemeProvider> */}
         {children}
         {/* </AntdThemeProvider> */}

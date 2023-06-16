@@ -1,7 +1,18 @@
-.myButton {
-  background: #5454d4;
+.button {
+  background: #6f4ff2;
   border-radius: 5px;
-  padding: 10px 30px;
+  padding: 7px 40px;
+  color: #fff;
+
+  &:hover {
+    opacity: 0.7;
+    transition: $trn;
+  }
+}
+.danger {
+  background: #dc3546;
+  border-radius: 5px;
+  padding: 7px 40px;
   color: #fff;
 
   &:hover {

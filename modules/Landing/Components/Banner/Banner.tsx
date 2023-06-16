@@ -20,7 +20,7 @@ export const Banner: FC<BannerProps> = () => {
         </p>
         <Btn>
           <span className='flex items-center gap-3'>
-            Наши услуги <RiseOutlined rev={1} />
+            Наши услуги
           </span>
         </Btn>
       </div>

@@ -6,6 +6,7 @@ type ButtonOwnProps<E extends ElementType = ElementType> = {
   htmlTypeButton?: string;
   tag?: E;
   primary?: boolean;
+  className?: string;
 };
 
 type ButtonProps<E extends ElementType> = ButtonOwnProps<E> & Omit<ComponentProps<E>, keyof ButtonOwnProps>;
@@ -15,15 +16,16 @@ const defaultElement = 'button';
 export default function Btn<E extends ElementType = typeof defaultElement>({
   children,
   tag,
-  isCancel,
+  danger,
   primary,
   htmlTypeButton,
+  className,
   ...otherProps
 }: ButtonProps<E>) {
   const TagName = tag || defaultElement;
 
   return (
-    <TagName className={`${primary && s.primary} ${s.myButton}`} {...otherProps}>
+    <TagName className={`${danger && s.danger} ${primary && s.primary} ${s.button} ${className}`} {...otherProps}>
       {children}
     </TagName>
   );

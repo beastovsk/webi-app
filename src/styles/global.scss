@@ -12,7 +12,14 @@ html {
 }
 
 body {
-  overflow-x: hidden
+  overflow-x: hidden;
+}
+
+input {
+  color: #fff !important;
+  &::placeholder {
+    color: #68676e !important;
+  }
 }
 
 .container {

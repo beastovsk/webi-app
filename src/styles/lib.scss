@@ -7,3 +7,16 @@
 .dot {
   background: #fff;
 }
+.ant-input,
+.ant-input-affix-wrapper {
+  background: #1d1932;
+  border-radius: 12px;
+  border: none;
+  padding: 10px 20px;
+  outline: none;
+}
+.ant-input-suffix {
+  .anticon {
+    color: #6c7aa0 !important;
+  }
+}
