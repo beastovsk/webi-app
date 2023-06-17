@@ -1,7 +1,7 @@
 'use client';
 
 import Btn from '@/components/UI/Btn/Btn';
-import {Button, Form, Input} from 'antd';
+import {Button, Form, Input, Tooltip} from 'antd';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {FC} from 'react';
@@ -14,7 +14,12 @@ export const Auth: FC<AuthProps> = () => {
   return (
     <div className={s.container}>
       <h1 className='text-5xl font-semibold'>
-        Webi <span className='text-primary-500'>Marketplace</span>
+        <Tooltip title='Перейти на главную страницу'>
+          <Link href={'/'} className='hover:opacity-70 transition-opacity'>
+            Webi
+          </Link>
+        </Tooltip>{' '}
+        <span className='text-primary-500'>Marketplace</span>
       </h1>
 
       <h2 className='text-3xl font-medium mt-20'>Авторизация</h2>
