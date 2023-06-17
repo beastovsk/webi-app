@@ -3,12 +3,15 @@
 import Btn from '@/components/UI/Btn/Btn';
 import {Button, Form, Input} from 'antd';
 import Link from 'next/link';
+import {useRouter} from 'next/navigation';
 import React, {FC} from 'react';
 import s from './Reg.module.scss';
 
 interface RegProps {}
 
 export const Reg: FC<RegProps> = () => {
+  const router = useRouter();
+
   return (
     <div className={s.container}>
       <h1 className='text-5xl font-semibold'>
@@ -17,7 +20,14 @@ export const Reg: FC<RegProps> = () => {
 
       <h2 className='text-3xl font-medium mt-20'>Регистрация</h2>
 
-      <Form className='my-10'>
+      <Form
+        className='my-10'
+        onFinish={() => {
+          setTimeout(() => {
+            router.push('/marketplace/auth');
+          }, 2000);
+        }}
+      >
         <Form.Item name='name'>
           <Input size='large' placeholder='Имя' />
         </Form.Item>{' '}

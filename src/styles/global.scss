@@ -9,12 +9,17 @@
 html {
   scroll-behavior: smooth;
   background: #131129;
+  height: 100%;
 }
 
 body {
   overflow-x: hidden;
+  height: 100%;
 }
 
+main {
+  height: 100%;
+}
 input {
   color: #fff !important;
   &::placeholder {
