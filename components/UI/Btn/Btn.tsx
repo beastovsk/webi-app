@@ -6,6 +6,7 @@ type ButtonOwnProps<E extends ElementType = ElementType> = {
   htmlTypeButton?: string;
   tag?: E;
   primary?: boolean;
+  danger?: boolean;
   className?: string;
 };
 
