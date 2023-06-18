@@ -2,6 +2,7 @@
 
 import Btn from '@/components/UI/Btn/Btn';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, {FC} from 'react';
 import s from './MarketplaceBanner.module.scss';
 
@@ -18,7 +19,9 @@ export const MarketplaceBanner: FC<MarketplaceBannerProps> = () => {
         <p className='mb-5'>Webi Маркетплейс - площадка для покупки веб-ресурсов</p>
 
         <div className='flex gap-5'>
-          <Btn>Каталог</Btn>
+          <Link href={'/marketplace/products'}>
+            <Btn>Каталог</Btn>
+          </Link>
           <Btn danger>Поддержка</Btn>
         </div>
       </div>

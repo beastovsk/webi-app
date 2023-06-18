@@ -34,8 +34,8 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
       <div className='flex gap-5 mt-5'>
         {productsList.length ? (
           productsList.map(({id, image, price, title, type}) => (
-            <Link href={`/marketplace/product/${id}`} className={s.item} key={id}>
-              <Image src={image} alt='' width={300} height={500} />
+            <Link href={`/marketplace/products/${id}`} className={s.item} key={id}>
+              <Image src={image} alt='' width={300} height={500} className='h-[170px] object-cover rounded-3xl' />
 
               <h2 className='my-5 text-lg font-medium'>{title}</h2>
 
@@ -48,7 +48,9 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
                 </span>
               </div>
 
-              <Btn className='w-full'>Добавить в корзину</Btn>
+              <Btn className='w-full' onClick={(e: any) => e.preventDefault()}>
+                Добавить в корзину
+              </Btn>
             </Link>
           ))
         ) : (

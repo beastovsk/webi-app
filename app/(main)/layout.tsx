@@ -10,7 +10,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <Header />
       </div>
       <div className='flex-grow flex-shrink-0 basis-auto container flex flex-col gap-20 md:gap-10'>{children}</div>
-      <div className='flex-grow-0 flex-shrink-0 basis-auto'>
+      <div className='flex-grow-0 flex-shrink-0 basis-auto mt-20'>
         <Footer />
       </div>
     </div>
