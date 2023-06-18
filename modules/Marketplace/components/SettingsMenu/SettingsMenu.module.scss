@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.item {
+  margin-top: 10px;
+  @apply rounded-3xl;
+  padding: 20px;
+  background: #1d1932;
+  transition: $trn;
+}

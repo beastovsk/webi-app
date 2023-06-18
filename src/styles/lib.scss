@@ -10,7 +10,7 @@
 .ant-input,
 .ant-input-affix-wrapper,
 .ant-select-selector {
-  background: #1d1932 !important;
+  background: #1d1932;
   border-radius: 12px !important;
   border: none !important;
   padding: 10px 20px;
@@ -29,4 +29,12 @@
 }
 .ant-select-selector {
   height: 42px !important;
+  background: #1d1932 !important;
+}
+.ant-input-affix-wrapper {
+  input {
+    background: transparent;
+    width: 100% !important;
+    border-radius: 0px !important;
+  }
 }

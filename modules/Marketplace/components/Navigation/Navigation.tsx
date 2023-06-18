@@ -20,7 +20,7 @@ export const Navigation: FC<NavigationProps> = () => {
     },
     {
       icon: <DesktopOutlined className='text-2xl cursor-pointer' color='#111' rev={''} />,
-      href: '/marketplace/search'
+      href: '/marketplace/products'
     },
     {
       icon: <UserOutlined className='text-2xl cursor-pointer' color='#111' rev={''} />,
