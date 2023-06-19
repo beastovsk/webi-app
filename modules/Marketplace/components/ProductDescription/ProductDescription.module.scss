@@ -1,0 +1,14 @@
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 5rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  background: #1d1932;
+  border-radius: 18px;
+  padding: 30px;
+}
