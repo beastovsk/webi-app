@@ -5,7 +5,7 @@ import React from 'react';
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <div className='flex flex-col h-full'>
+    <div className='flex flex-col h-full w-full'>
       <div className='flex-grow-0 flex-shrink-0 basis-auto container'>
         <Header />
       </div>

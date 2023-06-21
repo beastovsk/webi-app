@@ -9,4 +9,12 @@
   padding: 20px;
 
   position: fixed;
+
+  @media screen and (max-width: $breakpoint-md) {
+    height: 60px;
+    width: 100%;
+    bottom: 0;
+    flex-direction: row;
+    justify-content: center;
+  }
 }

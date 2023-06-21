@@ -15,7 +15,7 @@ interface ProductsListProps {
 export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
   return (
     <div className={s.container}>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center md:flex-col md:items-start'>
         <h2 className='font-medium text-xl'>{title}</h2>
 
         <Popover
@@ -31,11 +31,17 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
         </Popover>
       </div>
 
-      <div className='flex gap-5 mt-5'>
+      <div className='flex gap-5 mt-5 md:flex-col'>
         {productsList.length ? (
           productsList.map(({id, image, price, title, type}) => (
             <Link href={`/marketplace/products/${id}`} className={s.item} key={id}>
-              <Image src={image} alt='' width={300} height={500} className='h-[170px] object-cover rounded-3xl' />
+              <Image
+                src={image}
+                alt=''
+                width={300}
+                height={500}
+                className='h-[170px] object-cover md:w-full rounded-3xl'
+              />
 
               <h2 className='my-5 text-lg font-medium'>{title}</h2>
 

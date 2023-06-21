@@ -18,16 +18,18 @@ export const MarketplaceBanner: FC<MarketplaceBannerProps> = () => {
         <h2 className='text-xl mb-3'>Приобретайте сайт, веб-приложения и модули по доступным ценам</h2>
         <p className='mb-5'>Webi Маркетплейс - площадка для покупки веб-ресурсов</p>
 
-        <div className='flex gap-5'>
+        <div className='flex gap-5 md:flex-col'>
           <Link href={'/marketplace/products'}>
-            <Btn>Каталог</Btn>
+            <Btn className='md:w-full'>Каталог</Btn>
           </Link>
-          <Btn danger>Поддержка</Btn>
+          <Link href={'/marketplace/support'}>
+            <Btn danger>Поддержка</Btn>
+          </Link>
         </div>
       </div>
 
-      <div className='flex gap-5 bg-[#1D1932] p-5 rounded-3xl flex-grow'>
-        <Image src={banner} alt='' width={200} height={300} className='object-cover rounded-3xl' />
+      <div className='flex md:flex-col gap-5 bg-[#1D1932] p-5 rounded-3xl flex-grow'>
+        <Image src={banner} alt='' width={200} height={300} className='object-cover rounded-3xl md:w-full' />
 
         <div className='flex flex-col justify-between'>
           <h2 className={s.title}>новый продукт</h2>
@@ -41,7 +43,7 @@ export const MarketplaceBanner: FC<MarketplaceBannerProps> = () => {
             Цена: <p className='text-[#6C7AA0]'>10.000 Р</p>
           </span>
 
-          <div className='flex gap-5'>
+          <div className='flex gap-5 md:flex-col md:gap-2 md:mt-5'>
             <Btn>В корзину</Btn>
             <Btn danger>Подробнее</Btn>
           </div>

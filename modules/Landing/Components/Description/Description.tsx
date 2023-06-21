@@ -9,6 +9,7 @@ import 'swiper/css';
 import s from './Description.module.scss';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation, Pagination} from 'swiper';
+import Link from 'next/link';
 
 interface DescriptionProps {}
 
@@ -32,8 +33,11 @@ export const Description: FC<DescriptionProps> = () => {
       description: (
         <span>
           Мы подстраиваемся под бюджет клиента и разрабатываем проекты с нуля, но для выгодных покупок или под
-          минимальный бюджет - мы разработали <span className='text-primary-500'>маркетплейс</span> с уже готовыми и
-          качественными проектами
+          минимальный бюджет - мы разработали{' '}
+          <Link href='/marketplace/auth' className='text-primary-500 hover:opacity-70 transition-opacity'>
+            маркетплейс
+          </Link>{' '}
+          с уже готовыми и качественными проектами
         </span>
       )
     }

@@ -7,6 +7,7 @@ import {Services} from '@/modules/Landing/Components/Services/Services';
 import {Marketplace} from '@/modules/Landing/Components/Marketplace/Marketplace';
 import {Faq} from '@/modules/Landing/Components/Faq/Faq';
 import {Consumers} from '@/modules/Landing/Components/Consumers/Consumers';
+import {Feedback} from '@/modules/Landing/Components/Feedback/Feedback';
 
 export default async function Page() {
   return (
@@ -16,6 +17,7 @@ export default async function Page() {
       <Marketplace />
       <Consumers />
       <Services />
+      <Feedback />
       {/* <Faq /> */}
     </>
   );

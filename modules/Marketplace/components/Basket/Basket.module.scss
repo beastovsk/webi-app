@@ -1,18 +1,15 @@
-.container {
+.wrapper {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 5rem;
+  gap: 40px;
 
   @media screen and (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
   }
 }
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+.item {
   background: #1d1932;
   border-radius: 18px;
-  padding: 30px;
+  padding: 20px;
+  height: max-content;
 }

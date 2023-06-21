@@ -5,4 +5,8 @@
   align-items: center;
   gap: 40px;
   padding: 20px 0px;
+
+  @media screen and (max-width: $breakpoint-md) {
+    justify-content: space-between;
+  }
 }

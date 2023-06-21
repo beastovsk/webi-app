@@ -17,7 +17,7 @@ export const Services: FC<ServicesProps> = () => {
     {title: 'Поддержка', description: 'Возьмем на себя ответственность за ваши веб-ресурсы', image: support}
   ];
   return (
-    <div className={s.container}>
+    <div className={s.container} id='services'>
       <h1 className={s.title}>
         Наши услуги лично для <span className='text-primary-500'>тебя</span>
       </h1>

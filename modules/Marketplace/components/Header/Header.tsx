@@ -14,11 +14,11 @@ export const Header: FC<HeaderProps> = () => {
 
   return (
     <div className={s.container}>
-      <div className='cursor-pointer hover:opacity-70 transition-opacity'>
+      <Link href={'/marketplace/basket'} className='cursor-pointer hover:opacity-70 transition-opacity'>
         <Badge count={2} className=''>
           <ShoppingCartOutlined className='text-[#6C7AA0] text-2xl ' rev={''} />
         </Badge>
-      </div>
+      </Link>
       <Link
         href={'/marketplace/profile'}
         className='bg-[#6F4FF2] w-10 h-10 rounded-full transition-opacity hover:opacity-70'

@@ -42,11 +42,11 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
         </div>
       </div>
       <div className='w-full'>
-        <h2 className='text-xl font-medium'>Изменить пароль</h2>
+        <h2 className='text-xl font-medium'>Изменить email</h2>
         <div className={s.item}>
           <div className='flex flex-col gap-5'>
             <div>
-              <h3 className='text-base font-medium mb-3'>Email</h3>
+              <h3 className='text-base font-medium mb-3'>Новый email</h3>
               <Input
                 style={{background: '#131129'}}
                 value={passwordForm.email}
@@ -62,10 +62,9 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
               />
             </div>
             <div>
-              <h3 className='text-base font-medium mb-3'>Новый пароль</h3>
+              <h3 className='text-base font-medium mb-3'>Повторите пароль</h3>
               <Input.Password
                 style={{background: '#131129'}}
-                
                 value={passwordForm.newPassword}
                 onChange={(e) => setPasswordForm((form: IPasswordForm) => ({...form, newPassword: e.target.value}))}
               />

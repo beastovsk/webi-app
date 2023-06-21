@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import React, {FC} from 'react';
 
 import s from './Marketplace.module.scss';
@@ -10,21 +11,25 @@ export const Marketplace: FC<MarketplaceProps> = () => {
     {title: 'Сайт/веб-приложение', id: 1},
     {title: 'Возможность редактировать и удалять контента бесплатно в течении 7-ми дней', id: 2},
     {title: 'Хостинг, сервер и поддержка сайта на месяц', id: 3},
-    {title: 'Скидка 70% на дополнительный функционал', id: 4}
+    {title: 'Скидка 70% на дополнительный функционал', id: 4},
+    {title: 'При покупки модуля для сайта - интеграция бесплатно', id: 5}
   ];
   return (
-    <div className={s.container}>
+    <div className={s.container} id='marketplace'>
       <h1 className={s.title}>
-        Что такое <span className='text-primary-500'>Webi Маркетплейс</span>
+        Что такое{' '}
+        <span className='text-primary-500 cursor-pointer hover:opacity-70 transition-opacity'>Webi Маркетплейс</span>
         <span className='text-primary-500 ml-2'>?</span>
       </h1>
       <h2 className='text-xl mb-5'>
-        <span className='text-primary-500'>Webi Маркетплейс</span> - веб площадка, на которой продаются готовые сайты и
-        веб приложения компании.
+        <Link href='/marketplace/auth' className='text-primary-500  cursor-pointer hover:opacity-70 transition-opacity'>
+          Webi Маркетплейс
+        </Link>{' '}
+        - площадка, на которой продаются готовые сайты, веб приложения и отдельные для них модули от компании.
       </h2>
       <div className={s.wrapper}>
-        <h2 className='text-xl mb-2'>После покупки вы получите:</h2>
-        <div className='ml-5'>
+        <h2 className='text-xl mb-10 md:text-center'>После покупки вы получите:</h2>
+        <div className='ml-5 md:m-0 flex flex-col gap-3'>
           {servicesList.map(({id, title}) => (
             <div key={id}>
               <h2 className='text-lg'>
