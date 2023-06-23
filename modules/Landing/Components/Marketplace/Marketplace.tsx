@@ -25,10 +25,17 @@ export const Marketplace: FC<MarketplaceProps> = () => {
         <Link href='/marketplace/auth' className='text-primary-500  cursor-pointer hover:opacity-70 transition-opacity'>
           Webi Маркетплейс
         </Link>{' '}
-        - площадка, на которой продаются готовые сайты, веб приложения и отдельные для них модули от компании.
+        - самый лучший продукт на рынке для бизнеса. Мы создали площадку, которая сэкономит вам время и даст возможность
+        получить то что вам нужно прямо здесь и сейчас. Заходите по{' '}
+        <Link href={'/marketplace'} className='text-primary-500 hover:opacity-70 transition-opacity'>
+          ссылке
+        </Link>{' '}
+        и смотрите ассортимент
       </h2>
       <div className={s.wrapper}>
-        <h2 className='text-xl mb-10 md:text-center'>После покупки вы получите:</h2>
+        <h2 className='text-xl mb-10 md:text-center'>
+          После покупки мы даем вам самое необходимое для запуска бизнеса:
+        </h2>
         <div className='ml-5 md:m-0 flex flex-col gap-3'>
           {servicesList.map(({id, title}) => (
             <div key={id}>

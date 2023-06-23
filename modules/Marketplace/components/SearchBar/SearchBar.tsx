@@ -29,12 +29,12 @@ export const SearchBar: FC<SearchBarProps> = ({}) => {
               <Input placeholder='До' />
             </div>
           </div>
-          <div className='w-1/3 md:w-full'>
+          {/* <div className='w-1/3 md:w-full'>
             <h3>Цвет</h3>
             <div className='flex gap-10 items-center mt-3'>
               <Select style={{width: '100%'}} />
             </div>
-          </div>
+          </div> */}
           <div className='w-1/3 md:w-full'>
             <h3>Тип</h3>
             <div className='flex gap-10 items-center mt-3'>

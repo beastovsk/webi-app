@@ -12,22 +12,26 @@ export const Feedback: FC<FeedbackProps> = () => {
     <div className={s.container} id='feedback'>
       <div className='mb-[40px] text-center'>
         <h1 className={s.title}>
-          Остались вопросы <span className='text-primary-500 ml-2'>?</span>
+          Не нашел свою нишу на маркетплейсе <span className='text-primary-500 ml-2'>?</span>
         </h1>
-        <p className='text-gray-500'>Заполни форму и мы пришлем ответ прямо тебе на почту в течении суток</p>
+        <p className='text-gray-500'>Заполни форму и я решу твои проблемы в течении суток</p>
       </div>
 
       <div className='flex justify-center'>
         <div className={s.wrapper}>
           <Form layout='vertical'>
             <Form.Item label={'Имя'}>
-              <Input style={{background: '#131129'}} />
+              <Input style={{background: '#131129'}} size='large' />
             </Form.Item>
             <Form.Item label={'Email'}>
-              <Input style={{background: '#131129'}} />
+              <Input style={{background: '#131129'}} size='large' />
             </Form.Item>
             <Form.Item label={'Вопрос'}>
-              <Input style={{background: '#131129'}} />
+              <Input.TextArea
+                style={{background: '#131129', color: '#fff'}}
+                autoSize={{minRows: 3, maxRows: 3}}
+                size='large'
+              />
             </Form.Item>
 
             <Btn type='submit'>Отправить</Btn>

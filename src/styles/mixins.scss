@@ -81,7 +81,7 @@ $redGradient: linear-gradient(91.42deg, #ff3e3e 0%, #ff6969 100%), #1b1b1b;
   }
 
   @media screen and (max-width: $breakpoint-sm) {
-    width: 320px;
+    width: inherit;
   }
 }
 

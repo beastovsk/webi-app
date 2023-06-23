@@ -14,11 +14,10 @@ export const Banner: FC<BannerProps> = () => {
     <div className={s.container}>
       <div className='flex flex-col gap-10 items-start w-1/2 md:w-full'>
         <h1 className={s.title}>
-          Сделаем ваш сайт с 0 или предложим готовые решения<span className='text-primary-500 ml-2'>.</span>
+          Нужен онлайн бизнес меньше чем за сутки<span className='text-primary-500 ml-2'>?</span>
         </h1>
         <p className='text-base text-gray-500'>
-          Webi - веб агенство, предоставляющее услуги по разработке от лендинг страниц до социальных сетей на
-          современных технологиях, обеспечивающие быстрые и качественные приложения
+          Мы продаем веб-приложения на все ниши, для запуска которых остается лишь купить и заполнить
         </p>
         <a href='#services'>
           {' '}

@@ -12,8 +12,8 @@ interface ServicesProps {}
 
 export const Services: FC<ServicesProps> = () => {
   const servicesList = [
-    {title: 'Разработка', description: 'Создаем классные и качественные платформы', image: dev},
-    {title: 'UX/UI дизайн', description: 'Рисуем лучшие сайты на всем диком западе', image: design},
+    {title: 'Разработка', description: 'Создаем проекты любой сложности', image: dev},
+    {title: 'UX/UI дизайн', description: 'Рисуем продающий дизайн, которые принесет кучу денег', image: design},
     {title: 'Поддержка', description: 'Возьмем на себя ответственность за ваши веб-ресурсы', image: support}
   ];
   return (
