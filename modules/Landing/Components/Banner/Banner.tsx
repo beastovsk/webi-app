@@ -4,8 +4,10 @@ import {RiseOutlined} from '@ant-design/icons';
 import Image from 'next/image';
 import React, {FC} from 'react';
 import s from './Banner.module.scss';
+import {Player} from '@lottiefiles/react-lottie-player';
 
-import banner from '/public/image/banner.png';
+// @ts-ignore
+import banner from '/public/image/banner-image.json';
 
 interface BannerProps {}
 
@@ -26,7 +28,8 @@ export const Banner: FC<BannerProps> = () => {
           </Btn>
         </a>
       </div>
-      <Image className='flex flex-grow md:w-full' src={banner} alt='' quality={100} width={500} height={500} />
+      {/* <Image className='flex flex-grow md:w-full' src={banner} alt='' quality={100} width={500} height={500} /> */}
+      <Player src={banner} className='player' loop autoplay />
     </div>
   );
 };
