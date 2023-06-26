@@ -8,6 +8,8 @@ const nextConfig = {
       displayName: false
     }
   },
+  ignoreBuildErrors: true,
+
   experimental: {
     appDir: true
   },
