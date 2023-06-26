@@ -1,22 +1,28 @@
+import {GetProducts} from '@/modules/Marketplace/api';
 import {MarketplaceBanner} from '@/modules/Marketplace/components/MarketplaceBanner/MarketplaceBanner';
 import {ProductsList} from '@/modules/Marketplace/components/ProductsList/ProductsList';
 import React from 'react';
+import {useQuery} from 'react-query';
 
 import banner from '/public/image/marketplace-banner.png';
 
-export default function Page() {
+async function getData() {
+  const res = await fetch('http://api.webi-agency.ru/api/v1/search');
+
+  if (!res.ok) {
+    return;
+  }
+
+  return res.json();
+}
+
+export default async function Page() {
+  const data = await getData();
+
   return (
     <>
-      <MarketplaceBanner />
-      <ProductsList
-        title={'Популярные товары'}
-        productsList={[
-          {id: 1, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000},
-          {id: 2, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000},
-          {id: 3, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000},
-          {id: 4, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000}
-        ]}
-      />
+      <MarketplaceBanner productItem={data?.results[0]} />
+      <ProductsList title={'Популярные товары'} productsList={data?.results || []} />
     </>
   );
 }

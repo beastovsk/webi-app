@@ -3,21 +3,23 @@ import {ProductsList} from '@/modules/Marketplace/components/ProductsList/Produc
 import {SearchBar} from '@/modules/Marketplace/components/SearchBar/SearchBar';
 import React from 'react';
 
-import banner from '/public/image/marketplace-banner.png';
+async function getData() {
+  const res = await fetch('http://api.webi-agency.ru/api/v1/search');
 
-export default function Page() {
+  if (!res.ok) {
+    return {results: []};
+  }
+
+  return res.json();
+}
+
+export default async function Page() {
+  const data = await getData();
+
   return (
     <>
       <SearchBar />
-      <ProductsList
-        title={'Товары'}
-        productsList={[
-          {id: 1, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000},
-          {id: 2, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000},
-          {id: 3, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000},
-          {id: 4, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000}
-        ]}
-      />
+      <ProductsList title={'Товары'} productsList={data.results} />
     </>
   );
 }

@@ -5,11 +5,14 @@ import {Button, Form, Input, Tooltip} from 'antd';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {FC} from 'react';
+import {useMutation} from 'react-query';
+import {Login} from '../../api';
 import s from './Auth.module.scss';
 
 interface AuthProps {}
 
 export const Auth: FC<AuthProps> = () => {
+  const {mutate} = useMutation(Login);
   const router = useRouter();
   return (
     <div className={s.container}>
@@ -26,14 +29,12 @@ export const Auth: FC<AuthProps> = () => {
 
       <Form
         className='my-10'
-        onFinish={() => {
-          setTimeout(() => {
-            router.push('/marketplace');
-          }, 2000);
+        onFinish={(value) => {
+          mutate(value);
         }}
       >
-        <Form.Item name='email'>
-          <Input size='large' placeholder='Email' />
+        <Form.Item name='username'>
+          <Input size='large' placeholder='Имя пользователя' />
         </Form.Item>
         <Form.Item name='password'>
           <Input.Password size='large' placeholder='Пароль' />

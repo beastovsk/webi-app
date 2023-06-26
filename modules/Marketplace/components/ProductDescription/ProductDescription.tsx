@@ -7,28 +7,18 @@ import Image, {StaticImageData} from 'next/image';
 import Link from 'next/link';
 
 import React, {FC, useState} from 'react';
+import {IProduct} from '../../types';
 import s from './ProductDescription.module.scss';
 
 const {Paragraph} = Typography;
 
 interface ProductDescriptionProps {
-  id: number;
-  description: string;
-  modulesList: {id: number; label: string}[];
-  techList: {id: number; label: string}[];
-  link: string;
-  date: string;
+  productInfo: IProduct;
 }
 
-export const ProductDescription: FC<ProductDescriptionProps> = ({
-  date,
-  description,
-  id,
-  link,
-  modulesList,
-  techList
-}) => {
+export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) => {
   const [message, setMessage] = useState('Копировать ссылку');
+  const {description, id, link, modules, name, price, publication_date, technology, type} = productInfo;
 
   return (
     <div className={s.container}>

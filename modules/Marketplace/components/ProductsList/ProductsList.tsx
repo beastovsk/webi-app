@@ -1,15 +1,17 @@
 'use client';
 
 import Btn from '@/components/UI/Btn/Btn';
+import {formatProductPrice, getTypeName} from '@/src/helpers/hooks';
 import {Empty, Popover} from 'antd';
 import Image, {StaticImageData} from 'next/image';
 import Link from 'next/link';
 import React, {FC} from 'react';
+import {IProduct} from '../../types';
 import s from './ProductsList.module.scss';
 
 interface ProductsListProps {
   title: string;
-  productsList: {id: number; image: string | StaticImageData; title: string; type: number; price: number}[];
+  productsList: IProduct[];
 }
 
 export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
@@ -33,24 +35,24 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
 
       <div className='flex gap-5 mt-5 md:flex-col'>
         {productsList.length ? (
-          productsList.map(({id, image, price, title, type}) => (
+          productsList.map(({id, price, name, type}) => (
             <Link href={`/marketplace/products/${id}`} className={s.item} key={id}>
-              <Image
+              {/* <Image
                 src={image}
                 alt=''
                 width={300}
                 height={500}
                 className='h-[170px] object-cover md:w-full rounded-3xl'
-              />
+              /> */}
 
-              <h2 className='my-5 text-lg font-medium'>{title}</h2>
+              <h2 className='my-5 text-lg font-medium'>{name}</h2>
 
               <div className='flex justify-between mb-5'>
                 <span>
-                  Тип: <p className='text-[#6F4FF2]'>{type == 1 ? 'веб-сайт' : 'веб-приложение'}</p>
+                  Тип: <p className='text-[#6F4FF2]'>{getTypeName(type)}</p>
                 </span>
                 <span className='flex flex-col items-end'>
-                  Цена: <p className='text-[#6F4FF2]'>{price} Р</p>
+                  Цена: <p className='text-[#6F4FF2]'>{formatProductPrice(price)}</p>
                 </span>
               </div>
 

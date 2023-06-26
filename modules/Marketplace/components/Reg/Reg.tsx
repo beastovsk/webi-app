@@ -5,11 +5,14 @@ import {Breadcrumb, Button, Form, Input, Tooltip} from 'antd';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {FC} from 'react';
+import {useMutation} from 'react-query';
+import {Register} from '../../api';
 import s from './Reg.module.scss';
 
 interface RegProps {}
 
 export const Reg: FC<RegProps> = () => {
+  const {mutate} = useMutation(Register);
   const router = useRouter();
 
   return (
@@ -25,14 +28,12 @@ export const Reg: FC<RegProps> = () => {
       <h2 className='text-3xl font-medium mt-20'>Регистрация</h2>
       <Form
         className='my-10'
-        onFinish={() => {
-          setTimeout(() => {
-            router.push('/marketplace/auth');
-          }, 2000);
+        onFinish={(value) => {
+          mutate(value);
         }}
       >
-        <Form.Item name='name'>
-          <Input size='large' placeholder='Имя' />
+        <Form.Item name='username'>
+          <Input size='large' placeholder='Имя пользователя' />
         </Form.Item>{' '}
         <Form.Item name='email'>
           <Input size='large' placeholder='Email' />
