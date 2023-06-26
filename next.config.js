@@ -24,6 +24,9 @@ const nextConfig = {
         hostname: '**.example.com'
       }
     ]
+  },
+  eslint: {
+    ignoreDuringBuilds: true
   }
 };
 

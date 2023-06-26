@@ -14,9 +14,9 @@ interface BannerProps {}
 export const Banner: FC<BannerProps> = () => {
   return (
     <div className={s.container}>
-      <div className='flex flex-col gap-10 items-start w-1/2 md:w-full'>
+      <div className='flex flex-col gap-10 items-start md:w-full'>
         <h1 className={s.title}>
-          Нужен онлайн бизнес меньше чем за сутки<span className='text-primary-500 ml-2'>?</span>
+          Нужна платформа для бизнеса<span className='text-primary-500 ml-2'>?</span>
         </h1>
         <p className='text-base text-gray-500'>
           Мы продаем веб-приложения на все ниши, для запуска которых остается лишь купить и заполнить
@@ -29,7 +29,7 @@ export const Banner: FC<BannerProps> = () => {
         </a>
       </div>
       {/* <Image className='flex flex-grow md:w-full' src={banner} alt='' quality={100} width={500} height={500} /> */}
-      <Player src={banner} className='player' loop autoplay />
+      <Player src={banner} className='player w-full' loop autoplay />
     </div>
   );
 };
