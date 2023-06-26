@@ -78,7 +78,6 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) =
               <CopyOutlined
                 className='text-lg cursor-pointer text-[#6F4FF2] hover:opacity-70 transition-[all]'
                 color='#111'
-                rev={''}
                 onClick={() => {
                   navigator.clipboard.writeText(link);
                   setMessage('Ссылка скопирована');

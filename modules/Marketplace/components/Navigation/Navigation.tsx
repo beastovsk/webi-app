@@ -15,19 +15,19 @@ export const Navigation: FC<NavigationProps> = () => {
 
   const navigationMenu = [
     {
-      icon: <AppstoreOutlined className='text-2xl cursor-pointer' color='#111' rev={''} />,
+      icon: <AppstoreOutlined className='text-2xl cursor-pointer' color='#111' />,
       href: '/marketplace'
     },
     {
-      icon: <DesktopOutlined className='text-2xl cursor-pointer' color='#111' rev={''} />,
+      icon: <DesktopOutlined className='text-2xl cursor-pointer' color='#111' />,
       href: '/marketplace/products'
     },
     {
-      icon: <UserOutlined className='text-2xl cursor-pointer' color='#111' rev={''} />,
+      icon: <UserOutlined className='text-2xl cursor-pointer' color='#111' />,
       href: '/marketplace/profile'
     },
     {
-      icon: <SettingOutlined className='text-2xl cursor-pointer' color='#111' rev={''} />,
+      icon: <SettingOutlined className='text-2xl cursor-pointer' color='#111' />,
       href: '/marketplace/profile/settings'
     }
   ];
@@ -51,7 +51,7 @@ export const Navigation: FC<NavigationProps> = () => {
         </div>
       </div>
       <Link href={'/marketplace/auth'} className='hover:text-[#6F4FF2] transition-[all] text-[#6C7AA0] md:hidden'>
-        <ImportOutlined className='text-2xl cursor-pointer' color='#111' rev={''} />
+        <ImportOutlined className='text-2xl cursor-pointer' color='#111' />
       </Link>
     </div>
   );

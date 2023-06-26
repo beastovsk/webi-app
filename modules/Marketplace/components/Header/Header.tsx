@@ -16,7 +16,7 @@ export const Header: FC<HeaderProps> = () => {
     <div className={s.container}>
       <Link href={'/marketplace/basket'} className='cursor-pointer hover:opacity-70 transition-opacity'>
         <Badge count={2} className=''>
-          <ShoppingCartOutlined className='text-[#6C7AA0] text-2xl ' rev={''} />
+          <ShoppingCartOutlined className='text-[#6C7AA0] text-2xl ' />
         </Badge>
       </Link>
       <Link

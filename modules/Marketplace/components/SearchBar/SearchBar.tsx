@@ -17,7 +17,7 @@ export const SearchBar: FC<SearchBarProps> = ({}) => {
         <div className='flex gap-3 md:flex-col'>
           <Input
             placeholder='Например: лендинг страницы'
-            prefix={<SearchOutlined className='text-lg cursor-pointer text-[#6C7AA0] mr-5' rev={''} />}
+            prefix={<SearchOutlined className='text-lg cursor-pointer text-[#6C7AA0] mr-5' />}
           />
           <Btn>Поиск</Btn>
         </div>
