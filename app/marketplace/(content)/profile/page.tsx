@@ -9,15 +9,7 @@ export default function Page() {
   return (
     <>
       <h2 className='text-xl font-medium'>Личный кабинет</h2>
-      <ProductsList
-        title={'Мои покупки'}
-        productsList={[
-          {id: 1, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000},
-          {id: 2, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000},
-          {id: 3, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000},
-          {id: 4, image: banner, title: 'Сайт для тур-агенства', type: 1, price: 10000}
-        ]}
-      />
+      <ProductsList title={'Мои покупки'} productsList={[]} />
     </>
   );
 }
