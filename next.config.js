@@ -8,7 +8,7 @@ const nextConfig = {
       displayName: false
     }
   },
-
+  output: 'export',
   experimental: {
     appDir: true
   },
