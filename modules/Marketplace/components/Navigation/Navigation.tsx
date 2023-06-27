@@ -3,6 +3,7 @@
 import Btn from '@/components/UI/Btn/Btn';
 import {AppstoreOutlined, DesktopOutlined, ImportOutlined, SettingOutlined, UserOutlined} from '@ant-design/icons';
 import {Button, Form, Input} from 'antd';
+import {deleteCookie} from 'cookies-next';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import React, {FC} from 'react';
@@ -50,7 +51,15 @@ export const Navigation: FC<NavigationProps> = () => {
           ))}
         </div>
       </div>
-      <Link href={'/marketplace/auth'} className='hover:text-[#6F4FF2] transition-[all] text-[#6C7AA0] md:hidden'>
+      <Link
+        href={'/marketplace/auth'}
+        className='hover:text-[#6F4FF2] transition-[all] text-[#6C7AA0] md:hidden'
+        onClick={() => {
+          deleteCookie('token');
+          deleteCookie('refreshToken');
+          deleteCookie('username');
+        }}
+      >
         <ImportOutlined className='text-2xl cursor-pointer' color='#111' />
       </Link>
     </div>

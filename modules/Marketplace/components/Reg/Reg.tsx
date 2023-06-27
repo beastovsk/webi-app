@@ -1,6 +1,7 @@
 'use client';
 
 import Btn from '@/components/UI/Btn/Btn';
+import {customNotification} from '@/src/helpers/customNotification';
 import {Breadcrumb, Button, Form, Input, Tooltip} from 'antd';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
@@ -29,7 +30,16 @@ export const Reg: FC<RegProps> = () => {
       <Form
         className='my-10'
         onFinish={(value) => {
-          mutate(value);
+          mutate(value, {
+            onSuccess: () => {
+              customNotification('success', 'top', 'Успешная регистрация', '');
+              router.push('/marketplace');
+            },
+            onError: (error) => {
+              console.log(error);
+              customNotification('error', 'top', 'Не удалось зарегистрировать аккаунт', '');
+            }
+          });
         }}
       >
         <Form.Item name='username'>

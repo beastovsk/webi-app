@@ -24,7 +24,8 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**.example.com'
       }
-    ]
+    ],
+    unoptimized: true
   },
   eslint: {
     ignoreDuringBuilds: true
