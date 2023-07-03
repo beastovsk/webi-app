@@ -2,7 +2,7 @@
 
 const nextConfig = {
   compiler: {
-    removeConsole: true,
+    removeConsole: false,
     styledComponents: {
       minify: true,
       displayName: false

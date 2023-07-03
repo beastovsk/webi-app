@@ -2,6 +2,7 @@ import '@/src/styles/global.scss';
 import {Header} from '@/components/Header/Header';
 import {Footer} from '@/components/Footer/Footer';
 import React from 'react';
+import {LandingLayout} from '@/modules/Landing/Components/LandingLayout/LandingLayout';
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
@@ -13,6 +14,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <div className='flex-grow-0 flex-shrink-0 basis-auto mt-20'>
         <Footer />
       </div>
+
+      <LandingLayout />
     </div>
   );
 }

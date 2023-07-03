@@ -3,6 +3,7 @@
 import Btn from '@/components/UI/Btn/Btn';
 import {customNotification} from '@/src/helpers/customNotification';
 import {Button, Form, Input, Tooltip} from 'antd';
+import {setCookie} from 'cookies-next';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {FC} from 'react';
@@ -13,7 +14,8 @@ import s from './Auth.module.scss';
 interface AuthProps {}
 
 export const Auth: FC<AuthProps> = () => {
-  const {mutate} = useMutation(Login);
+  const {mutate, isLoading} = useMutation(Login);
+
   const router = useRouter();
 
   return (
@@ -34,20 +36,15 @@ export const Auth: FC<AuthProps> = () => {
         onFinish={(value) => {
           mutate(value, {
             onSuccess: () => {
-              customNotification('success', 'top', 'Успешная авторизация', '');
               router.push('/marketplace');
-            },
-            onError: (error) => {
-              console.log(error);
-              customNotification('error', 'top', 'Не удалось авторизироваться', '');
             }
           });
         }}
       >
-        <Form.Item name='username'>
+        <Form.Item name='username' rules={[{required: true, message: 'Введите имя пользователя'}]}>
           <Input size='large' placeholder='Имя пользователя' />
         </Form.Item>
-        <Form.Item name='password'>
+        <Form.Item name='password' rules={[{required: true, min: 4, message: 'Введите ваш пароль'}]}>
           <Input.Password size='large' placeholder='Пароль' />
         </Form.Item>
         <p className='text-start text-white text-sm'>
@@ -56,7 +53,7 @@ export const Auth: FC<AuthProps> = () => {
             Зарегистрироваться
           </Link>
         </p>
-        <Btn htmlTypeButton='submit' className='mt-10'>
+        <Btn loading={isLoading} htmlTypeButton='submit' className='mt-10'>
           Войти
         </Btn>
       </Form>

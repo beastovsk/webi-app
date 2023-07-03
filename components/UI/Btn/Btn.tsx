@@ -1,5 +1,6 @@
 import s from './Btn.module.scss';
 import React, {ComponentProps, ElementType} from 'react';
+import {LoadingOutlined} from '@ant-design/icons';
 
 type ButtonOwnProps<E extends ElementType = ElementType> = {
   children: any;
@@ -8,6 +9,7 @@ type ButtonOwnProps<E extends ElementType = ElementType> = {
   primary?: boolean;
   danger?: boolean;
   className?: string;
+  loading?: boolean;
 };
 
 type ButtonProps<E extends ElementType> = ButtonOwnProps<E> & Omit<ComponentProps<E>, keyof ButtonOwnProps>;
@@ -21,13 +23,16 @@ export default function Btn<E extends ElementType = typeof defaultElement>({
   primary,
   htmlTypeButton,
   className,
+  loading,
   ...otherProps
 }: ButtonProps<E>) {
   const TagName = tag || defaultElement;
 
   return (
     <TagName className={`${danger && s.danger} ${primary && s.primary} ${s.button} ${className}`} {...otherProps}>
-      {children}
+      <span className='flex gap-2 items-center transition-[all]'>
+        {loading ? <LoadingOutlined className={s.spinner} /> : null} {children}
+      </span>
     </TagName>
   );
 }

@@ -19,3 +19,15 @@
   background: none;
   border: 1px solid #fff;
 }
+.spinner {
+  transition: transform 2s ease-in-out;
+
+  @keyframes in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

@@ -7,13 +7,15 @@ import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {FC} from 'react';
 import {useMutation} from 'react-query';
-import {Register} from '../../api';
+import {GetCode, Register, Verificate} from '../../api';
 import s from './Reg.module.scss';
 
 interface RegProps {}
 
 export const Reg: FC<RegProps> = () => {
-  const {mutate} = useMutation(Register);
+  const {mutate, isLoading} = useMutation(Register);
+  const {mutate: get} = useMutation(GetCode);
+
   const router = useRouter();
 
   return (
@@ -32,23 +34,18 @@ export const Reg: FC<RegProps> = () => {
         onFinish={(value) => {
           mutate(value, {
             onSuccess: () => {
-              customNotification('success', 'top', 'Успешная регистрация', '');
-              router.push('/marketplace');
-            },
-            onError: (error) => {
-              console.log(error);
-              customNotification('error', 'top', 'Не удалось зарегистрировать аккаунт', '');
+              get({email: value.email});
             }
           });
         }}
       >
-        <Form.Item name='username'>
+        <Form.Item name='username' rules={[{required: true, message: 'Введите имя пользователя'}]}>
           <Input size='large' placeholder='Имя пользователя' />
         </Form.Item>{' '}
-        <Form.Item name='email'>
+        <Form.Item name='email' rules={[{required: true, type: 'email', message: 'Введите корректную почту'}]}>
           <Input size='large' placeholder='Email' />
         </Form.Item>
-        <Form.Item name='password'>
+        <Form.Item name='password' rules={[{required: true, min: 4, message: 'Введите пароль более 4 символов'}]}>
           <Input.Password size='large' placeholder='Пароль' />
         </Form.Item>
         <p className='text-start text-white text-sm'>
@@ -57,7 +54,7 @@ export const Reg: FC<RegProps> = () => {
             Авторизироваться
           </Link>
         </p>
-        <Btn htmlTypeButton='submit' className='mt-10'>
+        <Btn loading={isLoading} htmlTypeButton='submit' className='mt-10'>
           Создать аккаунт
         </Btn>
       </Form>
