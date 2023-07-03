@@ -34,18 +34,21 @@ export const Feedback: FC<FeedbackProps> = () => {
             <Form.Item 
               label={'Имя'}
               name={'name'}
+              rules={[{ required: true, message: 'Вы пропустили имя!' }]}
             >
               <Input style={{background: '#131129'}} size='large' />
             </Form.Item>
             <Form.Item 
               label={'Email'}
               name={'email'}
+              rules={[{ required: true, message: 'Введите Email!' }]}
             >
               <Input style={{background: '#131129'}} size='large' />
             </Form.Item>
             <Form.Item 
               label={'Вопрос'}
               name={'question'}
+              rules={[{ required: true, message: 'Поле с вопросом осталось пустым!' }]}
             >
               <Input.TextArea
                 style={{background: '#131129', color: '#fff'}}

@@ -28,18 +28,21 @@ export const SupportForm: FC<SupportFormProps> = () => {
           <Form.Item 
             label={'Имя'}
             name={'name'}
+            rules={[{ required: true, message: 'Вы пропустили имя!' }]}
           >
             <Input style={{background: '#131129'}} />
           </Form.Item>
           <Form.Item 
             label={'Email'}
             name={'email'}
+            rules={[{ required: true, message: 'Введите Email!' }]}
           >
             <Input style={{background: '#131129'}} />
           </Form.Item>
           <Form.Item 
             label={'Вопрос'}
             name={'question'}
+            rules={[{ required: true, message: 'Поле с вопросом осталось пустым!' }]}
           >
             <Input style={{background: '#131129'}} />
           </Form.Item>
