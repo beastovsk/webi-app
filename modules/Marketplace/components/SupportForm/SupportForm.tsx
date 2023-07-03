@@ -13,8 +13,7 @@ export const SupportForm: FC<SupportFormProps> = () => {
   const {mutate, isLoading} = useMutation(SendQuestion);
 
   const onFinish = (values: any) => {
-    console.log('Success:', values);
-    mutate(values)
+    mutate(values);
   };
 
   return (
