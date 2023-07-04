@@ -4,10 +4,18 @@ import {Form, Input} from 'antd';
 import React, {FC} from 'react';
 
 import s from './Feedback.module.scss';
+import { useMutation } from 'react-query';
+import { SendQuestion } from '@/modules/Marketplace/api';
 
 interface FeedbackProps {}
 
 export const Feedback: FC<FeedbackProps> = () => {
+  const {mutate, isLoading} = useMutation(SendQuestion);
+
+  const onFinish = (values: any) => {
+    mutate(values);
+  };
+
   return (
     <div className={s.container} id='feedback'>
       <div className='mb-[40px] text-center'>
@@ -19,14 +27,29 @@ export const Feedback: FC<FeedbackProps> = () => {
 
       <div className='flex justify-center'>
         <div className={s.wrapper}>
-          <Form layout='vertical'>
-            <Form.Item label={'Имя'}>
+          <Form 
+            layout='vertical'
+            onFinish={onFinish}
+          >
+            <Form.Item 
+              label={'Имя'}
+              name={'name'}
+              rules={[{ required: true, message: 'Вы пропустили имя!' }]}
+            >
               <Input style={{background: '#131129'}} size='large' />
             </Form.Item>
-            <Form.Item label={'Email'}>
+            <Form.Item 
+              label={'Email'}
+              name={'email'}
+              rules={[{ required: true, message: 'Введите Email!' }]}
+            >
               <Input style={{background: '#131129'}} size='large' />
             </Form.Item>
-            <Form.Item label={'Вопрос'}>
+            <Form.Item 
+              label={'Вопрос'}
+              name={'question'}
+              rules={[{ required: true, message: 'Поле с вопросом осталось пустым!' }]}
+            >
               <Input.TextArea
                 style={{background: '#131129', color: '#fff'}}
                 autoSize={{minRows: 3, maxRows: 3}}
@@ -34,7 +57,12 @@ export const Feedback: FC<FeedbackProps> = () => {
               />
             </Form.Item>
 
-            <Btn type='submit'>Отправить</Btn>
+            <Btn 
+              type='submit'
+              loading={isLoading}
+            >
+              Отправить
+            </Btn>
           </Form>
         </div>
       </div>

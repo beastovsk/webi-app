@@ -1,8 +1,6 @@
 import {customNotification} from '@/src/helpers/customNotification';
 import axios from 'axios';
 import {getCookie, setCookie, setCookies} from 'cookies-next';
-import {useRouter} from 'next/navigation';
-import router from 'next/router';
 
 export const Login = async (args: {username: string; password: string}) => {
   const {data} = await axios.post(`https://api.webi-agency.ru/api/v1/token`, args, {
@@ -67,4 +65,19 @@ export const GetUser = async () => {
     }
   });
   return data;
+};
+
+export const SendQuestion = async (args: {username: string; password: string, question: string}) => {
+  await axios
+    .post(`https://api.webi-agency.ru/api/v1/support`, args, {
+      headers: {'Content-type': 'application/json; charset=UTF-8'}
+    })
+    .then((response: any) => {
+      console.log('data', response.data);
+      customNotification('success', 'top', 'Ваш вопрос успешно отправлен!', '');
+    })
+    .catch((error) => {
+      console.log(error.response.data);
+      customNotification('error', 'top', 'Произошла ошибка в отправке вопроса, попробуйте снова!', error.response.data.detail);
+    });
 };
