@@ -32,11 +32,11 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) =
           <h2 className='text-lg mb-3'>Модули сайта</h2>
 
           <ul>
-            {/* {modulesList.map(({id, label}) => (
+            {modules.map(({id, label}) => (
               <li className='text-[#6C7AA0]' key={id}>
                 {id}. {label}
               </li>
-            ))} */}
+            ))}
           </ul>
         </div>
 
@@ -56,11 +56,11 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) =
         <div>
           <h2 className='text-lg mb-5'>Технологии</h2>
           <div className='flex flex-wrap gap-3'>
-            {/* {techList.map(({id, label}) => (
+            {technology.map(({id, label}) => (
               <span key={id} className='bg-[#41308D] rounded-[30px] py-3 px-6'>
                 {label}
               </span>
-            ))} */}
+            ))}
           </div>
         </div>
         <div>
@@ -92,9 +92,9 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) =
         </div>
         <div>
           <h2 className='text-lg mb-5'>Добавлено</h2>
-          {/* <p className='text-[#6C7AA0]'>{date}</p> */}
+          <p className='text-[#6C7AA0]'>{publication_date}</p>
         </div>
-        <Btn>Добавить в корзину</Btn>
+        <Btn className='w-max'>Добавить в корзину</Btn>
       </div>
     </div>
   );

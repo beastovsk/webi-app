@@ -4,6 +4,7 @@ import Btn from '@/components/UI/Btn/Btn';
 import {formatProductPrice, getTypeName} from '@/src/helpers/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
+import {usePathname} from 'next/navigation';
 import React, {FC} from 'react';
 import {IProduct} from '../../types';
 import s from './MarketplaceBanner.module.scss';
