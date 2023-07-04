@@ -20,3 +20,7 @@ export const formatProductPrice = (price: number) => {
 
   return RURubles.format(price);
 };
+
+export const getParsedDate = (date: string) => {
+  return new Intl.DateTimeFormat('ru-RU', {month: 'long', day: 'numeric', year: 'numeric'}).format(new Date(date));
+};

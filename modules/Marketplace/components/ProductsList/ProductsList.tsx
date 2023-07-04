@@ -5,9 +5,12 @@ import {formatProductPrice, getTypeName} from '@/src/helpers/hooks';
 import {Empty, Popover} from 'antd';
 import Image, {StaticImageData} from 'next/image';
 import Link from 'next/link';
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {IProduct} from '../../types';
 import s from './ProductsList.module.scss';
+
+import image from 'public/image/card-banner.png';
+import {useStore} from '../../store';
 
 interface ProductsListProps {
   title: string;
@@ -35,15 +38,15 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
 
       <div className='flex gap-5 mt-5 md:flex-col'>
         {productsList.length ? (
-          productsList.map(({id, price, name, type}) => (
+          productsList.map(({id, price, name, type, small_image}) => (
             <Link href={`/marketplace/products/${id}`} className={s.item} key={id}>
-              {/* <Image
-                src={image}
+              <Image
+                src={small_image || image}
                 alt=''
                 width={300}
                 height={500}
                 className='h-[170px] object-cover md:w-full rounded-3xl'
-              /> */}
+              />
 
               <h2 className='my-5 text-lg font-medium'>{name}</h2>
 

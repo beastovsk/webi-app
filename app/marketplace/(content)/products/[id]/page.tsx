@@ -8,18 +8,31 @@ import React from 'react';
 
 import banner from '/public/image/marketplace-banner.png';
 
+async function getData(id) {
+  const res = await fetch(`http://api.webi-agency.ru/api/v1/get-product/${id}`);
+
+  if (!res.ok) {
+    return {results: []};
+  }
+
+  return res.json();
+}
+
 export default async function Page({
   params,
   searchParams
 }: {
-  params: {slug: string};
+  params: {id: string};
   searchParams?: {[key: string]: string | string[] | undefined};
 }) {
-  console.log(params);
+  const data = await getData(params.id);
+
+  console.log(data);
+
   return (
     <>
-      <ProductBanner image={banner} title='Сайт для турагенства' />
-      {/* <ProductDescription productInfo={{}} /> */}
+      <ProductBanner image={data.full_image} title={data.name} price={data.price} />
+      <ProductDescription productInfo={data} />
     </>
   );
 }

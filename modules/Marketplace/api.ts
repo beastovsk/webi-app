@@ -3,21 +3,10 @@ import axios from 'axios';
 import {getCookie, setCookie, setCookies} from 'cookies-next';
 
 export const Login = async (args: {username: string; password: string}) => {
-  await axios
-    .post(`https://api.webi-agency.ru/api/v1/token`, args, {
-      headers: {'Content-type': 'application/json; charset=UTF-8'}
-    })
-    .then((response: any) => {
-      console.log('data', response.data);
-      customNotification('success', 'top', 'Успешная авторизация', '');
-      setCookie('token', response.data.access);
-      setCookie('refreshToken', response.data.refresh);
-      setCookie('username', args.username);
-    })
-    .catch((error) => {
-      console.log(error.response.data);
-      customNotification('error', 'top', 'Ошибка при авторизации', error.response.data.detail);
-    });
+  const {data} = await axios.post(`https://api.webi-agency.ru/api/v1/token`, args, {
+    headers: {'Content-type': 'application/json; charset=UTF-8'}
+  });
+  return data;
 };
 
 export const Register = async (args: {username: string; password: string; email: string}) => {
@@ -54,8 +43,15 @@ export const GetCode = async (args: {email: string}) => {
     });
 };
 
-export const GetProducts = async () => {
-  const {data} = await axios.get(`https://api.webi-agency.ru/api/v1/search`);
+export const GetProducts = async (args: any) => {
+  const {data} = await axios.get(`https://api.webi-agency.ru/api/v1/search`, {
+    params: {
+      query: args.query || null,
+      priceFrom: args.priceFrom || null,
+      priceTo: args.priceTo || null,
+      type: args.type || null
+    }
+  });
   return data;
 };
 
