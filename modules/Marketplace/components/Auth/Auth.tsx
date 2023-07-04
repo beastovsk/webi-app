@@ -35,8 +35,15 @@ export const Auth: FC<AuthProps> = () => {
         className='my-10'
         onFinish={(value) => {
           mutate(value, {
-            onSuccess: () => {
+            onSuccess: (data) => {
+              customNotification('success', 'top', 'Успешная авторизация', '');
+              setCookie('token', data.access);
+              setCookie('refreshToken', data.refresh);
+              setCookie('username', value.username);
               router.push('/marketplace');
+            },
+            onError: (error: any) => {
+              customNotification('error', 'top', 'Ошибка при авторизации', error.response.data.detail);
             }
           });
         }}

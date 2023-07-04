@@ -8,6 +8,8 @@ export interface IProduct {
   link: string;
   publication_date: string;
   description: string;
+  small_image: string;
+  full_image: string;
 }
 
 export interface Technology {
