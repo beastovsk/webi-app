@@ -31,7 +31,7 @@ export default async function Page({
 
   return (
     <>
-      <ProductBanner image={banner} title={data.name} price={data.price} />
+      <ProductBanner image={data.full_image} title={data.name} price={data.price} />
       <ProductDescription productInfo={data} />
     </>
   );

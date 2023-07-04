@@ -1,6 +1,7 @@
 'use client';
 
 import Btn from '@/components/UI/Btn/Btn';
+import {getParsedDate} from '@/src/helpers/hooks';
 import {CopyOutlined} from '@ant-design/icons';
 import {Tooltip, Typography} from 'antd';
 import Image, {StaticImageData} from 'next/image';
@@ -92,7 +93,7 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) =
         </div>
         <div>
           <h2 className='text-lg mb-5'>Добавлено</h2>
-          <p className='text-[#6C7AA0]'>{publication_date}</p>
+          <p className='text-[#6C7AA0]'>{getParsedDate(publication_date)}</p>
         </div>
         <Btn className='w-max'>Добавить в корзину</Btn>
       </div>
