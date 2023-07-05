@@ -9,6 +9,14 @@
     transition: $trn;
   }
 }
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+
+  &:hover {
+    opacity: 0.4;
+  }
+}
 .danger {
   background: #dc3546;
   border-radius: 5px;

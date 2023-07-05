@@ -18,6 +18,9 @@ interface ProductsListProps {
 }
 
 export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
+  const basketList = useStore((store) => store.basketList);
+  const setBasketList = useStore((store) => store.setBasketList);
+
   return (
     <div className={s.container}>
       <div className='flex justify-between items-center md:flex-col md:items-start'>
@@ -59,7 +62,14 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
                 </span>
               </div>
 
-              <Btn className='w-full' onClick={(e: any) => e.preventDefault()}>
+              <Btn
+                disabled={basketList.filter((item) => item.id == id).length ? true : false}
+                className='w-full'
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  setBasketList([...basketList, productsList.filter((item) => item.id == id).at(-1)]);
+                }}
+              >
                 Добавить в корзину
               </Btn>
             </Link>

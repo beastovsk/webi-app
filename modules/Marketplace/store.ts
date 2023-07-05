@@ -9,6 +9,7 @@ interface IStore {
   setProductsList: (arg0: IProduct[]) => void;
   setBasketList: (arg0: IProduct[]) => void;
   setAvailable: (arg0: boolean) => void;
+  removeProduct: (arg0: number) => void;
 }
 
 export const useStore = create<IStore>()((set) => ({
@@ -20,5 +21,13 @@ export const useStore = create<IStore>()((set) => ({
   setAvailable: (value) => set(() => ({available: true})),
 
   basketList: [],
-  setBasketList: (value) => set(() => ({basketList: value}))
+  setBasketList: (value) => set(() => ({basketList: value})),
+  removeProduct: (id) =>
+    set((store) => {
+      const index = store.basketList.findIndex((item) => item.id == id);
+
+      const copy = [...store.basketList.slice(0, index), ...store.basketList.slice(index + 1)];
+
+      return {basketList: copy};
+    })
 }));

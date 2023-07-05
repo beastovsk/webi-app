@@ -67,7 +67,7 @@ export const GetUser = async () => {
   return data;
 };
 
-export const SendQuestion = async (args: {username: string; password: string, question: string}) => {
+export const SendQuestion = async (args: {username: string; password: string; question: string}) => {
   await axios
     .post(`https://api.webi-agency.ru/api/v1/support`, args, {
       headers: {'Content-type': 'application/json; charset=UTF-8'}
@@ -78,6 +78,20 @@ export const SendQuestion = async (args: {username: string; password: string, qu
     })
     .catch((error) => {
       console.log(error.response.data);
-      customNotification('error', 'top', 'Произошла ошибка в отправке вопроса, попробуйте снова!', error.response.data.detail);
+      customNotification(
+        'error',
+        'top',
+        'Произошла ошибка в отправке вопроса, попробуйте снова!',
+        error.response.data.detail
+      );
     });
+};
+
+export const CreateOrder = async (args: {orders: number[]}) => {
+  const token = getCookie('token');
+
+  const {data} = await axios.post(`https://api.webi-agency.ru/api/v1/create-order`, args, {
+    headers: {'Content-type': 'application/json; charset=UTF-8', Authorization: `Bearer ${token}`}
+  });
+  return data;
 };

@@ -8,6 +8,7 @@ import React, {FC} from 'react';
 import s from './Header.module.scss';
 import {getCookie} from 'cookies-next';
 import Btn from '@/components/UI/Btn/Btn';
+import {useStore} from '../../store';
 
 interface HeaderProps {}
 
@@ -15,13 +16,14 @@ export const Header: FC<HeaderProps> = () => {
   const router = useRouter();
   const token = getCookie('token');
   const username = getCookie('username');
+  const basketList = useStore((store) => store.basketList);
 
   return (
     <div className={s.container}>
       {token ? (
         <div className='flex gap-10 items-end'>
           <Link href={'/marketplace/basket'} className='cursor-pointer hover:opacity-70 transition-opacity'>
-            <Badge count={2} className=''>
+            <Badge count={basketList.length} className=''>
               <ShoppingCartOutlined className='text-[#6C7AA0] text-2xl ' />
             </Badge>
           </Link>
