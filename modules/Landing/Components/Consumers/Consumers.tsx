@@ -1,13 +1,23 @@
 'use client';
 import React, {FC} from 'react';
 
+import {animated, useInView} from '@react-spring/web';
+
 import s from './Consumers.module.scss';
 
 interface ConsumersProps {}
 
 export const Consumers: FC<ConsumersProps> = () => {
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0, x: -60},
+      to: {opacity: 1, x: 0}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
+
   return (
-    <div className={s.container}>
+    <animated.div ref={ref} style={springs} className={s.container}>
       <h1 className={s.title}>
         Кому подойдет <span className='text-primary-500 ml-2'>?</span>
       </h1>
@@ -42,6 +52,6 @@ export const Consumers: FC<ConsumersProps> = () => {
           </p>
         </div>
       </div>
-    </div>
+    </animated.div>
   );
 };

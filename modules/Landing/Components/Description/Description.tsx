@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React, {FC} from 'react';
 
 import 'swiper/css';
+import {animated, useInView} from '@react-spring/web';
 
 import s from './Description.module.scss';
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -14,12 +15,20 @@ import Link from 'next/link';
 interface DescriptionProps {}
 
 export const Description: FC<DescriptionProps> = () => {
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0, x: 60},
+      to: {opacity: 1, x: 0}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
+
   const descriptionList = [
     {
       id: 0,
       title: 'Комплексный подход',
       description:
-        'Мы продаем качественный продукт с улучшенной СЕО-оптимизацией, устанавливаем его на хостинг и дарим гарантию в качестве месяца бесплатной поддержки и обслуживания сайта'
+        'Мы продаем качественный, быстрый и красивый продукт с улучшенной поисковой оптимизацией, отвечаем за техническую часть проекта при запуске и экономим ваше время'
     },
     {
       id: 1,
@@ -34,7 +43,7 @@ export const Description: FC<DescriptionProps> = () => {
     }
   ];
   return (
-    <div className={s.container}>
+    <animated.div ref={ref} style={springs} className={s.container}>
       <div className='flex justify-between md:flex-col'>
         <h1 className={s.title}>
           Почему <span className='text-primary-500'>Webi</span> - это лучший выбор на рынке
@@ -56,6 +65,6 @@ export const Description: FC<DescriptionProps> = () => {
           </div>
         ))}
       </div>
-    </div>
+    </animated.div>
   );
 };

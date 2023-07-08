@@ -1,5 +1,4 @@
 .container {
-  @include fluid(margin-top, 20px, 40px);
   display: flex;
   align-items: center;
   height: max-content;
@@ -40,6 +39,6 @@
   }
 }
 .title {
-  @include fluid(font-size, 38px, 56px);
+  @include fluid(font-size, 38px, 53px);
   font-weight: bold;
 }

@@ -6,30 +6,41 @@ import React, {FC} from 'react';
 import s from './Banner.module.scss';
 import {Player} from '@lottiefiles/react-lottie-player';
 
+import {animated, useInView} from '@react-spring/web';
+
 // @ts-ignore
 import banner from '/public/image/banner-image.json';
+import Link from 'next/link';
 
 interface BannerProps {}
 
 export const Banner: FC<BannerProps> = () => {
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0, scale: 0.95, x: 20},
+      to: {opacity: 1, scale: 1, x: 0}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
+
   return (
-    <div className={s.container}>
-      <div className='flex flex-col gap-10 items-start md:w-full'>
+    <animated.div ref={ref} style={springs} className={s.container}>
+      <div className='flex flex-col gap-10 items-start w-full'>
         <h1 className={s.title}>
-          Нужна платформа для бизнеса<span className='text-primary-500 ml-2'>?</span>
+          Нужна веб-платформа <br /> для бизнеса<span className='text-primary-500 ml-2'>?</span>
         </h1>
         <p className='text-base text-gray-500'>
-          Мы продаем веб-приложения на все ниши, для запуска которых остается лишь купить и заполнить
+          Мы продаем готовые веб-приложения на все ниши, <br /> помогаем запустить свой онлайн бизнес
         </p>
-        <a href='#services'>
+        <Link href='/marketplace'>
           {' '}
           <Btn>
-            <span className='flex items-center gap-3'>Наши услуги</span>
+            <span className='flex items-center gap-3'>Посмотреть товары</span>
           </Btn>
-        </a>
+        </Link>
       </div>
       {/* <Image className='flex flex-grow md:w-full' src={banner} alt='' quality={100} width={500} height={500} /> */}
-      <Player src={banner} className='player w-full' loop autoplay />
-    </div>
+      <Player src={banner} className='player' loop autoplay />
+    </animated.div>
   );
 };

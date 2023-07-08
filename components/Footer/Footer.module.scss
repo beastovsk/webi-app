@@ -7,5 +7,24 @@
 .wrapper {
   @include container;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  // justify-content: space-between;
+}
+.header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.icon {
+  cursor: pointer;
+  transition: fill 0.3s;
+
+  path {
+    fill: #6f4ff2 !important;
+  }
+
+  &:hover {
+    path {
+      fill: #a484fa !important;
+    }
+  }
 }

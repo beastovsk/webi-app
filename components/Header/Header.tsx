@@ -1,7 +1,9 @@
 'use client';
 
+import {MenuOutlined} from '@ant-design/icons';
+import {Drawer} from 'antd';
 import Link from 'next/link';
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import Btn from '../UI/Btn/Btn';
 import {Logo} from '../UI/Logo/Logo';
 import s from './Header.module.scss';
@@ -9,17 +11,34 @@ import s from './Header.module.scss';
 interface HeaderProps {}
 
 export const Header: FC<HeaderProps> = (props) => {
-  return (
-    <div className={s.header}>
-      <Logo />
+  const [open, setOpen] = useState(false);
+
+  const content = (
+    <div className={s.content}>
       <div className={s.menu}>
-        <Link href={'/marketplace/auth'} className={s.link}>
-          <span className='text-primary-500'>Webi</span> Marketplace
+        <Link href={'/marketplace/'} className={s.link}>
+          Marketplace
+        </Link>{' '}
+        <Link href={'/blog'} className={s.link}>
+          Блог
         </Link>
       </div>
       <a href='#feedback' className='md:hidden'>
-        <Btn primary>Связаться с нами</Btn>
+        <Btn primary>Поддержка</Btn>
       </a>
+    </div>
+  );
+  return (
+    <div className={s.header}>
+      <Logo />
+      <div className='hidden md:flex' onClick={() => setOpen(true)}>
+        <MenuOutlined className='text-xl opacity-80' />
+      </div>
+      <div className='md:hidden'>{content}</div>
+
+      <Drawer open={open} onClose={() => setOpen(false)}>
+        {content}
+      </Drawer>
     </div>
   );
 };

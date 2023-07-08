@@ -3,6 +3,8 @@ import s from './Logo.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import logo from 'public/logo.svg';
+
 interface LogoProps {
   // src: string;
 }
@@ -10,8 +12,8 @@ interface LogoProps {
 export const Logo: FC<LogoProps> = () => {
   return (
     <Link href={'/'}>
-      {/* <Image width={100} height={60} className={s.logo} src={src} alt={''} priority={true} /> */}
-      <h2 className='text-3xl font-medium'>Webi</h2>
+      <Image width={100} height={100} className={s.logo} src={logo} alt={''} priority={true} />
+      {/* <h2 className='text-3xl font-medium'>Webi</h2> */}
     </Link>
   );
 };

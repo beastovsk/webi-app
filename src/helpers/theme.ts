@@ -8,11 +8,11 @@ export const lightTheme = {
   }
 };
 export const darkTheme = {
-  algorithm: theme.darkAlgorithm,
+  // algorithm: theme.darkAlgorithm,
   token: {
-    colorBgBase: '#fff',
-    // colorBgContainer:'#00132C',
-    colorPrimary: '#fff',
+    colorBgBase: '#131129',
+    colorBgContainer: '#131129',
+    colorPrimary: '#131129',
     wireframe: true
   }
 };
