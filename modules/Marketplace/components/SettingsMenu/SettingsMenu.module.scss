@@ -14,3 +14,15 @@
   background: #1d1932;
   transition: $trn;
 }
+.input {
+  width: 30px !important;
+  padding: 10px 0px;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  background: none;
+  font-size: 32px;
+
+  &:focus {
+    outline: none;
+  }
+}

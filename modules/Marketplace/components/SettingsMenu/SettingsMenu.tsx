@@ -1,10 +1,11 @@
 'use client';
 
 import Btn from '@/components/UI/Btn/Btn';
-import {Input} from 'antd';
+import {Input, Modal} from 'antd';
 import {format} from 'path';
 import React, {FC, SetStateAction, useState} from 'react';
 import s from './SettingsMenu.module.scss';
+import OtpInput from 'react-otp-input';
 
 interface SettingsMenuProps {}
 
@@ -15,12 +16,27 @@ interface IPasswordForm {
 }
 
 export const SettingsMenu: FC<SettingsMenuProps> = () => {
+  const [open, setOpen] = useState(false);
+
+  const [code, setCode] = useState('');
   const [name, setName] = useState('Артём');
   const [passwordForm, setPasswordForm] = useState<SetStateAction<any>>({
     email: '',
     currentPassword: '',
     newPassword: ''
   });
+
+  const confirmEmail = () => {
+    // Code format from XXXXXX to XX-XX-XX
+    console.log(
+      code
+        .split('')
+        .map((item, i) => (i % 2 && code.length - 1 != i ? [item, '-'] : item))
+        .flat()
+        .join('')
+    );
+  };
+
   return (
     <div className={s.container}>
       <div className='w-full'>
@@ -70,9 +86,29 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
               />
             </div>
           </div>
-          <Btn className='mt-5'>Изменить</Btn>
+          <Btn className='mt-5' onClick={() => setOpen(true)}>
+            Изменить
+          </Btn>
         </div>
       </div>
+
+      <Modal open={open} onCancel={() => setOpen(false)} footer={false}>
+        <div className='flex flex-col justify-center items-center'>
+          <h2 className='mb-5'>Введите код указанный в письме</h2>
+          <OtpInput
+            containerStyle={{justifyContent: 'center'}}
+            inputStyle={s.input}
+            value={code}
+            onChange={setCode}
+            numInputs={6}
+            renderSeparator={<span style={{marginRight: '10px'}}> </span>}
+            renderInput={(props: any) => <input {...props} />}
+          />
+          <Btn className='mt-10' onClick={() => confirmEmail()}>
+            Отправить
+          </Btn>
+        </div>
+      </Modal>
     </div>
   );
 };
