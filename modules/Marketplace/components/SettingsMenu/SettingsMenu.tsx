@@ -2,10 +2,11 @@
 
 import Btn from '@/components/UI/Btn/Btn';
 import {Input, Modal} from 'antd';
-import {format} from 'path';
 import React, {FC, SetStateAction, useState} from 'react';
 import s from './SettingsMenu.module.scss';
 import OtpInput from 'react-otp-input';
+import { useMutation } from 'react-query';
+import { ChangeEmail, GetCodeChangeEmail } from '../../api';
 
 interface SettingsMenuProps {}
 
@@ -16,6 +17,8 @@ interface IPasswordForm {
 }
 
 export const SettingsMenu: FC<SettingsMenuProps> = () => {
+  const {mutate: get} = useMutation(GetCodeChangeEmail);
+  const {mutate: getChangeEmail} = useMutation(ChangeEmail);
   const [open, setOpen] = useState(false);
 
   const [code, setCode] = useState('');
@@ -28,13 +31,16 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
 
   const confirmEmail = () => {
     // Code format from XXXXXX to XX-XX-XX
-    console.log(
-      code
-        .split('')
-        .map((item, i) => (i % 2 && code.length - 1 != i ? [item, '-'] : item))
-        .flat()
-        .join('')
-    );
+    const codeForm = code.split('').map((item, i) => (i % 2 && code.length - 1 !== i ? [item, '-'] : item)).flat().join('');
+    getChangeEmail({email: passwordForm.email, code: codeForm});
+
+    // Need add close window form after 200 code
+    setOpen(false);
+  };
+
+  const getCode = () => {
+    get({email: passwordForm.email});
+    setOpen(true);
   };
 
   return (
@@ -86,7 +92,9 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
               />
             </div>
           </div>
-          <Btn className='mt-5' onClick={() => setOpen(true)}>
+          <Btn 
+            className='mt-5'
+            onClick={getCode}>
             Изменить
           </Btn>
         </div>
