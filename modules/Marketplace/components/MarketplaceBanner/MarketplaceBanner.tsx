@@ -12,6 +12,8 @@ import {useStore} from '../../store';
 import {IProduct} from '../../types';
 import s from './MarketplaceBanner.module.scss';
 
+import {animated, useInView} from '@react-spring/web';
+
 import banner from '/public/image/marketplace-banner.png';
 
 interface MarketplaceBannerProps {
@@ -20,6 +22,14 @@ interface MarketplaceBannerProps {
 }
 
 export const MarketplaceBanner: FC<MarketplaceBannerProps> = ({productItem, productsList}) => {
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0.7, y: 40},
+      to: {opacity: 1, y: 0}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
+
   const basketList = localStorage.getItem('basketList');
 
   const copyList = useStore((store) => store.basketList);
@@ -34,7 +44,7 @@ export const MarketplaceBanner: FC<MarketplaceBannerProps> = ({productItem, prod
   }, []);
 
   return (
-    <div className={s.container}>
+    <animated.div ref={ref} style={springs} className={s.container}>
       <div className={s.banner}>
         <PreloaderImage src={banner} objectFit='cover' className={s.image} alt='' width={500} height={500} />
         <h2 className='text-xl mb-3'>Приобретайте сайт, веб-приложения и модули по доступным ценам</h2>
@@ -103,6 +113,6 @@ export const MarketplaceBanner: FC<MarketplaceBannerProps> = ({productItem, prod
           </div>
         </div>
       </div>
-    </div>
+    </animated.div>
   );
 };

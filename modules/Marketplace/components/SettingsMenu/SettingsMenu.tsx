@@ -7,6 +7,8 @@ import React, {FC, SetStateAction, useState} from 'react';
 import s from './SettingsMenu.module.scss';
 import OtpInput from 'react-otp-input';
 
+import {animated, useInView} from '@react-spring/web';
+
 interface SettingsMenuProps {}
 
 interface IPasswordForm {
@@ -16,6 +18,14 @@ interface IPasswordForm {
 }
 
 export const SettingsMenu: FC<SettingsMenuProps> = () => {
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0.7, y: 40},
+      to: {opacity: 1, y: 0}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
+
   const [open, setOpen] = useState(false);
 
   const [code, setCode] = useState('');
@@ -38,7 +48,7 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
   };
 
   return (
-    <div className={s.container}>
+    <animated.div ref={ref} style={springs} className={s.container}>
       <div className='w-full'>
         <h2 className='text-xl font-medium'>Изменить имя</h2>
         <div className={s.item}>
@@ -109,6 +119,6 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
           </Btn>
         </div>
       </Modal>
-    </div>
+    </animated.div>
   );
 };

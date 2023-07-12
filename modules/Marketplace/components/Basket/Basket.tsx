@@ -3,17 +3,15 @@
 import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 import Btn from '@/components/UI/Btn/Btn';
 import {formatProductPrice} from '@/src/helpers/hooks';
-import {Empty} from 'antd';
-import Image, {StaticImageData} from 'next/image';
-import Link from 'next/link';
 
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useMutation} from 'react-query';
 import {CreateOrder} from '../../api';
 import {useStore} from '../../store';
 import s from './Basket.module.scss';
 
-import banner from '/public/image/marketplace-banner.png';
+import {animated, useInView} from '@react-spring/web';
+import Link from 'next/link';
 
 interface BasketProps {}
 
@@ -55,8 +53,16 @@ export const Basket: FC<BasketProps> = () => {
     return generalPrice;
   };
 
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0.7, y: 40},
+      to: {opacity: 1, y: 0}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
+
   return (
-    <div className={s.container}>
+    <animated.div ref={ref} style={springs} className={s.container}>
       <h2 className='font-medium text-xl mb-10'>Корзина</h2>
 
       <div className={s.wrapper}>
@@ -134,6 +140,6 @@ export const Basket: FC<BasketProps> = () => {
           </div>
         </div>
       </div>
-    </div>
+    </animated.div>
   );
 };

@@ -10,6 +10,8 @@ import {GetProducts} from '../../api';
 import {useStore} from '../../store';
 import s from './SearchBar.module.scss';
 
+import {animated, useInView} from '@react-spring/web';
+
 interface SearchBarProps {}
 
 export const SearchBar: FC<SearchBarProps> = ({}) => {
@@ -18,8 +20,16 @@ export const SearchBar: FC<SearchBarProps> = ({}) => {
   const setProductsList = useStore((store) => store.setProductsList);
   const setAvailable = useStore((store) => store.setAvailable);
 
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0.7, y: 40},
+      to: {opacity: 1, y: 0}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
+
   return (
-    <div className={s.container}>
+    <animated.div ref={ref} style={springs} className={s.container}>
       <h2 className='font-medium text-xl'>Поиск по каталогу</h2>
 
       <Form
@@ -67,6 +77,6 @@ export const SearchBar: FC<SearchBarProps> = ({}) => {
           </Btn>
         </Space.Compact>
       </Form>
-    </div>
+    </animated.div>
   );
 };

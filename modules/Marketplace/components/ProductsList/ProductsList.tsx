@@ -14,6 +14,8 @@ import {useStore} from '../../store';
 import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 import {CheckOutlined} from '@ant-design/icons';
 
+import {animated, useInView} from '@react-spring/web';
+
 interface ProductsListProps {
   title: string;
   productsList: IProduct[];
@@ -35,8 +37,16 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
     localStorage.setItem('basketList', JSON.stringify([]));
   }, []);
 
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0.7, y: 40},
+      to: {opacity: 1, y: 0}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
+
   return (
-    <div className={s.container}>
+    <animated.div ref={ref} style={springs} className={s.container}>
       <div className='flex justify-between items-center md:flex-col md:items-start'>
         <h2 className='font-medium text-xl'>{title}</h2>
 
@@ -111,6 +121,6 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
           </div>
         )}
       </div>
-    </div>
+    </animated.div>
   );
 };
