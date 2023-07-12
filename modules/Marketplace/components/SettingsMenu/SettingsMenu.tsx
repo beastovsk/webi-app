@@ -6,10 +6,9 @@ import React, {FC, SetStateAction, useState} from 'react';
 import s from './SettingsMenu.module.scss';
 import OtpInput from 'react-otp-input';
 import { useMutation } from 'react-query';
-import { ChangeEmail, GetCodeChangeEmail } from '../../api';
+import { ChangeEmail, ChangePassword, GetCodeChangeEmail, GetCodeChangePassword } from '../../api';
 
 import {animated, useInView} from '@react-spring/web';
-
 
 interface SettingsMenuProps {}
 
@@ -20,8 +19,10 @@ interface IPasswordForm {
 }
 
 export const SettingsMenu: FC<SettingsMenuProps> = () => {
-  const {mutate: get} = useMutation(GetCodeChangeEmail);
+  const {mutate: getCodeChangeEmail} = useMutation(GetCodeChangeEmail);
+  const {mutate: getCodeChangePassword} = useMutation(GetCodeChangePassword);
   const {mutate: getChangeEmail} = useMutation(ChangeEmail);
+  const {mutate: getChangePassword} = useMutation(ChangePassword);
   const [ref, springs] = useInView(
     () => ({
       from: {opacity: 0.7, y: 40},
@@ -40,14 +41,16 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
 
   const [passwordForm, setPasswordForm] = useState<SetStateAction<any>>({
     email: '',
-    currentPassword: '',
     newPassword: ''
   });
 
   const confirmEmail = () => {
     // Code format from XXXXXX to XX-XX-XX
     const codeForm = code.split('').map((item, i) => (i % 2 && code.length - 1 !== i ? [item, '-'] : item)).flat().join('');
-    getChangeEmail({email: emailForm.email, code: codeForm});
+    getChangeEmail({
+      email: emailForm.email, 
+      code: codeForm
+    });
 
     // Need add close window form after 200 code
     setOpen(false);
@@ -56,19 +59,23 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
   const confirmPassword = () => {
     // Code format from XXXXXX to XX-XX-XX
     const codeForm = code.split('').map((item, i) => (i % 2 && code.length - 1 !== i ? [item, '-'] : item)).flat().join('');
-    getChangeEmail({email: emailForm.email, code: codeForm});
+    getChangePassword({
+      email: passwordForm.email, 
+      password: passwordForm.newPassword, 
+      code: codeForm
+    });
 
     // Need add close window form after 200 code
     setOpen(false);
   };
 
   const getEmailCode = () => {
-    get({email: emailForm.email});
+    getCodeChangeEmail({email: emailForm.email});
     setOpen(true);
   };
 
   const getPasswordCode = () => {
-    get({email: emailForm.email});
+    getCodeChangePassword({email: passwordForm.email});
     setOpen(true);
   };
 
@@ -90,8 +97,8 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
               <h3 className='text-base font-medium mb-3'>Пароль</h3>
               <Input.Password
                 style={{background: '#131129'}}
-                value={passwordForm.currentPassword}
-                onChange={(e) => setPasswordForm((form: IPasswordForm) => ({...form, currentPassword: e.target.value}))}
+                value={passwordForm.newPassword}
+                onChange={(e) => setPasswordForm((form: IPasswordForm) => ({...form, newPassword: e.target.value}))}
               />
             </div>
           </div>
