@@ -65,7 +65,26 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) =
           </div>
         </div>
         <div>
-          <h2 className='text-lg mb-3'>Ссылка</h2>
+          <h2 className='text-lg mb-3 md:flex gap-3'>
+            Ссылка
+            <span className='hidden md:flex'>
+              {' '}
+              <Tooltip title={message}>
+                <CopyOutlined
+                  className='text-lg cursor-pointer text-[#6F4FF2] hover:opacity-70 transition-[all]'
+                  color='#111'
+                  onClick={() => {
+                    navigator.clipboard.writeText(link);
+                    setMessage('Ссылка скопирована');
+
+                    setTimeout(() => {
+                      setMessage('Копировать ссылку');
+                    }, 5000);
+                  }}
+                />
+              </Tooltip>
+            </span>
+          </h2>
           <div className='flex items-center gap-3'>
             <Link
               target='_blank'
@@ -75,27 +94,29 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) =
               {link}
             </Link>
 
-            <Tooltip title={message}>
-              <CopyOutlined
-                className='text-lg cursor-pointer text-[#6F4FF2] hover:opacity-70 transition-[all]'
-                color='#111'
-                onClick={() => {
-                  navigator.clipboard.writeText(link);
-                  setMessage('Ссылка скопирована');
+            <span className='md:hidden'>
+              <Tooltip title={message}>
+                <CopyOutlined
+                  className='text-lg cursor-pointer text-[#6F4FF2] hover:opacity-70 transition-[all]'
+                  color='#111'
+                  onClick={() => {
+                    navigator.clipboard.writeText(link);
+                    setMessage('Ссылка скопирована');
 
-                  setTimeout(() => {
-                    setMessage('Копировать ссылку');
-                  }, 5000);
-                }}
-              />
-            </Tooltip>
+                    setTimeout(() => {
+                      setMessage('Копировать ссылку');
+                    }, 5000);
+                  }}
+                />
+              </Tooltip>
+            </span>
           </div>
         </div>
         <div>
           <h2 className='text-lg mb-5'>Добавлено</h2>
           <p className='text-[#6C7AA0]'>{getParsedDate(publication_date)}</p>
         </div>
-        <Btn className='w-max'>Добавить в корзину</Btn>
+        <Btn className='w-max sm:w-full'>Добавить в корзину</Btn>
       </div>
     </div>
   );

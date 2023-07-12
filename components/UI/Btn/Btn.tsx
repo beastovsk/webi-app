@@ -35,7 +35,7 @@ export default function Btn<E extends ElementType = typeof defaultElement>({
       className={`${disabled && s.disabled} ${danger && s.danger} ${primary && s.primary} ${s.button} ${className}`}
       {...otherProps}
     >
-      <span className='flex gap-2 items-center transition-[all]'>
+      <span className='flex gap-2 items-center justify-center transition-[all]'>
         {loading ? <LoadingOutlined className={s.spinner} /> : null} {children}
       </span>
     </TagName>

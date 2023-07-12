@@ -9,7 +9,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <div className='flex h-full'>
       <Navigation />
-      <div className='flex flex-col h-full ml-[100px] md:ml-0 flex-grow gap-10'>
+      <div className='flex flex-col w-full h-full ml-[100px] md:ml-0 flex-grow gap-10'>
         <div className='flex-grow-0 flex-shrink-0 basis-auto container'>
           <Header />
         </div>

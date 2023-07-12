@@ -1,12 +1,13 @@
 'use client';
 
+import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 import Btn from '@/components/UI/Btn/Btn';
 import {formatProductPrice} from '@/src/helpers/hooks';
 import {Empty} from 'antd';
 import Image, {StaticImageData} from 'next/image';
 import Link from 'next/link';
 
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useMutation} from 'react-query';
 import {CreateOrder} from '../../api';
 import {useStore} from '../../store';
@@ -17,26 +18,37 @@ import banner from '/public/image/marketplace-banner.png';
 interface BasketProps {}
 
 export const Basket: FC<BasketProps> = () => {
-  const basketList = useStore((store) => store.basketList);
-  const removeProduct = useStore((store) => store.removeProduct);
+  const basketList = localStorage.getItem('basketList');
 
-  const {mutate} = useMutation(CreateOrder);
+  // dublicating products list after adding in client components, for checking "disabled" state
 
-  const createOrder = () => {
-    mutate(
-      {orders: basketList.map((item) => item.id)},
-      {
-        onSuccess: (response) => {
-          console.log(response.data);
-        }
-      }
-    );
+  const copyList = useStore((store) => store.basketList);
+  const setCopyList = useStore((store) => store.setBasketList);
+
+  useEffect(() => {
+    setCopyList(JSON.parse(basketList) || []);
+
+    if (basketList?.length && basketList) return;
+
+    localStorage.setItem('basketList', JSON.stringify([]));
+  }, []);
+
+  const createOrder = () => {};
+
+  const removeProduct = (id) => {
+    const index = copyList.findIndex((item) => item.id == id);
+    const editedBasketList = [...copyList.slice(0, index), ...copyList.slice(index + 1)];
+    // local storage remove
+    localStorage.setItem('basketList', JSON.stringify(editedBasketList));
+
+    // state remove
+    setCopyList(editedBasketList);
   };
 
   const getBasketPrice = () => {
     let generalPrice = 0;
 
-    basketList.map(({price}) => {
+    copyList.map(({price}) => {
       generalPrice += price;
     });
 
@@ -49,8 +61,8 @@ export const Basket: FC<BasketProps> = () => {
 
       <div className={s.wrapper}>
         <div className='flex flex-col gap-5'>
-          {basketList.length ? (
-            basketList.map(
+          {copyList.length ? (
+            copyList.map(
               ({
                 description,
                 full_image,
@@ -68,8 +80,9 @@ export const Basket: FC<BasketProps> = () => {
                   <div className='flex justify-between md:flex-col'>
                     <div className='flex gap-10 md:flex-col'>
                       <Link href='/marketplace/products/1'>
-                        <Image
+                        <PreloaderImage
                           src={small_image}
+                          objectFit='cover'
                           alt=''
                           width={200}
                           height={400}
@@ -103,18 +116,20 @@ export const Basket: FC<BasketProps> = () => {
         <div className={s.item}>
           <h2 className='text-xl font-normal'>Итого</h2>
           <div className='flex justify-between items-center mt-5 mb-10'>
-            <p>{basketList.length} товар</p>
+            <p>{copyList.length} товар</p>
             <h3 className='text-primary-500 font-bold'>{formatProductPrice(getBasketPrice())}</h3>
           </div>
           <span className='text-[#6C7AA0] text-sm'>
-            После оплаты с вами свяжутся по почте, указанной при регистрации аккаунта в течении дня.{' '}
+            После создания заказа с вами свяжутся по почте, указанной при регистрации аккаунта в течении дня.{' '}
             <Link href='/marketplace/profile/settings' className='text-[#6F4FF2] hover:opacity-70 transition-opacity'>
               Изменить ее
             </Link>
           </span>
           <div className='mt-10 flex justify-center'>
-            <Btn disabled={basketList.length ? false : true} onClick={() => createOrder()}>
-              Перейти к оформлению
+            {/* double '!' symbol is fast way to get bool of copyList length */}
+            {/* logical '!' to disable button in the case of empty basket */}
+            <Btn disabled={!!!copyList.length} onClick={() => createOrder()}>
+              Создать заказ
             </Btn>
           </div>
         </div>

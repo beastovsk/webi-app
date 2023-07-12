@@ -16,19 +16,23 @@ export const Navigation: FC<NavigationProps> = () => {
 
   const navigationMenu = [
     {
-      icon: <AppstoreOutlined className='text-2xl cursor-pointer' color='#111' />,
+      label: 'Главная',
+      icon: <AppstoreOutlined className='w-full justify-center text-2xl cursor-pointer' color='#111' />,
       href: '/marketplace'
     },
     {
-      icon: <DesktopOutlined className='text-2xl cursor-pointer' color='#111' />,
+      label: 'Поиск',
+      icon: <DesktopOutlined className='w-full justify-center text-2xl cursor-pointer' color='#111' />,
       href: '/marketplace/products'
     },
     {
-      icon: <UserOutlined className='text-2xl cursor-pointer' color='#111' />,
+      label: 'Профиль',
+      icon: <UserOutlined className='w-full justify-center text-2xl cursor-pointer' color='#111' />,
       href: '/marketplace/profile'
     },
     {
-      icon: <SettingOutlined className='text-2xl cursor-pointer' color='#111' />,
+      label: 'Настройки',
+      icon: <SettingOutlined className='w-full justify-center text-2xl cursor-pointer' color='#111' />,
       href: '/marketplace/profile/settings'
     }
   ];
@@ -40,13 +44,16 @@ export const Navigation: FC<NavigationProps> = () => {
         </Link>
 
         <div className='flex flex-col md:flex-row gap-10 items-center text-[#6C7AA0]'>
-          {navigationMenu.map(({icon, href}) => (
+          {navigationMenu.map(({label, icon, href}, i) => (
             <Link
               href={href}
-              className={`${pathname == href && 'text-[#6F4FF2]'} hover:text-[#6F4FF2] transition-[all]`}
+              className={`${pathname == href && 'text-[#6F4FF2]'} hover:text-[#6F4FF2] transition-[all] ${
+                i == 3 && 'sm:hidden'
+              }`}
               key={href}
             >
               {icon}
+              <p className='hidden md:flex'>{label}</p>
             </Link>
           ))}
         </div>

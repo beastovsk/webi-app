@@ -39,7 +39,6 @@ export const Banner: FC<BannerProps> = () => {
           </Btn>
         </Link>
       </div>
-      {/* <Image className='flex flex-grow md:w-full' src={banner} alt='' quality={100} width={500} height={500} /> */}
       <Player src={banner} className='player' loop autoplay />
     </animated.div>
   );

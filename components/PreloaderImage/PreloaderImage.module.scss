@@ -1,0 +1,21 @@
+@import 'src/styles/mixins';
+
+@keyframes bgSkeletonAnimate {
+    0% {
+        background-color: #00000000;
+    }
+    100% {
+        background-color: #00000017;
+    }
+}
+
+.preloaderGradient {
+    // background-color: rgba($color: #000000, $alpha: 0.1);
+    // background: radial-gradient(rgba($color: #000000, $alpha: 0.1), transparent);
+    // background: radial-gradient(rgb(0 0 0 / 21%) 0%, transparent 45%);
+
+    background-color: #00000000;
+    border-radius: 15px;
+    backdrop-filter: blur(8px);
+    animation: bgSkeletonAnimate 1s cubic-bezier(0, 0.29, 1, 0.72) 0s infinite alternate;
+}

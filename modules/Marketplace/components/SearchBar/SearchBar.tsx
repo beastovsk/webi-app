@@ -42,16 +42,17 @@ export const SearchBar: FC<SearchBarProps> = ({}) => {
             prefix={<SearchOutlined className='text-lg cursor-pointer text-[#6C7AA0] mr-5' />}
           />
         </Form.Item>
-        <Space.Compact className='gap-5 flex items-center h-[50px]'>
-          <Form.Item className='m-0 p-0' label='Цена от' name='priceFrom'>
-            <Input placeholder='0.00' className='w-[155px]' suffix='₽' />
-          </Form.Item>
-          <Form.Item className='m-0 p-0' label='Цена до' name='priceTo'>
-            <Input placeholder='325.000' className='w-[155px]' suffix='₽' />
-          </Form.Item>
-          <Form.Item className='m-0 p-0' label='Тип' name='type'>
+        <Space.Compact className='gap-5 flex items-center h-[50px] md:h-max md:flex-col'>
+          <Space.Compact className='md:w-full gap-5'>
+            <Form.Item className='m-0 p-0 md:w-full' label='Цена от' name='priceFrom'>
+              <Input placeholder='0.00' className='w-[155px] md:w-full' suffix='₽' />
+            </Form.Item>
+            <Form.Item className='m-0 p-0 md:w-full' label='Цена до' name='priceTo'>
+              <Input placeholder='325.000' className='w-[155px] md:w-full' suffix='₽' />
+            </Form.Item>
+          </Space.Compact>
+          <Form.Item className='m-0 p-0 md:w-full w-[300px]' label='Тип' name='type'>
             <Select
-              style={{width: '300px'}}
               options={[
                 {label: 'Веб-сайты', value: 0},
                 {label: 'Веб-приложения', value: 1},

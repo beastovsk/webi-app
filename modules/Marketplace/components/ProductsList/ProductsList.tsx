@@ -11,6 +11,8 @@ import s from './ProductsList.module.scss';
 
 import image from 'public/image/card-banner.png';
 import {useStore} from '../../store';
+import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
+import {CheckOutlined} from '@ant-design/icons';
 
 interface ProductsListProps {
   title: string;
@@ -18,8 +20,20 @@ interface ProductsListProps {
 }
 
 export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
-  const basketList = useStore((store) => store.basketList);
-  const setBasketList = useStore((store) => store.setBasketList);
+  const basketList = localStorage.getItem('basketList');
+
+  // dublicating products list after adding in client components, for checking "disabled" state
+
+  const copyList = useStore((store) => store.basketList);
+  const setCopyList = useStore((store) => store.setBasketList);
+
+  useEffect(() => {
+    if (basketList?.length || basketList) {
+      return setCopyList(JSON.parse(basketList) || []);
+    }
+
+    localStorage.setItem('basketList', JSON.stringify([]));
+  }, []);
 
   return (
     <div className={s.container}>
@@ -39,16 +53,17 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
         </Popover>
       </div>
 
-      <div className='flex gap-5 mt-5 md:flex-col'>
+      <div className={s.list}>
         {productsList.length ? (
           productsList.map(({id, price, name, type, small_image}) => (
             <Link href={`/marketplace/products/${id}`} className={s.item} key={id}>
-              <Image
+              <PreloaderImage
                 src={small_image || image}
+                objectFit='cover'
                 alt=''
                 width={300}
                 height={500}
-                className='h-[170px] object-cover md:w-full rounded-3xl'
+                className='h-[170px] w-full object-cover md:w-full rounded-3xl'
               />
 
               <h2 className='my-5 text-lg font-medium'>{name}</h2>
@@ -63,14 +78,30 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
               </div>
 
               <Btn
-                disabled={basketList.filter((item) => item.id == id).length ? true : false}
+                disabled={!!copyList?.filter((item) => item.id == id).length}
                 className='w-full'
                 onClick={(e: any) => {
                   e.preventDefault();
-                  setBasketList([...basketList, productsList.filter((item) => item.id == id).at(-1)]);
+                  const basketArray = JSON.parse(basketList);
+
+                  localStorage.setItem(
+                    'basketList',
+                    JSON.stringify([
+                      ...(basketArray?.length ? basketArray : []),
+                      productsList.filter((item) => item.id == id).at(-1)
+                    ])
+                  );
+
+                  setCopyList([...basketArray, productsList.filter((item) => item.id == id).at(-1)]);
                 }}
               >
-                Добавить в корзину
+                {!!copyList?.filter((item) => item.id == id).length ? (
+                  <>
+                    <CheckOutlined /> Добавлено
+                  </>
+                ) : (
+                  'Добавить в корзину'
+                )}
               </Btn>
             </Link>
           ))

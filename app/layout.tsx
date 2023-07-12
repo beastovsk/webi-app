@@ -3,6 +3,7 @@ import '@/src/styles/global.scss';
 import {Metadata} from 'next';
 import ClientProvider from '@/modules/ClientProdider';
 import React from 'react';
+import Head from 'next/head';
 
 const gilroy = localFont({
   src: [
@@ -46,6 +47,10 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang='en'>
+      <Head>
+        {/* <meta charset='utf-8' /> */}
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+      </Head>
       <body>
         <main className={gilroy.className}>
           <ClientProvider>{children}</ClientProvider>

@@ -21,7 +21,7 @@ export default async function Page() {
 
   return (
     <>
-      <MarketplaceBanner productItem={data?.results[0]} />
+      <MarketplaceBanner productItem={data?.results[0]} productsList={data?.results || []} />
       <ProductsList title={'Популярные товары'} productsList={data?.results || []} />
     </>
   );

@@ -3,7 +3,7 @@
   justify-content: space-between;
   gap: 20px;
 
-  @media screen and (max-width: $breakpoint-md) {
+  @media screen and (max-width: $breakpoint-lg) {
     flex-direction: column;
   }
 }
@@ -13,8 +13,12 @@
   position: relative;
   padding: 20px 40px;
 
-  @media screen and (max-width: $breakpoint-md) {
+  @media screen and (max-width: $breakpoint-lg) {
     width: 100%;
+  }
+
+  @media screen and (max-width:$breakpoint-md) {
+    padding: 20px;
   }
 }
 
@@ -49,5 +53,23 @@
 
     background: #50ba23;
     border-radius: 10px;
+  }
+}
+.buttons {
+  display: flex;
+  gap: 20px;
+
+  @media screen and (max-width: 1165px) {
+    margin-top: 20px;
+    gap: 10px;
+    flex-direction: column;
+  }
+  
+  @media screen and (max-width:$breakpoint-lg) {
+    flex-direction: row;
+  }
+
+  @media screen and (max-width:$breakpoint-sm) {
+    flex-direction: column;
   }
 }

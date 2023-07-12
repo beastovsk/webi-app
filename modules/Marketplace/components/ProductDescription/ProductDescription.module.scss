@@ -3,8 +3,9 @@
   grid-template-columns: 2fr 1fr;
   gap: 5rem;
 
-  @media screen and (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
+  @media screen and (max-width: $breakpoint-lg) {
+    display: flex;
+    flex-direction: column;
   }
 }
 
