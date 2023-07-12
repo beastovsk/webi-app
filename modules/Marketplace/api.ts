@@ -43,6 +43,42 @@ export const GetCode = async (args: {email: string}) => {
     });
 };
 
+export const GetCodeChangeEmail = async (args: {email: string}) => {
+  const token = getCookie('token');
+
+  await axios
+    .post(`https://api.webi-agency.ru/api/v1/email/change/get-code`, args, {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((data: any) => {
+      customNotification('success', 'top', 'Успешно', 'Вам отправлено письмо для подтверждения почты');
+    })
+    .catch((error) => {
+      // customNotification('error', 'top', 'Ошибка при регистрации', 'Такая почта или имя уже существует');
+    });
+};
+
+export const ChangeEmail = async (args: {email: string; code: string}) => {
+  const token = getCookie('token');
+
+  await axios
+    .post(`https://api.webi-agency.ru/api/v1/email/change/get-code`, args, {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((data: any) => {
+      customNotification('success', 'top', 'Успешно', 'Вам отправлено письмо для подтверждения почты');
+    })
+    .catch((error) => {
+      // customNotification('error', 'top', 'Ошибка при регистрации', 'Такая почта или имя уже существует');
+    });
+};
+
 export const GetProducts = async (args: any) => {
   const {data} = await axios.get(`https://api.webi-agency.ru/api/v1/search`, {
     params: {
