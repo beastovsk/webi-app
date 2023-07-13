@@ -5,11 +5,10 @@ import {Input, Modal} from 'antd';
 import React, {FC, SetStateAction, useState} from 'react';
 import s from './SettingsMenu.module.scss';
 import OtpInput from 'react-otp-input';
-import { useMutation } from 'react-query';
-import { ChangeEmail, GetCodeChangeEmail } from '../../api';
+import {useMutation} from 'react-query';
+import {ChangeEmail, GetCodeChangeEmail} from '../../api';
 
 import {animated, useInView} from '@react-spring/web';
-
 
 interface SettingsMenuProps {}
 
@@ -42,7 +41,11 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
 
   const confirmEmail = () => {
     // Code format from XXXXXX to XX-XX-XX
-    const codeForm = code.split('').map((item, i) => (i % 2 && code.length - 1 !== i ? [item, '-'] : item)).flat().join('');
+    const codeForm = code
+      .split('')
+      .map((item, i) => (i % 2 && code.length - 1 !== i ? [item, '-'] : item))
+      .flat()
+      .join('');
     getChangeEmail({email: passwordForm.email, code: codeForm});
 
     // Need add close window form after 200 code
@@ -103,9 +106,7 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
               />
             </div>
           </div>
-          <Btn 
-            className='mt-5'
-            onClick={getCode}>
+          <Btn className='mt-5' onClick={getCode}>
             Изменить
           </Btn>
         </div>

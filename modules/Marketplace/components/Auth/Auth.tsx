@@ -11,15 +11,24 @@ import {useMutation} from 'react-query';
 import {Login} from '../../api';
 import s from './Auth.module.scss';
 
+import {animated, useInView} from '@react-spring/web';
+
 interface AuthProps {}
 
 export const Auth: FC<AuthProps> = () => {
   const {mutate, isLoading} = useMutation(Login);
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0.7, scale: 0.95},
+      to: {opacity: 1, scale: 1}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
 
   const router = useRouter();
 
   return (
-    <div className={s.container}>
+    <animated.div ref={ref} style={springs} className={s.container}>
       <h1 className='text-5xl font-semibold'>
         <Tooltip title='Перейти на главную страницу'>
           <Link href={'/'} className='hover:opacity-70 transition-opacity'>
@@ -64,6 +73,6 @@ export const Auth: FC<AuthProps> = () => {
           Войти
         </Btn>
       </Form>
-    </div>
+    </animated.div>
   );
 };

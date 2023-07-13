@@ -10,16 +10,26 @@ import {useMutation} from 'react-query';
 import {GetCode, Register, Verificate} from '../../api';
 import s from './Reg.module.scss';
 
+import {animated, useInView} from '@react-spring/web';
+
 interface RegProps {}
 
 export const Reg: FC<RegProps> = () => {
   const {mutate, isLoading} = useMutation(Register);
   const {mutate: get} = useMutation(GetCode);
 
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0.7, scale: 0.95},
+      to: {opacity: 1, scale: 1}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
+
   const router = useRouter();
 
   return (
-    <div className={s.container}>
+    <animated.div ref={ref} style={springs} className={s.container}>
       <h2 className='text-5xl font-semibold'>
         <Tooltip title='Перейти на главную страницу'>
           <Link href={'/'} className='hover:opacity-70 transition-opacity'>
@@ -58,6 +68,6 @@ export const Reg: FC<RegProps> = () => {
           Создать аккаунт
         </Btn>
       </Form>
-    </div>
+    </animated.div>
   );
 };

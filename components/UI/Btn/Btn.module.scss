@@ -4,10 +4,14 @@
   padding: 7px 40px;
   color: #fff;
   white-space: nowrap;
+  transition: $trn;
 
   &:hover {
-    opacity: 0.9;
-    transition: $trn;
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.5;
   }
 }
 .disabled {

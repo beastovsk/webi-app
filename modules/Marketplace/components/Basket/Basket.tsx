@@ -4,7 +4,7 @@ import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 import Btn from '@/components/UI/Btn/Btn';
 import {formatProductPrice} from '@/src/helpers/hooks';
 
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useMutation} from 'react-query';
 import {CreateOrder} from '../../api';
 import {useStore} from '../../store';
@@ -12,18 +12,22 @@ import s from './Basket.module.scss';
 
 import {animated, useInView} from '@react-spring/web';
 import Link from 'next/link';
+import {Modal} from 'antd';
 
 interface BasketProps {}
 
 export const Basket: FC<BasketProps> = () => {
   const basketList = localStorage.getItem('basketList');
+  const [open, setOpen] = useState(false);
+
+  const {mutate} = useMutation(CreateOrder);
 
   // dublicating products list after adding in client components, for checking "disabled" state
-
   const copyList = useStore((store) => store.basketList);
   const setCopyList = useStore((store) => store.setBasketList);
 
   useEffect(() => {
+    setOpen(false);
     setCopyList(JSON.parse(basketList) || []);
 
     if (basketList?.length && basketList) return;
@@ -31,7 +35,18 @@ export const Basket: FC<BasketProps> = () => {
     localStorage.setItem('basketList', JSON.stringify([]));
   }, []);
 
-  const createOrder = () => {};
+  const createOrder = () => {
+    mutate(
+      {orders: copyList.map(({id}) => id)},
+      {
+        onSuccess: () => {
+          setOpen(true);
+          localStorage.setItem('basketList', JSON.stringify([]));
+          setCopyList([]);
+        }
+      }
+    );
+  };
 
   const removeProduct = (id) => {
     const index = copyList.findIndex((item) => item.id == id);
@@ -140,6 +155,18 @@ export const Basket: FC<BasketProps> = () => {
           </div>
         </div>
       </div>
+
+      <Modal open={open} onCancel={() => setOpen(false)} footer={false}>
+        <div>
+          <h2 className='text-xl'>Заказ успешно создан!</h2>
+          <p className='my-5'>Мы свяжемся с вами по указанному email, следите за почтовыми обновлениями.</p>
+          <div className='flex justify-center'>
+            <Link href={'/marketplace'}>
+              <Btn className=''>Вернуться на главную</Btn>
+            </Link>
+          </div>
+        </div>
+      </Modal>
     </animated.div>
   );
 };
