@@ -4,19 +4,34 @@ import {ShoppingCartOutlined} from '@ant-design/icons';
 import {Badge} from 'antd';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import s from './Header.module.scss';
-import {getCookie} from 'cookies-next';
+import {getCookie, setCookie} from 'cookies-next';
 import Btn from '@/components/UI/Btn/Btn';
 import {useStore} from '../../store';
+import {useMutation} from 'react-query';
+import {RefreshToken} from '../../api';
 
 interface HeaderProps {}
 
 export const Header: FC<HeaderProps> = () => {
   const router = useRouter();
   const token = getCookie('token');
+  const refresh = getCookie('refreshToken');
   const username = getCookie('username');
   const basketList = useStore((store) => store.basketList);
+  const {mutate} = useMutation(RefreshToken);
+
+  useEffect(() => {
+    mutate(
+      {refresh: refresh},
+      {
+        onSuccess: (data) => {
+          setCookie('token', data.access);
+        }
+      }
+    );
+  }, []);
 
   return (
     <div className={s.container}>

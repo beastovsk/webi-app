@@ -9,6 +9,13 @@ export const Login = async (args: {username: string; password: string}) => {
   return data;
 };
 
+export const RefreshToken = async (args: {refresh: string}) => {
+  const {data} = await axios.post('https://api.webi-agency.ru/api/v1/token/refresh', args, {
+    headers: {'Content-type': 'application/json; charset=UTF-8'}
+  });
+  return data;
+};
+
 export const Register = async (args: {username: string; password: string; email: string}) => {
   await axios
     .post('https://api.webi-agency.ru/api/v1/register', args)
