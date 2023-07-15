@@ -3,20 +3,40 @@
 import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 import {getParsedDate} from '@/src/helpers/hooks';
 import {ArrowRightOutlined} from '@ant-design/icons';
+import {Breadcrumb} from 'antd';
 import Link from 'next/link';
 import React, {FC} from 'react';
 import {IArticle} from '../../types';
 import s from './ArticlesList.module.scss';
+import {animated, useInView} from '@react-spring/web';
 
 interface ArticlesListProps {
   articlesList: IArticle[];
 }
 
 export const ArticlesList: FC<ArticlesListProps> = ({articlesList}) => {
-  console.log(articlesList);
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0.7, x: 40},
+      to: {opacity: 1, x: 0}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
 
   return (
-    <div className='mt-10'>
+    <animated.div ref={ref} style={springs} className='mt-0'>
+      <Breadcrumb
+        className='mb-10 text-base'
+        separator='>'
+        items={[
+          {
+            title: <Link href={'/'}>Главная</Link>
+          },
+          {
+            title: <Link href={'/blog'}>Блог</Link>
+          }
+        ]}
+      />
       <h2 className='text-xl font-medium'>Блог</h2>
       <div className={s.list}>
         {articlesList.map(({content, date, description, id, image, tags, title}) => (
@@ -43,6 +63,6 @@ export const ArticlesList: FC<ArticlesListProps> = ({articlesList}) => {
           </Link>
         ))}
       </div>
-    </div>
+    </animated.div>
   );
 };

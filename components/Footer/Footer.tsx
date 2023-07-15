@@ -31,7 +31,7 @@ export const Footer: FC<FooterProps> = (props) => {
       links: [
         {
           label: 'Поиск товаров',
-          href: '/marketplace/search'
+          href: '/marketplace/products'
         },
         {
           label: 'Личный кабинет',
@@ -58,7 +58,9 @@ export const Footer: FC<FooterProps> = (props) => {
                 <h2 className='text-lg mb-3'>{title}</h2>
                 <div className='flex flex-col gap-1 text-gray-400'>
                   {links.map(({href, label}) => (
-                    <Link href={href}>{label}</Link>
+                    <Link href={href} className='hover:opacity-70 transition-opacity'>
+                      {label}
+                    </Link>
                   ))}
                 </div>
               </div>

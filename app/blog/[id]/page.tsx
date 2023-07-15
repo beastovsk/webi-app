@@ -12,6 +12,15 @@ async function getData(id) {
   return res.json();
 }
 
+export async function generateMetadata({params}: {params: {id: string}}) {
+  const data = await getData(params.id);
+
+  return {
+    title: data.title,
+    description: data.description
+  };
+}
+
 export default async function Page({
   params,
   searchParams
@@ -20,7 +29,6 @@ export default async function Page({
   searchParams?: {[key: string]: string | string[] | undefined};
 }) {
   const data = await getData(params.id);
-  console.log(data);
 
   return (
     <>

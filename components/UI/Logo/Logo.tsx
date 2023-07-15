@@ -12,8 +12,8 @@ interface LogoProps {
 
 export const Logo: FC<LogoProps> = () => {
   return (
-    <Link href={'/'}>
-      <PreloaderImage width={100} height={100} className={s.logo} src={logo} alt={''} priority={true} />
+    <Link href={'/'} className='cursor-pointer z-30 hover:opacity-70 transition-opacity'>
+      <PreloaderImage width={100} height={100} className={s.logo} src={logo} alt={'Logo'} priority={true} />
     </Link>
   );
 };

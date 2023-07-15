@@ -13,10 +13,13 @@ import s from './Basket.module.scss';
 import {animated, useInView} from '@react-spring/web';
 import Link from 'next/link';
 import {Modal} from 'antd';
+import {getCookie} from 'cookies-next';
+import {customNotification} from '@/src/helpers/customNotification';
 
 interface BasketProps {}
 
 export const Basket: FC<BasketProps> = () => {
+  const token = getCookie('token');
   const basketList = localStorage.getItem('basketList');
   const [open, setOpen] = useState(false);
 
@@ -36,6 +39,15 @@ export const Basket: FC<BasketProps> = () => {
   }, []);
 
   const createOrder = () => {
+    if (!token) {
+      return customNotification(
+        'info',
+        'top',
+        'Пожалуйста авторизируйтесь',
+        'Мы сможем связаться с вами быстрее, если у вас будет учетная запись'
+      );
+    }
+
     mutate(
       {orders: copyList.map(({id}) => id)},
       {

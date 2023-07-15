@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {FC, useEffect} from 'react';
 import s from './Header.module.scss';
-import {getCookie, setCookie} from 'cookies-next';
+import {deleteCookie, getCookie, setCookie} from 'cookies-next';
 import Btn from '@/components/UI/Btn/Btn';
 import {useStore} from '../../store';
 import {useMutation} from 'react-query';
@@ -24,10 +24,16 @@ export const Header: FC<HeaderProps> = () => {
 
   useEffect(() => {
     mutate(
+      // @ts-ignore
       {refresh: refresh},
       {
         onSuccess: (data) => {
           setCookie('token', data.access);
+        },
+        onError: () => {
+          deleteCookie('token');
+          deleteCookie('refreshToken');
+          deleteCookie('username');
         }
       }
     );
@@ -35,13 +41,13 @@ export const Header: FC<HeaderProps> = () => {
 
   return (
     <div className={s.container}>
+      <Link href={'/marketplace/basket'} className='cursor-pointer hover:opacity-70 transition-opacity'>
+        <Badge count={basketList.length} className=''>
+          <ShoppingCartOutlined className='text-[#6C7AA0] text-2xl ' />
+        </Badge>
+      </Link>
       {token ? (
         <div className='flex gap-10 items-end'>
-          <Link href={'/marketplace/basket'} className='cursor-pointer hover:opacity-70 transition-opacity'>
-            <Badge count={basketList.length} className=''>
-              <ShoppingCartOutlined className='text-[#6C7AA0] text-2xl ' />
-            </Badge>
-          </Link>
           <Link
             href={'/marketplace/profile'}
             className='bg-[#6F4FF2] w-10 h-10 rounded-full transition-opacity hover:opacity-70'

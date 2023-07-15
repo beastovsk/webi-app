@@ -49,7 +49,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
     <animated.div ref={ref} style={springs} className={s.container}>
       <div className='flex justify-between items-center md:flex-col md:items-start'>
         <h2 className='font-medium text-xl'>{title}</h2>
-
+        {/* 
         <Popover
           placement='bottomRight'
           content={
@@ -60,7 +60,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
           }
         >
           <p className='cursor-pointer'>Сортировать по</p>
-        </Popover>
+        </Popover> */}
       </div>
 
       <div className={s.list}>
