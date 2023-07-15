@@ -27,8 +27,6 @@ export default async function Page({
 }) {
   const data = await getData(params.id);
 
-  console.log(data);
-
   return (
     <>
       <ProductBanner image={data.full_image} title={data.name} price={data.price} />

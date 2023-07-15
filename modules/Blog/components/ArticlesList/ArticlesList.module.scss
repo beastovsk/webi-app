@@ -1,0 +1,42 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 20px;
+
+  @media screen and (max-width: $breakpoint-md) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+.item {
+  padding: 20px;
+  border-radius: 20px;
+  background: #1d1932;
+  display: flex;
+  gap: 20px;
+  transition: $trn;
+  height: 200px;
+
+  &:hover {
+    .arrow {
+      -webkit-mask-image: linear-gradient(-75deg, rgba(0, 0, 0, 0.6) 30%, #000 50%, rgba(0, 0, 0, 0.6) 70%);
+      -webkit-mask-size: 200%;
+      animation: shine 4s infinite;
+      color: #5454d4;
+    }
+  }
+}
+.arrow {
+  transition: $trn;
+}
+
+@-webkit-keyframes shine {
+  from {
+    -webkit-mask-position: 150%;
+  }
+
+  to {
+    -webkit-mask-position: -50%;
+  }
+}
