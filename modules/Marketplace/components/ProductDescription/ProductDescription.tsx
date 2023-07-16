@@ -33,9 +33,9 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) =
           <h2 className='text-lg mb-3'>Модули сайта</h2>
 
           <ul>
-            {modules.map(({id, label}) => (
+            {modules.map(({id, label}, i) => (
               <li className='text-[#6C7AA0]' key={id}>
-                {id}. {label}
+                {i + 1}. {label}
               </li>
             ))}
           </ul>
@@ -67,7 +67,7 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) =
         <div>
           <h2 className='text-lg mb-3 md:flex gap-3'>
             Ссылка
-            <span className='hidden md:flex'>
+            <span className=''>
               {' '}
               <Tooltip title={message}>
                 <CopyOutlined
@@ -88,28 +88,11 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({productInfo}) =
           <div className='flex items-center gap-3'>
             <Link
               target='_blank'
-              href={`https://${link}`}
+              href={link}
               className='text-[#6C7AA0] hover:opacity-70 transition-opacity cursor-pointer'
             >
               {link}
             </Link>
-
-            <span className='md:hidden'>
-              <Tooltip title={message}>
-                <CopyOutlined
-                  className='text-lg cursor-pointer text-[#6F4FF2] hover:opacity-70 transition-[all]'
-                  color='#111'
-                  onClick={() => {
-                    navigator.clipboard.writeText(link);
-                    setMessage('Ссылка скопирована');
-
-                    setTimeout(() => {
-                      setMessage('Копировать ссылку');
-                    }, 5000);
-                  }}
-                />
-              </Tooltip>
-            </span>
           </div>
         </div>
         <div>

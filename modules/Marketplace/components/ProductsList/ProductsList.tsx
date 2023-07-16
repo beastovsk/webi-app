@@ -89,7 +89,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
 
               <Btn
                 disabled={!!copyList?.filter((item) => item.id == id).length}
-                className='w-full'
+                className='w-full mt-auto'
                 onClick={(e: any) => {
                   e.preventDefault();
                   const basketArray = JSON.parse(basketList);

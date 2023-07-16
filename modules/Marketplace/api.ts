@@ -128,7 +128,7 @@ export const GetProducts = async (args: any) => {
       query: args.query || null,
       priceFrom: args.priceFrom || null,
       priceTo: args.priceTo || null,
-      type: args.type || null
+      type: args.type
     }
   });
   return data;

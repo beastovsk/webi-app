@@ -60,7 +60,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
                 m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
                 (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
       
-                ym(12345678, "init", {
+                ym(94315700, "init", {
                       clickmap:true,
                       trackLinks:true,
                       accurateTrackBounce:true

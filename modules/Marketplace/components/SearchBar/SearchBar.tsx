@@ -33,7 +33,14 @@ export const SearchBar: FC<SearchBarProps> = ({}) => {
       <h2 className='font-medium text-xl'>Поиск по каталогу</h2>
 
       <Form
+        initialValues={{
+          query: '',
+          priceFrom: '',
+          priceTo: '',
+          type: 0
+        }}
         onFinish={(value) => {
+          console.log(value);
           mutate(value, {
             onSuccess: (response) => {
               console.log(response.results);
