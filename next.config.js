@@ -17,6 +17,7 @@ const nextConfig = {
     prependData: `@use 'src/styles/mixins' as *;`
   },
   reactStrictMode: false,
+  trailingSlash: true,
   images: {
     domains: [''],
     remotePatterns: [
