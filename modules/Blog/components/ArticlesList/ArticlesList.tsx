@@ -49,7 +49,7 @@ export const ArticlesList: FC<ArticlesListProps> = ({articlesList}) => {
               </div>
               <div className='flex justify-between w-full'>
                 {' '}
-                <div className='flex gap-3 items-center text-sm'>
+                <div className='flex gap-3 items-center text-sm md:flex-col md:items-start md:mt-5'>
                   <h3 className='text-sm text-gray-400'>{getParsedDate(date)}</h3>
                   <div>
                     {tags.map((label) => (
