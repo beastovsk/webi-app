@@ -38,11 +38,12 @@ const PreloaderImage = (props: PrealoaderImageProps) => {
                 </div>
             )}
             {loading && !props.preloader && (
-                <div
-                    style={{zIndex: 2}}
-                    className={`absolute left-0 top-0 w-full h-full flex justify-center items-center ${s.preloaderGradient}`}>
-                    {/* <Spin size={props.preloaderSize ? props.preloaderSize : 'default'} /> */}
-                </div>
+                <></>
+                // <div
+                //     style={{zIndex: 2}}
+                //     className={`absolute left-0 top-0 w-full h-full flex justify-center items-center ${s.preloaderGradient}`}>
+                //     {/* <Spin size={props.preloaderSize ? props.preloaderSize : 'default'} /> */}
+                // </div>
             )}
             {testMode ? (
                 <></>
