@@ -16,7 +16,6 @@
   display: flex;
   gap: 20px;
   transition: $trn;
-  min-height: 200px;
 
   @media screen and (max-width: $breakpoint-md) {
     gap: 10px;

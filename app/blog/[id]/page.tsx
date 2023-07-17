@@ -2,37 +2,29 @@ import {ArticleDetail} from '@/modules/Blog/components/ArticleDetail/ArticleDeta
 import {ArticlesList} from '@/modules/Blog/components/ArticlesList/ArticlesList';
 import React from 'react';
 
-async function getData(id) {
-  const res = await fetch(`http://api.webi-agency.ru/api/v1/get-article/${id}`);
+// async function getData(id) {
+//   const res = await fetch(`http://api.webi-agency.ru/api/v1/get-article/${id}`);
 
-  if (!res.ok) {
-    return {results: []};
-  }
+//   if (!res.ok) {
+//     return {results: []};
+//   }
 
-  return res.json();
-}
+//   return res.json();
+// }
 
-export async function generateMetadata({params}: {params: {id: string}}) {
-  const data = await getData(params.id);
+// export async function generateMetadata({params}: {params: {id: string}}) {
+//   const data = await getData(params.id);
 
-  return {
-    title: data.title,
-    description: data.description
-  };
-}
+//   return {
+//     title: data.title,
+//     description: data.description
+//   };
+// }
 
-export default async function Page({
-  params,
-  searchParams
-}: {
-  params: {id: string};
-  searchParams?: {[key: string]: string | string[] | undefined};
-}) {
-  const data = await getData(params.id);
-
+export default async function Page({params}: {params: {id: string}}) {
   return (
     <>
-      <ArticleDetail articleInfo={data} />
+      <ArticleDetail id={params.id} />
     </>
   );
 }

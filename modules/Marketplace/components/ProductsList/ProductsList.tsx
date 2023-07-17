@@ -15,16 +15,18 @@ import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 import {CheckOutlined} from '@ant-design/icons';
 
 import {animated, useInView} from '@react-spring/web';
+import {useQuery} from 'react-query';
+import {GetProducts} from '../../api';
 
 interface ProductsListProps {
   title: string;
   productsList: IProduct[];
+  isLoading: boolean;
 }
 
-export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
+export const ProductsList: FC<ProductsListProps> = ({title, productsList, isLoading}) => {
   const basketList = localStorage.getItem('basketList');
-
-  // dublicating products list after adding in client components, for checking "disabled" state
+  // const {data, isLoading, isSuccess} = useQuery('productsList', GetProducts);
 
   const copyList = useStore((store) => store.basketList);
   const setCopyList = useStore((store) => store.setBasketList);
@@ -45,22 +47,34 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
     {rootMargin: '-20% 0%'}
   );
 
+  const skeletonCard = (
+    <div
+      role='status'
+      className='p-4 border border-gray-200 rounded-3xl shadow animate-pulse md:p-6 dark:border-gray-700'
+    >
+      <div className='flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700'>
+        <svg
+          className='w-10 h-10 text-gray-200 dark:text-gray-600'
+          aria-hidden='true'
+          xmlns='http://www.w3.org/2000/svg'
+          fill='currentColor'
+          viewBox='0 0 16 20'
+        >
+          <path d='M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z' />
+          <path d='M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z' />
+        </svg>
+      </div>
+      <div className='h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4'></div>
+      <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5'></div>
+      <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5'></div>
+      <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700'></div>
+    </div>
+  );
+
   return (
     <animated.div ref={ref} style={springs} className={s.container}>
       <div className='flex justify-between items-center md:flex-col md:items-start'>
         <h2 className='font-medium text-xl'>{title}</h2>
-        {/* 
-        <Popover
-          placement='bottomRight'
-          content={
-            <div className='cursor-pointer'>
-              <p className='cursor-pointer hover:opacity-70 transition-opacity'>сначала недорогие</p>
-              <p className='cursor-pointer hover:opacity-70 transition-opacity'>сначала дорогие</p>
-            </div>
-          }
-        >
-          <p className='cursor-pointer'>Сортировать по</p>
-        </Popover> */}
       </div>
 
       <div className={s.list}>
@@ -115,6 +129,12 @@ export const ProductsList: FC<ProductsListProps> = ({title, productsList}) => {
               </Btn>
             </Link>
           ))
+        ) : isLoading ? (
+          <>
+            {skeletonCard}
+            {skeletonCard}
+            {skeletonCard}
+          </>
         ) : (
           <div className='w-full bg-[#1D1932] py-10 rounded-3xl'>
             <h2 className='flex justify-center'>Список пуст</h2>

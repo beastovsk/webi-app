@@ -133,6 +133,10 @@ export const GetProducts = async (args: any) => {
   });
   return data;
 };
+export const GetProductById = async (id: string) => {
+  const {data} = await axios.get(`https://api.webi-agency.ru/api/v1/get-product/${id}`);
+  return data;
+};
 
 export const GetUser = async () => {
   const token = getCookie('token');

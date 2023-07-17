@@ -2,9 +2,14 @@ import {customNotification} from '@/src/helpers/customNotification';
 import axios from 'axios';
 import {getCookie, setCookie} from 'cookies-next';
 
-export const Login = async (args: {username: string; password: string}) => {
-  const {data} = await axios.post('https://api.webi-agency.ru/api/v1/token', args, {
-    headers: {'Content-type': 'application/json; charset=UTF-8'}
-  });
+export const GetArticles = async () => {
+  const {data} = await axios.get('https://api.webi-agency.ru/api/v1/get-articles');
+
+  return data;
+};
+
+export const GetArticleById = async (id: string) => {
+  const {data} = await axios.get(`https://api.webi-agency.ru/api/v1/get-article/${id}`);
+
   return data;
 };

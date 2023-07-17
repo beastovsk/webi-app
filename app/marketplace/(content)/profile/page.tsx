@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <>
       <h2 className='text-xl font-medium'>Личный кабинет</h2>
-      <ProductsList title={'Мои покупки'} productsList={[]} />
+      {/* <ProductsList title={'Мои покупки'} productsList={[]} /> */}
     </>
   );
 }

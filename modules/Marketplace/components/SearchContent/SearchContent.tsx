@@ -9,17 +9,24 @@ import s from './SearchContent.module.scss';
 
 import {useStore} from '../../store';
 import {ProductsList} from '../ProductsList/ProductsList';
+import {useQuery} from 'react-query';
+import {GetProducts} from '../../api';
 
 interface SearchContentProps {
   title: string;
-  productsList: IProduct[];
 }
 
-export const SearchContent: FC<SearchContentProps> = ({title, productsList}) => {
-  const [currentList, setCurrentList] = useState(productsList);
+export const SearchContent: FC<SearchContentProps> = ({title}) => {
+  const {data, isSuccess, isLoading} = useQuery('productsList', GetProducts);
+  const [currentList, setCurrentList] = useState([]);
 
   const storeProducts = useStore((store) => store.productsList);
   const available = useStore((store) => store.available);
+
+  useEffect(() => {
+    if (!isSuccess) return;
+    setCurrentList(data.results);
+  }, [isSuccess]);
 
   useEffect(() => {
     if (!available) return;
@@ -29,7 +36,7 @@ export const SearchContent: FC<SearchContentProps> = ({title, productsList}) => 
 
   return (
     <div className={s.container}>
-      <ProductsList title={title} productsList={currentList} />
+      <ProductsList title={title} productsList={currentList} isLoading={isLoading} />
     </div>
   );
 };

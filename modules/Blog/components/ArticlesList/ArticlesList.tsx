@@ -5,16 +5,25 @@ import {getParsedDate} from '@/src/helpers/hooks';
 import {ArrowRightOutlined} from '@ant-design/icons';
 import {Breadcrumb} from 'antd';
 import Link from 'next/link';
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {IArticle} from '../../types';
 import s from './ArticlesList.module.scss';
 import {animated, useInView} from '@react-spring/web';
+import {useQuery} from 'react-query';
+import {GetArticles} from '../../api';
 
-interface ArticlesListProps {
-  articlesList: IArticle[];
-}
+interface ArticlesListProps {}
 
-export const ArticlesList: FC<ArticlesListProps> = ({articlesList}) => {
+export const ArticlesList: FC<ArticlesListProps> = () => {
+  const {data, isLoading, isSuccess} = useQuery('articlesList', GetArticles);
+  const [articlesList, setArticlesList] = useState([]);
+
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    setArticlesList(data.results);
+  }, [isSuccess]);
+
   const [ref, springs] = useInView(
     () => ({
       from: {opacity: 0.7, x: 40},
@@ -41,7 +50,7 @@ export const ArticlesList: FC<ArticlesListProps> = ({articlesList}) => {
       <div className={s.list}>
         {articlesList.map(({content, date, description, id, image, tags, title}) => (
           <Link href={`/blog/${id}`} className={s.item}>
-            <PreloaderImage src={image} alt='' width={100} height={100} className='w-1/2 h-full' objectFit='cover' />
+            <PreloaderImage src={image} alt='' width={100} height={100} className='w-1/2 h-[180px]' objectFit='cover' />
             <div className='h-full flex flex-col flex-grow justify-between'>
               <div>
                 <h2 className='text-lg font-medium mb-5'>{title}</h2>

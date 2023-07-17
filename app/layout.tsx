@@ -5,6 +5,8 @@ import ClientProvider from '@/modules/ClientProdider';
 import React from 'react';
 import Head from 'next/head';
 
+import YandexMetrika from 'next-yandex-metrika';
+
 const gilroy = localFont({
   src: [
     {
@@ -35,7 +37,7 @@ export const metadata: Metadata = {
     default: 'Webi agency',
     template: `%s | Webi`
   },
-  description: 'Разработка веб приложений',
+  description: 'Купить готовые веб приложения',
   icons: {
     icon: '/favicon.ico'
   },
@@ -51,34 +53,13 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang='en'>
       <Head>
-        {/* <meta charset='utf-8' /> */}
+        <YandexMetrika yid={94315700} clickmap={true} trackLinks={true} accurateTrackBounce={true} webvisor={true} />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-                (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-      
-                ym(94315700, "init", {
-                      clickmap:true,
-                      trackLinks:true,
-                      accurateTrackBounce:true
-                });
-              `
-          }}
-        />
       </Head>
       <body>
         <main className={gilroy.className}>
           <ClientProvider>{children}</ClientProvider>
         </main>
-
-        <noscript>
-          <div>
-            <img src='https://mc.yandex.ru/watch/94315700' style={{position: 'absolute', left: '-9999px'}} alt='' />
-          </div>
-        </noscript>
       </body>
     </html>
   );
