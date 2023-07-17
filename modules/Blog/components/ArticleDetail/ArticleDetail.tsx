@@ -17,6 +17,11 @@ interface ArticleDetailProps {
   id: string;
 }
 
+export const metadata = {
+  title: 'asdasd',
+  description: 'Купить готовые веб приложения'
+};
+
 export const ArticleDetail: FC<ArticleDetailProps> = ({id}) => {
   const {data, isSuccess, isLoading} = useQuery(['articleInfo', id], () => GetArticleById(id));
 

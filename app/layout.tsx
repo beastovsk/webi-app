@@ -37,7 +37,19 @@ export const metadata: Metadata = {
     default: 'Webi agency',
     template: `%s | Webi`
   },
-  description: 'Купить готовые веб приложения',
+  description: 'Купить веб сайт или веб приложение',
+  keywords: [
+    'веб приложение',
+    'создание сайтов',
+    'разработка сайтов',
+    'landing',
+    'e commerce',
+    'самый дешевый интернет магазин'
+  ],
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: '/favicon.ico'
   },
@@ -53,6 +65,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang='en'>
       <Head>
+        <meta name='yandex-verification' content='c4492d1cc4639f2c' />
         <YandexMetrika yid={94315700} clickmap={true} trackLinks={true} accurateTrackBounce={true} webvisor={true} />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </Head>
