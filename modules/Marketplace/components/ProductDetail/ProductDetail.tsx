@@ -22,7 +22,7 @@ export const ProductDetail: FC<ProductDetailProps> = ({id}) => {
       {data ? (
         <div className='flex flex-col gap-10'>
           {' '}
-          <ProductBanner image={data.full_image} title={data.name} price={data.price} />
+          <ProductBanner title={data.name} price={data.price} />
           <ProductDescription productInfo={data} />
         </div>
       ) : (

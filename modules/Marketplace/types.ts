@@ -6,7 +6,7 @@ export interface IProduct {
   name: string;
   price: number;
   link: string;
-  publication_date: string;
+  publication_date: any;
   description: string;
   small_image: string;
   full_image: string;

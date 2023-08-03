@@ -10,12 +10,11 @@ import s from './ProductBanner.module.scss';
 import banner from 'public/image/marketplace-banner.png';
 
 interface ProductBannerProps {
-  image: StaticImageData;
   title: string;
   price: number;
 }
 
-export const ProductBanner: FC<ProductBannerProps> = ({title, price, image}) => {
+export const ProductBanner: FC<ProductBannerProps> = ({title, price}) => {
   return (
     <div className={s.container}>
       <h2 className='font-medium text-xl mb-10'>Информация о товаре</h2>
