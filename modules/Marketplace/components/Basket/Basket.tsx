@@ -16,6 +16,8 @@ import {Modal} from 'antd';
 import {getCookie} from 'cookies-next';
 import {customNotification} from '@/src/helpers/customNotification';
 
+import image from 'public/image/card-banner.png';
+
 interface BasketProps {}
 
 export const Basket: FC<BasketProps> = () => {
@@ -23,7 +25,7 @@ export const Basket: FC<BasketProps> = () => {
   const basketList = localStorage.getItem('basketList');
   const [open, setOpen] = useState(false);
 
-  const {mutate} = useMutation(CreateOrder);
+  // const {mutate} = useMutation(CreateOrder);
 
   // dublicating products list after adding in client components, for checking "disabled" state
   const copyList = useStore((store) => store.basketList);
@@ -36,6 +38,8 @@ export const Basket: FC<BasketProps> = () => {
     if (basketList?.length && basketList) return;
 
     localStorage.setItem('basketList', JSON.stringify([]));
+
+    customNotification('success', 'top', 'Заказ успешно создан', 'с вами свяжутся');
   }, []);
 
   const createOrder = () => {
@@ -48,16 +52,16 @@ export const Basket: FC<BasketProps> = () => {
       );
     }
 
-    mutate(
-      {orders: copyList.map(({id}) => id)},
-      {
-        onSuccess: () => {
-          setOpen(true);
-          localStorage.setItem('basketList', JSON.stringify([]));
-          setCopyList([]);
-        }
-      }
-    );
+    // mutate(
+    //   {orders: copyList.map(({id}) => id)},
+    //   {
+    //     onSuccess: () => {
+    setOpen(true);
+    localStorage.setItem('basketList', JSON.stringify([]));
+    setCopyList([]);
+    //     }
+    //   }
+    // );
   };
 
   const removeProduct = (id) => {
@@ -114,7 +118,7 @@ export const Basket: FC<BasketProps> = () => {
                     <div className='flex gap-10 md:flex-col'>
                       <Link href='/marketplace/products/1'>
                         <PreloaderImage
-                          src={small_image}
+                          src={image}
                           objectFit='cover'
                           alt=''
                           width={200}

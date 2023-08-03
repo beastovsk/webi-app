@@ -7,6 +7,8 @@ import Image, {StaticImageData} from 'next/image';
 import React, {FC} from 'react';
 import s from './ProductBanner.module.scss';
 
+import banner from 'public/image/marketplace-banner.png';
+
 interface ProductBannerProps {
   image: StaticImageData;
   title: string;
@@ -19,7 +21,7 @@ export const ProductBanner: FC<ProductBannerProps> = ({title, price, image}) => 
       <h2 className='font-medium text-xl mb-10'>Информация о товаре</h2>
 
       <div className={s.wrapper}>
-        <PreloaderImage src={image} objectFit='cover' alt='' width={500} height={500} className={s.image} />
+        <PreloaderImage src={banner} objectFit='cover' alt='' width={500} height={500} className={s.image} />
         <div className={s.content}>
           <h1 className={s.title}>{title}</h1>
           <p className={s.price}>{formatProductPrice(price)}</p>

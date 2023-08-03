@@ -2,7 +2,7 @@
 
 import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 import Btn from '@/components/UI/Btn/Btn';
-import {formatProductPrice, getTypeName} from '@/src/helpers/hooks';
+import {formatProductPrice, getProductsList, getTypeName} from '@/src/helpers/hooks';
 import {CheckOutlined} from '@ant-design/icons';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -29,7 +29,6 @@ export const MarketplaceBanner: FC<MarketplaceBannerProps> = () => {
     {rootMargin: '-20% 0%'}
   );
 
-  const {data, isLoading, isSuccess} = useQuery('productsList', GetProducts);
   const [productItem, setProductItem] = useState<any>({});
 
   const basketList = localStorage.getItem('basketList');
@@ -46,10 +45,10 @@ export const MarketplaceBanner: FC<MarketplaceBannerProps> = () => {
   }, []);
 
   useEffect(() => {
-    if (isSuccess) {
-      setProductItem(data.results.at(-1));
+    if (true) {
+      setProductItem(getProductsList().results[0]);
     }
-  }, [isSuccess]);
+  }, []);
 
   const skeletonCard = (
     <div role='status' className='p-4 w-full flex gap-5 rounded-3xl shadow animate-pulse md:p-6'>
@@ -96,10 +95,10 @@ export const MarketplaceBanner: FC<MarketplaceBannerProps> = () => {
       </div>
 
       <div className='flex md:flex-col gap-5 bg-[#1D1932] p-5 rounded-3xl flex-grow'>
-        {isSuccess ? (
+        {true ? (
           <>
             <PreloaderImage
-              src={productItem.full_image}
+              src={banner}
               objectFit='cover'
               alt=''
               width={200}
@@ -130,11 +129,18 @@ export const MarketplaceBanner: FC<MarketplaceBannerProps> = () => {
                       'basketList',
                       JSON.stringify([
                         ...(basketArray?.length ? basketArray : []),
-                        data.results.filter((item) => item.id == productItem.id).at(-1)
+                        getProductsList()
+                          .results.filter((item) => item.id == productItem.id)
+                          .at(-1)
                       ])
                     );
 
-                    setCopyList([...basketArray, data.results.filter((item) => item.id == productItem.id).at(-1)]);
+                    setCopyList([
+                      ...basketArray,
+                      getProductsList()
+                        .results.filter((item) => item.id == productItem.id)
+                        .at(-1)
+                    ]);
                   }}
                 >
                   {!!copyList.filter((item) => item.id == productItem.id).length ? 'В корзине' : 'В корзину'}

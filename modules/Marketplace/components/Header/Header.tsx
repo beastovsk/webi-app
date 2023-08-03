@@ -18,25 +18,26 @@ export const Header: FC<HeaderProps> = () => {
   const router = useRouter();
   const token = getCookie('token');
   const refresh = getCookie('refreshToken');
-  const username = getCookie('username');
+  const username = 'Username';
+  // getCookie('username');
   const basketList = useStore((store) => store.basketList);
   const {mutate} = useMutation(RefreshToken);
 
   useEffect(() => {
-    mutate(
-      // @ts-ignore
-      {refresh: refresh},
-      {
-        onSuccess: (data) => {
-          setCookie('token', data.access);
-        },
-        onError: () => {
-          deleteCookie('token');
-          deleteCookie('refreshToken');
-          deleteCookie('username');
-        }
-      }
-    );
+    // mutate(
+    //   // @ts-ignore
+    //   {refresh: refresh},
+    //   {
+    //     onSuccess: (data) => {
+    //       setCookie('token', data.access);
+    //     },
+    //     onError: () => {
+    //       deleteCookie('token');
+    //       deleteCookie('refreshToken');
+    //       deleteCookie('username');
+    //     }
+    //   }
+    // );
   }, []);
 
   return (

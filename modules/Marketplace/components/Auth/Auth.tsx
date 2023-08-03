@@ -6,7 +6,7 @@ import {Button, Form, Input, Tooltip} from 'antd';
 import {setCookie} from 'cookies-next';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {useMutation} from 'react-query';
 import {Login} from '../../api';
 import s from './Auth.module.scss';
@@ -16,7 +16,8 @@ import {animated, useInView} from '@react-spring/web';
 interface AuthProps {}
 
 export const Auth: FC<AuthProps> = () => {
-  const {mutate, isLoading} = useMutation(Login);
+  // const {mutate, isLoading} = useMutation(Login);
+  const [isLoading, setIsLoading] = useState(false);
   const [ref, springs] = useInView(
     () => ({
       from: {opacity: 0.7, scale: 0.95},
@@ -43,18 +44,28 @@ export const Auth: FC<AuthProps> = () => {
       <Form
         className='my-10'
         onFinish={(value) => {
-          mutate(value, {
-            onSuccess: (data) => {
-              customNotification('success', 'top', 'Успешная авторизация', '');
-              setCookie('token', data.access);
-              setCookie('refreshToken', data.refresh);
-              setCookie('username', value.username);
-              router.push('/marketplace');
-            },
-            onError: (error: any) => {
-              customNotification('error', 'top', 'Ошибка при авторизации', error.response.data.detail);
-            }
-          });
+          setIsLoading(true);
+
+          setTimeout(() => {
+            setIsLoading(false);
+            customNotification('success', 'top', 'Успешная авторизация', '');
+            router.push('/marketplace');
+            setCookie('token', 'AccessToken');
+            setCookie('refreshToken', 'RefreshToken');
+            setCookie('username', 'username');
+          }, 2000);
+          // mutate(value, {
+          //   onSuccess: (data) => {
+          //     customNotification('success', 'top', 'Успешная авторизация', '');
+          //     setCookie('token', data.access);
+          //     setCookie('refreshToken', data.refresh);
+          //     setCookie('username', value.username);
+          //     router.push('/marketplace');
+          //   },
+          //   onError: (error: any) => {
+          //     customNotification('error', 'top', 'Ошибка при авторизации', error.response.data.detail);
+          //   }
+          // });
         }}
       >
         <Form.Item name='username' rules={[{required: true, message: 'Введите имя пользователя'}]}>

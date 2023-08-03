@@ -1,7 +1,7 @@
 'use client';
 
 import Btn from '@/components/UI/Btn/Btn';
-import {formatProductPrice, getTypeName} from '@/src/helpers/hooks';
+import {formatProductPrice, getProductsList, getTypeName} from '@/src/helpers/hooks';
 import {Empty, Popover} from 'antd';
 import Image, {StaticImageData} from 'next/image';
 import Link from 'next/link';
@@ -24,10 +24,11 @@ interface ProductsListProps {
   isLoading: boolean;
 }
 
-export const ProductsList: FC<ProductsListProps> = ({title, productsList, isLoading}) => {
+export const ProductsList: FC<ProductsListProps> = ({title, isLoading}) => {
   const basketList = localStorage.getItem('basketList');
   // const {data, isLoading, isSuccess} = useQuery('productsList', GetProducts);
 
+  const productsList = getProductsList().results;
   const copyList = useStore((store) => store.basketList);
   const setCopyList = useStore((store) => store.setBasketList);
 

@@ -17,8 +17,13 @@ interface SearchContentProps {
 }
 
 export const SearchContent: FC<SearchContentProps> = ({title}) => {
-  const {data, isSuccess, isLoading} = useQuery('productsList', GetProducts);
+  // const {data, isSuccess, isLoading} = useQuery('productsList', GetProducts);
   const [currentList, setCurrentList] = useState([]);
+
+  const data = {results: []};
+  
+  const isSuccess = true;
+  const isLoading = false;
 
   const storeProducts = useStore((store) => store.productsList);
   const available = useStore((store) => store.available);

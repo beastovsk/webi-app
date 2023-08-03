@@ -1,5 +1,6 @@
 'use client';
 
+import {getProductsList} from '@/src/helpers/hooks';
 import React, {FC} from 'react';
 import {useQuery} from 'react-query';
 import {GetProductById} from '../../api';
@@ -12,8 +13,10 @@ interface ProductDetailProps {
 }
 
 export const ProductDetail: FC<ProductDetailProps> = ({id}) => {
-  const {data, isLoading} = useQuery(['product', id], () => GetProductById(id));
-  console.log(data);
+  // const {data, isLoading} = useQuery(['product', id], () => GetProductById(id));
+
+  const data = getProductsList().results.find((item) => item.id == Number(id));
+
   return (
     <div className={s.container}>
       {data ? (

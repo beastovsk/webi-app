@@ -15,8 +15,8 @@ import {animated, useInView} from '@react-spring/web';
 interface RegProps {}
 
 export const Reg: FC<RegProps> = () => {
-  const {mutate, isLoading} = useMutation(Register);
-  const {mutate: get} = useMutation(GetCode);
+  // const {mutate, isLoading} = useMutation(Register);
+  // const {mutate: get} = useMutation(GetCode);
 
   const [ref, springs] = useInView(
     () => ({
@@ -42,11 +42,13 @@ export const Reg: FC<RegProps> = () => {
       <Form
         className='my-10'
         onFinish={(value) => {
-          mutate(value, {
-            onSuccess: () => {
-              get({email: value.email});
-            }
-          });
+          customNotification('success', 'top', 'Успешная регистрация');
+          router.push('/auth');
+          // mutate(value, {
+          //   onSuccess: () => {
+          //     get({email: value.email});
+          //   }
+          // });
         }}
       >
         <Form.Item name='username' rules={[{required: true, message: 'Введите имя пользователя'}]}>
@@ -64,7 +66,7 @@ export const Reg: FC<RegProps> = () => {
             Авторизироваться
           </Link>
         </p>
-        <Btn loading={isLoading} htmlTypeButton='submit' className='mt-10'>
+        <Btn loading={false} htmlTypeButton='submit' className='mt-10'>
           Создать аккаунт
         </Btn>
       </Form>
