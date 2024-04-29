@@ -1,3 +1,13 @@
+export interface Technology {
+  id: number;
+  label: string;
+}
+
+export interface Modules {
+  id: number;
+  label: string;
+}
+
 export interface IProduct {
   id: number;
   technology: Technology[];
@@ -10,14 +20,5 @@ export interface IProduct {
   description: string;
   small_image: string;
   full_image: string;
-}
-
-export interface Technology {
-  id: number;
-  label: string;
-}
-
-export interface Modules {
-  id: number;
-  label: string;
+  author: string;
 }

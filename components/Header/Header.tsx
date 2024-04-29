@@ -19,9 +19,9 @@ export const Header: FC<HeaderProps> = (props) => {
         <Link href={'/marketplace/'} className={s.link}>
           Marketplace
         </Link>{' '}
-        <Link href={'/blog'} className={s.link}>
+        {/* <Link href={'/blog'} className={s.link}>
           Блог
-        </Link>
+        </Link> */}
       </div>
       <a href='#feedback' className='md:hidden'>
         <Btn primary>Поддержка</Btn>

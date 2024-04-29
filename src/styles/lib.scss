@@ -46,5 +46,9 @@
 .ant-select-selection-item,
 .ant-input-affix-wrapper {
   color: rgba(255, 255, 255, 0.776) !important;
-  padding-top: 5px !important;
+  // padding-top: 5px !important;
+}
+
+.ant-upload-list-item {
+  border: 1px solid #424242 !important;
 }

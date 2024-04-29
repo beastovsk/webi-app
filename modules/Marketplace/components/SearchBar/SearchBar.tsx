@@ -2,8 +2,7 @@
 
 import Btn from '@/components/UI/Btn/Btn';
 import {SearchOutlined} from '@ant-design/icons';
-import {Form, Input, Select, Space} from 'antd';
-import {MaskedInput} from 'antd-mask-input';
+import {Form, Input, Space} from 'antd';
 import React, {FC} from 'react';
 import {useMutation} from 'react-query';
 import {GetProducts} from '../../api';
@@ -14,7 +13,7 @@ import {animated, useInView} from '@react-spring/web';
 
 interface SearchBarProps {}
 
-export const SearchBar: FC<SearchBarProps> = ({}) => {
+export const SearchBar: FC<SearchBarProps> = () => {
   const {mutate} = useMutation(GetProducts);
 
   const setProductsList = useStore((store) => store.setProductsList);
@@ -68,15 +67,6 @@ export const SearchBar: FC<SearchBarProps> = ({}) => {
               <Input placeholder='325.000' className='w-[155px] md:w-full' suffix='₽' />
             </Form.Item>
           </Space.Compact>
-          <Form.Item className='m-0 p-0 md:w-full w-[300px]' label='Тип' name='type'>
-            <Select
-              options={[
-                {label: 'Веб-сайты', value: 0},
-                {label: 'Веб-приложения', value: 1},
-                {label: 'Веб-модули', value: 2}
-              ]}
-            />
-          </Form.Item>
         </Space.Compact>
         <Space.Compact className='w-full'>
           <Btn type='submit' className='mt-7 ml-auto'>

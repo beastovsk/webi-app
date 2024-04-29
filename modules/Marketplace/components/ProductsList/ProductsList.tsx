@@ -2,10 +2,8 @@
 
 import Btn from '@/components/UI/Btn/Btn';
 import {formatProductPrice, getProductsList, getTypeName} from '@/src/helpers/hooks';
-import {Empty, Popover} from 'antd';
-import Image, {StaticImageData} from 'next/image';
 import Link from 'next/link';
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {IProduct} from '../../types';
 import s from './ProductsList.module.scss';
 
@@ -15,8 +13,6 @@ import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 import {CheckOutlined} from '@ant-design/icons';
 
 import {animated, useInView} from '@react-spring/web';
-import {useQuery} from 'react-query';
-import {GetProducts} from '../../api';
 
 interface ProductsListProps {
   title: string;
@@ -80,9 +76,11 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading}) => {
 
       <div className={s.list}>
         {productsList.length ? (
+          // eslint-disable-next-line camelcase
           productsList.map(({id, price, name, type, small_image}) => (
             <Link href={`/marketplace/products/${id}`} className={s.item} key={id}>
               <PreloaderImage
+                // eslint-disable-next-line camelcase
                 src={small_image || image}
                 objectFit='cover'
                 alt=''
@@ -103,7 +101,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading}) => {
               </div>
 
               <Btn
-                disabled={!!copyList?.filter((item) => item.id == id).length}
+                disabled={!!copyList?.filter((item) => item.id === id).length}
                 className='w-full mt-auto'
                 onClick={(e: any) => {
                   e.preventDefault();
@@ -113,14 +111,14 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading}) => {
                     'basketList',
                     JSON.stringify([
                       ...(basketArray?.length ? basketArray : []),
-                      productsList.filter((item) => item.id == id).at(-1)
+                      productsList.filter((item) => item.id === id).at(-1)
                     ])
                   );
 
-                  setCopyList([...basketArray, productsList.filter((item) => item.id == id).at(-1)]);
+                  setCopyList([...basketArray, productsList.filter((item) => item.id === id).at(-1)]);
                 }}
               >
-                {!!copyList?.filter((item) => item.id == id).length ? (
+                {copyList?.filter((item) => item.id === id).length ? (
                   <>
                     <CheckOutlined /> Добавлено
                   </>

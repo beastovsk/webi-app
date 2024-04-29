@@ -1,19 +1,19 @@
 export const getTypeName = (type: number) => {
   switch (type) {
-    case 0:
-      return 'веб-сайт';
-    case 1:
-      return 'веб-приложение';
-    case 2:
-      return 'модуль';
+  case 0:
+    return 'веб-сайт';
+  case 1:
+    return 'веб-приложение';
+  case 2:
+    return 'модуль';
 
-    default:
-      return 'модуль';
+  default:
+    return 'модуль';
   }
 };
 
 export const formatProductPrice = (price: number) => {
-  let RURubles = new Intl.NumberFormat('ru-RU', {
+  const RURubles = new Intl.NumberFormat('ru-RU', {
     style: 'currency',
     currency: 'RUB'
   });
@@ -41,7 +41,8 @@ export const getProductsList = () => {
         type: 1,
         name: 'Лендинг-портфолио',
         price: 23000,
-        link: 'google.com',
+        author: 'http://t.me/beastovsk',
+        link: 'http://google.com',
         publication_date: new Date(),
         description: 'Продающий одностраничный сайт для продвижения личного бренда в интернете',
         small_image: '',
@@ -61,7 +62,8 @@ export const getProductsList = () => {
         type: 2,
         name: 'Соц. сеть',
         price: 4200000,
-        link: 'google.com',
+        author: 'http://t.me/beastovsk',
+        link: 'http://google.com',
         publication_date: new Date(),
         description: 'Многофункциональная соц. сеть',
         small_image: '',

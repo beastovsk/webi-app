@@ -35,7 +35,7 @@
         "**/*.ts",
         "**/*.tsx",
         ".next/types/**/*.ts"
-    ],
+, "src/helpers/l"    ],
     "exclude": [
         "node_modules"
     ]
