@@ -18,7 +18,15 @@
   z-index: -1;
   opacity: 0.7;
 }
+
+.carousel {
+  height: 100%;
+  border-radius: 15px !important;
+}
+
 .content {
+  width: 100%;
+  position: absolute;
   height: 100%;
   padding: 60px;
   display: flex;
