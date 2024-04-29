@@ -7,6 +7,7 @@ import type {UploadFile, UploadProps} from 'antd';
 import ImgCrop from 'antd-img-crop';
 import {onPreview} from '@/src/helpers/onPreview';
 import {CustomEditor} from '@/components/CustomEditor';
+import {animated, useInView} from '@react-spring/web';
 
 interface CreateFormProps {}
 
@@ -17,6 +18,14 @@ export const CreateForm: FC<CreateFormProps> = () => {
     setFileList(newFileList);
   };
 
+  const [ref, springs] = useInView(
+    () => ({
+      from: {opacity: 0.7, y: 40},
+      to: {opacity: 1, y: 0}
+    }),
+    {rootMargin: '-20% 0%'}
+  );
+
   const onFinish = (value) => {
     const request = {...value, description, images: fileList.length ? fileList.map((file) => file.thumbUrl) : []};
 
@@ -24,7 +33,7 @@ export const CreateForm: FC<CreateFormProps> = () => {
   };
 
   return (
-    <div className={s.container}>
+    <animated.div ref={ref} style={springs} className={s.container}>
       <h1>Создание товара</h1>
 
       <Form layout='vertical' className='mt-10' onFinish={onFinish}>
@@ -59,6 +68,6 @@ export const CreateForm: FC<CreateFormProps> = () => {
         </Form.Item>
         <Button htmlType='submit'>Создать</Button>
       </Form>
-    </div>
+    </animated.div>
   );
 };
