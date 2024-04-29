@@ -8,7 +8,6 @@ import {useMutation} from 'react-query';
 import {SendQuestion} from '@/modules/Marketplace/api';
 import {animated, useInView} from '@react-spring/web';
 
-
 interface FeedbackProps {}
 
 export const Feedback: FC<FeedbackProps> = () => {
@@ -30,9 +29,9 @@ export const Feedback: FC<FeedbackProps> = () => {
     <animated.div ref={ref} style={springs} className={s.container} id='feedback'>
       <div className='mb-[40px] text-center'>
         <h1 className={s.title}>
-          Не нашел свою нишу на маркетплейсе <span className='text-primary-500 ml-2'>?</span>
+          Остались вопросы или нужна помощь по маркетплейсу <span className='text-primary-500 ml-2'>?</span>
         </h1>
-        <p className='text-gray-500'>Заполни форму и я решу твои проблемы в течении суток</p>
+        <p className='text-gray-500'>Заполните форму ниже и мы свяжемся с вами</p>
       </div>
 
       <div className='flex justify-center'>

@@ -30,11 +30,11 @@ export const Marketplace: FC<MarketplaceProps> = () => {
         <span className='text-primary-500 ml-2'>?</span>
       </h1>
       <h2 className='text-xl mb-5'>
-        <span className='text-primary-500 '>Webi Marketplace</span> - единственный продукт на рынке для бизнеса в
-        секторе веб-приложений. Мы создали площадку, на которой вы приобретаете готовый собранный продукт за короткий
-        промежуток времени
+        <span className='text-primary-500 '>Webi Marketplace</span> - единственный сервис на рынке для B2B в сфере IT.{' '}
+        <br />
+        Мы создали площадку, на которой вы приобретаете или продаете готовый продукт
       </h2>
-      <div className={s.wrapper}>
+      {/* <div className={s.wrapper}>
         <h2 className='text-xl mb-10'>После покупки мы даем вам самое необходимое для запуска бизнеса:</h2>
         <div className='ml-5 md:m-0 flex flex-col gap-3'>
           {servicesList.map(({id, title}) => (
@@ -45,7 +45,7 @@ export const Marketplace: FC<MarketplaceProps> = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </animated.div>
   );
 };

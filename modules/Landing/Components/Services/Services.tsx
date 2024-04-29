@@ -22,9 +22,17 @@ export const Services: FC<ServicesProps> = () => {
   );
 
   const servicesList = [
-    {title: 'Разработка', description: 'Создаем веб-проекты любой сложности', image: dev},
-    {title: 'UX/UI дизайн', description: 'Рисуем продающий дизайн, на который приятно смотреть', image: design},
-    {title: 'Поддержка', description: 'Возьмем на себя ответственность за ваши веб-ресурсы', image: support}
+    {title: 'Для разработчиков', description: 'Предоставляем сервис для поиска покупателей и инвесторов', image: dev},
+    {
+      title: 'Для покупателей',
+      description: 'Сортируем и предлагаем готовые решения и сервисы по вашему вкусу',
+      image: design
+    },
+    {
+      title: 'Поддержка',
+      description: 'Контроллируем процесс и следим за качеством товаров на Маркетплейсе',
+      image: support
+    }
   ];
   return (
     <animated.div ref={ref} style={springs} className={s.container} id='services'>

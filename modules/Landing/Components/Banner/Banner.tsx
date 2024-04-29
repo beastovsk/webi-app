@@ -30,10 +30,9 @@ export const Banner: FC<BannerProps> = () => {
           Нужна веб-платформа <br /> для бизнеса<span className='text-primary-500 ml-2'>?</span>
         </h1>
         <p className='text-base text-gray-500'>
-          Мы продаем готовые веб-приложения на все ниши, <br /> помогаем запустить свой онлайн бизнес
+          В нашем сервисе вы можете купить и продать готовый IT-бизнес. <br /> От малых веб-сайтов до больших сервисов
         </p>
         <Link href='/marketplace'>
-          {' '}
           <Btn>
             <span className='flex items-center gap-3'>Посмотреть товары</span>
           </Btn>
