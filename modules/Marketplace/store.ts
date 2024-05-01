@@ -6,12 +6,14 @@ interface IStore {
   basketList: IProduct[];
   available: boolean;
   openConfirmCode: boolean;
+  openResetPassword: boolean;
 
   setProductsList: (arg0: IProduct[]) => void;
   setBasketList: (arg0: IProduct[]) => void;
   setAvailable: (arg0: boolean) => void;
   removeProduct: (arg0: number) => void;
   setOpenConfirmCode: (param: boolean) => void;
+  setOpenResetPassword: (param: boolean) => void;
 }
 
 export const useStore = create<IStore>()((set) => ({
@@ -34,5 +36,8 @@ export const useStore = create<IStore>()((set) => ({
     }),
 
   openConfirmCode: false,
-  setOpenConfirmCode: (value) => set(() => ({openConfirmCode: value}))
+  setOpenConfirmCode: (value) => set(() => ({openConfirmCode: value})),
+
+  openResetPassword: false,
+  setOpenResetPassword: (value) => set(() => ({openResetPassword: value}))
 }));

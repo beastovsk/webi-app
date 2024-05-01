@@ -18,8 +18,7 @@ interface RegProps {}
 
 export const Reg: FC<RegProps> = () => {
   const {mutate, isLoading} = useMutation(Register);
-  const {mutate: confirm, isLoading: isConfirmLoading} = useMutation(ConfirmEmail);
-  const {openConfirmCode, setOpenConfirmCode} = useStore();
+  const {setOpenConfirmCode} = useStore();
 
   const [ref, springs] = useInView(
     () => ({
@@ -28,8 +27,6 @@ export const Reg: FC<RegProps> = () => {
     }),
     {rootMargin: '-20% 0%'}
   );
-
-  const router = useRouter();
 
   const onFinish = (value) => {
     mutate(value, {
@@ -43,27 +40,6 @@ export const Reg: FC<RegProps> = () => {
           ) {
             setOpenConfirmCode(true);
           }
-          customNotification('info', 'top', 'Информация', data?.message);
-        });
-      }
-    });
-  };
-
-  const onConfirmFinish = (value) => {
-    confirm(value, {
-      onSuccess: (data) => {
-        data.json().then((data) => {
-          if (!data?.message) return;
-
-          if (data?.message === 'Почта подтверждена') {
-            setOpenConfirmCode(false);
-          }
-
-          if (data?.token) {
-            router.push('/marketplace');
-            localStorage.setItem('token', `Bearer ${data?.token}`);
-          }
-
           customNotification('info', 'top', 'Информация', data?.message);
         });
       }
@@ -98,18 +74,6 @@ export const Reg: FC<RegProps> = () => {
           Создать аккаунт
         </Btn>
       </Form>
-
-      <Modal open={openConfirmCode} onCancel={() => setOpenConfirmCode(false)} footer={false}>
-        <Form layout='vertical' onFinish={onConfirmFinish}>
-          <Form.Item className='mt-5' label='Код подтверждения' name='confirmToken'>
-            <Input className='text-center text-2xl' />
-          </Form.Item>
-
-          <Btn className='mt-2 flex justify-center m-auto' htmlTypeButton='submit' loading={isConfirmLoading}>
-            Отправить
-          </Btn>
-        </Form>
-      </Modal>
     </animated.div>
   );
 };

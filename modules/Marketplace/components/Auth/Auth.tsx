@@ -17,9 +17,8 @@ import {useStore} from '../../store';
 interface AuthProps {}
 
 export const Auth: FC<AuthProps> = () => {
-  const {mutate: confirm, isLoading: isConfirmLoading} = useMutation(ConfirmEmail);
   const {mutate, isLoading} = useMutation(Login);
-  const {openConfirmCode, setOpenConfirmCode} = useStore();
+  const {setOpenConfirmCode, setOpenResetPassword} = useStore();
   const [ref, springs] = useInView(
     () => ({
       from: {opacity: 0.7, scale: 0.95},
@@ -38,27 +37,6 @@ export const Auth: FC<AuthProps> = () => {
 
           if (data?.message === 'Аккаунт не подтвержден. Проверьте вашу почту для подтверждения регистрации') {
             setOpenConfirmCode(true);
-          }
-
-          if (data?.token) {
-            router.push('/marketplace');
-            localStorage.setItem('token', `Bearer ${data?.token}`);
-          }
-
-          customNotification('info', 'top', 'Информация', data?.message);
-        });
-      }
-    });
-  };
-
-  const onConfirmFinish = (value) => {
-    confirm(value, {
-      onSuccess: (data) => {
-        data.json().then((data) => {
-          if (!data?.message) return;
-
-          if (data?.message === 'Почта подтверждена') {
-            setOpenConfirmCode(false);
           }
 
           if (data?.token) {
@@ -97,23 +75,16 @@ export const Auth: FC<AuthProps> = () => {
           <Link href={'/marketplace/reg'} className='text-primary-500'>
             Зарегистрироваться
           </Link>
+        </p>{' '}
+        <p className='cursor-pointer text-start mt-3 text-white text-sm'>
+          <span className='text-primary-500' onClick={() => setOpenResetPassword(true)}>
+            Восстановить пароль
+          </span>
         </p>
         <Btn loading={isLoading} htmlTypeButton='submit' className='mt-10'>
           Войти
         </Btn>
       </Form>
-
-      <Modal open={openConfirmCode} onCancel={() => setOpenConfirmCode(false)} footer={false}>
-        <Form layout='vertical' onFinish={onConfirmFinish}>
-          <Form.Item className='mt-5' label='Код подтверждения' name='confirmToken'>
-            <Input className='text-center text-2xl' />
-          </Form.Item>
-
-          <Btn className='mt-2 flex justify-center m-auto' htmlTypeButton='submit' loading={isConfirmLoading}>
-            Отправить
-          </Btn>
-        </Form>
-      </Modal>
     </animated.div>
   );
 };
