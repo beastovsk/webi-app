@@ -2,21 +2,24 @@
 
 import Btn from '@/components/UI/Btn/Btn';
 import {customNotification} from '@/src/helpers/customNotification';
-import {Breadcrumb, Button, Form, Input, Tooltip} from 'antd';
+import {Breadcrumb, Button, Form, Input, Modal, Space, Tooltip} from 'antd';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {FC} from 'react';
 import {useMutation} from 'react-query';
-import {GetCode, Register, Verificate} from '../../api';
+import {Register, ConfirmEmail} from '../../api';
 import s from './Reg.module.scss';
 
 import {animated, useInView} from '@react-spring/web';
+import {useStore} from '../../store';
+import OTPInput from 'react-otp-input';
 
 interface RegProps {}
 
 export const Reg: FC<RegProps> = () => {
-  // const {mutate, isLoading} = useMutation(Register);
-  // const {mutate: get} = useMutation(GetCode);
+  const {mutate, isLoading} = useMutation(Register);
+  const {mutate: confirm, isLoading: isConfirmLoading} = useMutation(ConfirmEmail);
+  const {openConfirmCode, setOpenConfirmCode} = useStore();
 
   const [ref, springs] = useInView(
     () => ({
@@ -27,6 +30,45 @@ export const Reg: FC<RegProps> = () => {
   );
 
   const router = useRouter();
+
+  const onFinish = (value) => {
+    mutate(value, {
+      onSuccess: (data) => {
+        data.json().then((data) => {
+          if (!data?.message) return;
+
+          if (
+            data?.message === 'Подтвердите почту' ||
+            data?.message === 'Подтверждение регистрации отправлено на вашу почту'
+          ) {
+            setOpenConfirmCode(true);
+          }
+          customNotification('info', 'top', 'Информация', data?.message);
+        });
+      }
+    });
+  };
+
+  const onConfirmFinish = (value) => {
+    confirm(value, {
+      onSuccess: (data) => {
+        data.json().then((data) => {
+          if (!data?.message) return;
+
+          if (data?.message === 'Почта подтверждена') {
+            setOpenConfirmCode(false);
+          }
+
+          if (data?.token) {
+            router.push('/marketplace');
+            localStorage.setItem('token', `Bearer ${data?.token}`);
+          }
+
+          customNotification('info', 'top', 'Информация', data?.message);
+        });
+      }
+    });
+  };
 
   return (
     <animated.div ref={ref} style={springs} className={s.container}>
@@ -39,21 +81,7 @@ export const Reg: FC<RegProps> = () => {
         <span className='text-primary-500'>Marketplace</span>
       </h2>
       <h2 className='text-3xl font-medium mt-20'>Регистрация</h2>
-      <Form
-        className='my-10'
-        onFinish={(value) => {
-          customNotification('success', 'top', 'Успешная регистрация');
-          router.push('/auth');
-          // mutate(value, {
-          //   onSuccess: () => {
-          //     get({email: value.email});
-          //   }
-          // });
-        }}
-      >
-        <Form.Item name='username' rules={[{required: true, message: 'Введите имя пользователя'}]}>
-          <Input size='large' placeholder='Имя пользователя' />
-        </Form.Item>{' '}
+      <Form className='my-10' onFinish={onFinish}>
         <Form.Item name='email' rules={[{required: true, type: 'email', message: 'Введите корректную почту'}]}>
           <Input size='large' placeholder='Email' />
         </Form.Item>
@@ -66,10 +94,22 @@ export const Reg: FC<RegProps> = () => {
             Авторизироваться
           </Link>
         </p>
-        <Btn loading={false} htmlTypeButton='submit' className='mt-10'>
+        <Btn loading={isLoading} htmlTypeButton='submit' className='mt-10'>
           Создать аккаунт
         </Btn>
       </Form>
+
+      <Modal open={openConfirmCode} onCancel={() => setOpenConfirmCode(false)} footer={false}>
+        <Form layout='vertical' onFinish={onConfirmFinish}>
+          <Form.Item className='mt-5' label='Код подтверждения' name='confirmToken'>
+            <Input className='text-center text-2xl' />
+          </Form.Item>
+
+          <Btn className='mt-2 flex justify-center m-auto' htmlTypeButton='submit' loading={isConfirmLoading}>
+            Отправить
+          </Btn>
+        </Form>
+      </Modal>
     </animated.div>
   );
 };

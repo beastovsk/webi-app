@@ -32,7 +32,9 @@ export default function Btn<E extends ElementType = typeof defaultElement>({
   return (
     <TagName
       disabled={disabled}
-      className={`${disabled && s.disabled} ${danger && s.danger} ${primary && s.primary} ${s.button} ${className}`}
+      className={`${disabled ? s.disabled : ''} ${danger ? s.danger : ''} ${primary ? s.primary : ''} ${
+        s.button
+      } ${className}`}
       {...otherProps}
     >
       <span className='flex gap-2 items-center justify-center transition-[all]'>

@@ -2,22 +2,24 @@
 
 import Btn from '@/components/UI/Btn/Btn';
 import {customNotification} from '@/src/helpers/customNotification';
-import {Button, Form, Input, Tooltip} from 'antd';
+import {Button, Form, Input, Modal, Tooltip} from 'antd';
 import {setCookie} from 'cookies-next';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {FC, useState} from 'react';
 import {useMutation} from 'react-query';
-import {Login} from '../../api';
+import {ConfirmEmail, Login} from '../../api';
 import s from './Auth.module.scss';
 
 import {animated, useInView} from '@react-spring/web';
+import {useStore} from '../../store';
 
 interface AuthProps {}
 
 export const Auth: FC<AuthProps> = () => {
-  // const {mutate, isLoading} = useMutation(Login);
-  const [isLoading, setIsLoading] = useState(false);
+  const {mutate: confirm, isLoading: isConfirmLoading} = useMutation(ConfirmEmail);
+  const {mutate, isLoading} = useMutation(Login);
+  const {openConfirmCode, setOpenConfirmCode} = useStore();
   const [ref, springs] = useInView(
     () => ({
       from: {opacity: 0.7, scale: 0.95},
@@ -27,6 +29,48 @@ export const Auth: FC<AuthProps> = () => {
   );
 
   const router = useRouter();
+
+  const onFinish = async (value) => {
+    mutate(value, {
+      onSuccess: (data) => {
+        data.json().then((data) => {
+          if (!data?.message) return;
+
+          if (data?.message === 'Аккаунт не подтвержден. Проверьте вашу почту для подтверждения регистрации') {
+            setOpenConfirmCode(true);
+          }
+
+          if (data?.token) {
+            router.push('/marketplace');
+            localStorage.setItem('token', `Bearer ${data?.token}`);
+          }
+
+          customNotification('info', 'top', 'Информация', data?.message);
+        });
+      }
+    });
+  };
+
+  const onConfirmFinish = (value) => {
+    confirm(value, {
+      onSuccess: (data) => {
+        data.json().then((data) => {
+          if (!data?.message) return;
+
+          if (data?.message === 'Почта подтверждена') {
+            setOpenConfirmCode(false);
+          }
+
+          if (data?.token) {
+            router.push('/marketplace');
+            localStorage.setItem('token', `Bearer ${data?.token}`);
+          }
+
+          customNotification('info', 'top', 'Информация', data?.message);
+        });
+      }
+    });
+  };
 
   return (
     <animated.div ref={ref} style={springs} className={s.container}>
@@ -41,35 +85,9 @@ export const Auth: FC<AuthProps> = () => {
 
       <h2 className='text-3xl font-medium mt-20'>Авторизация</h2>
 
-      <Form
-        className='my-10'
-        onFinish={(value) => {
-          setIsLoading(true);
-
-          setTimeout(() => {
-            setIsLoading(false);
-            customNotification('success', 'top', 'Успешная авторизация', '');
-            router.push('/marketplace');
-            setCookie('token', 'AccessToken');
-            setCookie('refreshToken', 'RefreshToken');
-            setCookie('username', 'username');
-          }, 2000);
-          // mutate(value, {
-          //   onSuccess: (data) => {
-          //     customNotification('success', 'top', 'Успешная авторизация', '');
-          //     setCookie('token', data.access);
-          //     setCookie('refreshToken', data.refresh);
-          //     setCookie('username', value.username);
-          //     router.push('/marketplace');
-          //   },
-          //   onError: (error: any) => {
-          //     customNotification('error', 'top', 'Ошибка при авторизации', error.response.data.detail);
-          //   }
-          // });
-        }}
-      >
-        <Form.Item name='username' rules={[{required: true, message: 'Введите имя пользователя'}]}>
-          <Input size='large' placeholder='Имя пользователя' />
+      <Form className='my-10' onFinish={onFinish}>
+        <Form.Item name='email' rules={[{required: true, message: 'Введите почту пользователя'}]}>
+          <Input size='large' placeholder='Почта пользователя' />
         </Form.Item>
         <Form.Item name='password' rules={[{required: true, min: 4, message: 'Введите ваш пароль'}]}>
           <Input.Password size='large' placeholder='Пароль' />
@@ -84,6 +102,18 @@ export const Auth: FC<AuthProps> = () => {
           Войти
         </Btn>
       </Form>
+
+      <Modal open={openConfirmCode} onCancel={() => setOpenConfirmCode(false)} footer={false}>
+        <Form layout='vertical' onFinish={onConfirmFinish}>
+          <Form.Item className='mt-5' label='Код подтверждения' name='confirmToken'>
+            <Input className='text-center text-2xl' />
+          </Form.Item>
+
+          <Btn className='mt-2 flex justify-center m-auto' htmlTypeButton='submit' loading={isConfirmLoading}>
+            Отправить
+          </Btn>
+        </Form>
+      </Modal>
     </animated.div>
   );
 };

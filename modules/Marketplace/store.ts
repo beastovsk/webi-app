@@ -5,11 +5,13 @@ interface IStore {
   productsList: IProduct[];
   basketList: IProduct[];
   available: boolean;
+  openConfirmCode: boolean;
 
   setProductsList: (arg0: IProduct[]) => void;
   setBasketList: (arg0: IProduct[]) => void;
   setAvailable: (arg0: boolean) => void;
   removeProduct: (arg0: number) => void;
+  setOpenConfirmCode: (param: boolean) => void;
 }
 
 export const useStore = create<IStore>()((set) => ({
@@ -29,5 +31,8 @@ export const useStore = create<IStore>()((set) => ({
       const copy = [...store.basketList.slice(0, index), ...store.basketList.slice(index + 1)];
 
       return {basketList: copy};
-    })
+    }),
+
+  openConfirmCode: false,
+  setOpenConfirmCode: (value) => set(() => ({openConfirmCode: value}))
 }));
