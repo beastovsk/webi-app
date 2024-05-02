@@ -57,3 +57,27 @@ export const ResetPassword = async (args: {password: string; confirmToken: strin
     body: JSON.stringify(args)
   });
 };
+
+export const ChangeEmail = async (args: {currentEmail: string; newEmail: string; password: string}) => {
+  return await fetch('http://localhost:3001/api/user/changePassword', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify(args)
+  });
+};
+
+export const ChangePassword = async (args: {password: string; currentPassword: string}) => {
+  return await fetch('http://localhost:3001/api/user/changeEmail', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify(args)
+  });
+};
