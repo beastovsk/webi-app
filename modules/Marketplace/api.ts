@@ -81,3 +81,65 @@ export const ChangePassword = async (args: {password: string; currentPassword: s
     body: JSON.stringify(args)
   });
 };
+
+export const CreateService = async (args) => {
+  return await fetch('http://localhost:3001/api/service/createService', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify(args)
+  });
+};
+
+export const UpdateService = async (args) => {
+  return await fetch('http://localhost:3001/api/service/updateService', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify(args)
+  });
+};
+
+export const RemoveService = async (args) => {
+  return await fetch('http://localhost:3001/api/service/removeService', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify(args)
+  });
+};
+
+export const GetServiceById = async ({serviceId}) => {
+  return await fetch(`http://localhost:3001/api/service/getServiceById?serviceId=${serviceId}`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'GET'
+  }).then((data) => {
+    if (!data.ok) return;
+    return data.json();
+  });
+};
+
+export const GetServices = async ({name, priceFrom, priceTo}) => {
+  return await fetch(
+    `http://localhost:3001/api/service/getServices?name=${name}&priceFrom=${priceFrom}&priceTo=${priceTo}`,
+    {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'GET'
+    }
+  );
+};

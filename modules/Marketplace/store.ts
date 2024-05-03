@@ -1,15 +1,15 @@
-import {IProduct} from './types';
+import {IService} from './types';
 import {create} from 'zustand';
 
 interface IStore {
-  productsList: IProduct[];
-  basketList: IProduct[];
+  productsList: IService[];
+  basketList: IService[];
   available: boolean;
   openConfirmCode: boolean;
   openResetPassword: boolean;
 
-  setProductsList: (arg0: IProduct[]) => void;
-  setBasketList: (arg0: IProduct[]) => void;
+  setProductsList: (arg0: IService[]) => void;
+  setBasketList: (arg0: IService[]) => void;
   setAvailable: (arg0: boolean) => void;
   removeProduct: (arg0: number) => void;
   setOpenConfirmCode: (param: boolean) => void;
@@ -28,7 +28,7 @@ export const useStore = create<IStore>()((set) => ({
   setBasketList: (value) => set(() => ({basketList: value})),
   removeProduct: (id) =>
     set((store) => {
-      const index = store.basketList.findIndex((item) => item.id == id);
+      const index = store.basketList.findIndex((item) => item.id === String(id));
 
       const copy = [...store.basketList.slice(0, index), ...store.basketList.slice(index + 1)];
 

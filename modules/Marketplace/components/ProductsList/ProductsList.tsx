@@ -1,10 +1,10 @@
 'use client';
 
 import Btn from '@/components/UI/Btn/Btn';
-import {formatProductPrice, getProductsList, getTypeName} from '@/src/helpers/hooks';
+import {formatProductPrice} from '@/src/helpers/hooks';
 import Link from 'next/link';
 import React, {FC, useEffect} from 'react';
-import {IProduct} from '../../types';
+import {IService} from '../../types';
 import s from './ProductsList.module.scss';
 
 import image from 'public/image/card-banner.png';
@@ -16,15 +16,14 @@ import {animated, useInView} from '@react-spring/web';
 
 interface ProductsListProps {
   title: string;
-  productsList: IProduct[];
+  productsList: IService[];
   isLoading: boolean;
 }
 
-export const ProductsList: FC<ProductsListProps> = ({title, isLoading}) => {
+export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsList}) => {
   const basketList = localStorage.getItem('basketList');
   // const {data, isLoading, isSuccess} = useQuery('productsList', GetProducts);
 
-  const productsList = getProductsList().results;
   const copyList = useStore((store) => store.basketList);
   const setCopyList = useStore((store) => store.setBasketList);
 
@@ -76,12 +75,10 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading}) => {
 
       <div className={s.list}>
         {productsList.length ? (
-          // eslint-disable-next-line camelcase
-          productsList.map(({id, price, name, type, small_image}) => (
+          productsList.map(({id, title, price, images}) => (
             <Link href={`/marketplace/products/${id}`} className={s.item} key={id}>
               <PreloaderImage
-                // eslint-disable-next-line camelcase
-                src={small_image || image}
+                src={images[0]}
                 objectFit='cover'
                 alt=''
                 width={300}
@@ -89,12 +86,9 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading}) => {
                 className='h-[170px] w-full object-cover md:w-full rounded-3xl'
               />
 
-              <h2 className='my-5 text-lg font-medium'>{name}</h2>
+              <h2 className='my-5 text-lg font-medium'>{title}</h2>
 
-              <div className='flex justify-between mb-5'>
-                <span>
-                  Тип: <p className='text-[#6F4FF2]'>{getTypeName(type)}</p>
-                </span>
+              <div className='flex justify-end mb-5'>
                 <span className='flex flex-col items-end'>
                   Цена: <p className='text-[#6F4FF2]'>{formatProductPrice(price)}</p>
                 </span>

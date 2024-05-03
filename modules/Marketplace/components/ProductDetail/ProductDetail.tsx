@@ -1,9 +1,8 @@
 'use client';
 
-import {getProductsList} from '@/src/helpers/hooks';
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useQuery} from 'react-query';
-import {GetProductById} from '../../api';
+import {GetServiceById} from '../../api';
 import {ProductBanner} from '../ProductBanner/ProductBanner';
 import {ProductDescription} from '../ProductDescription/ProductDescription';
 import s from './ProductDetail.module.scss';
@@ -13,17 +12,23 @@ interface ProductDetailProps {
 }
 
 export const ProductDetail: FC<ProductDetailProps> = ({id}) => {
-  // const {data, isLoading} = useQuery(['product', id], () => GetProductById(id));
+  const {data, isLoading, isSuccess} = useQuery(['product', id], () => GetServiceById({serviceId: id}));
+  const [service, setService] = useState(null);
 
-  const data = getProductsList().results.find((item) => item.id == Number(id));
+  console.log(service);
+
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    setService(data?.service);
+  }, [isSuccess, isLoading, data]);
 
   return (
     <div className={s.container}>
-      {data ? (
+      {isSuccess ? (
         <div className='flex flex-col gap-10'>
-          {' '}
-          <ProductBanner title={data.name} price={data.price} />
-          <ProductDescription productInfo={data} />
+          <ProductBanner title={service?.title} price={service?.price} images={service?.images} />
+          <ProductDescription productInfo={service} />
         </div>
       ) : (
         <div className='flex justify-center items-center w-full h-full'>

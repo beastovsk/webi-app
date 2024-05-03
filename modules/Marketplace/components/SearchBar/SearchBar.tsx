@@ -61,10 +61,10 @@ export const SearchBar: FC<SearchBarProps> = () => {
         <Space.Compact className='gap-5 flex items-center h-[50px] md:h-max md:flex-col'>
           <Space.Compact className='md:w-full gap-5'>
             <Form.Item className='m-0 p-0 md:w-full' label='Цена от' name='priceFrom'>
-              <Input placeholder='0.00' className='w-[155px] md:w-full' suffix='₽' />
+              <Input placeholder='0.00' className='w-[155px] md:w-full' suffix='$' />
             </Form.Item>
             <Form.Item className='m-0 p-0 md:w-full' label='Цена до' name='priceTo'>
-              <Input placeholder='325.000' className='w-[155px] md:w-full' suffix='₽' />
+              <Input placeholder='325.000' className='w-[155px] md:w-full' suffix='$' />
             </Form.Item>
           </Space.Compact>
         </Space.Compact>
