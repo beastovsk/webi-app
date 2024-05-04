@@ -28,13 +28,13 @@ export const MarketplaceBanner: FC<MarketplaceBannerProps> = () => {
         <h2 className='text-xl mb-3'>
           Мы даем возможность запустить ваш онлайн-бизнес с помощью проверенных инструментов
         </h2>
-        <p className='mb-5'>Webi Маркетплейс - площадка для покупки веб-ресурсов</p>
+        <p className='mb-5'>Webi Маркетплейс - площадка для покупки/продажи веб-ресурсов</p>
 
         <div className='flex gap-5 sm:flex-col sm:gap-[10px]'>
           <Link href={'/marketplace/products'}>
             <Btn className='md:w-full'>Каталог</Btn>
           </Link>
-          <Link href={'/marketplace/support'}>
+          <Link href={'https://t.me/beastovsk'}>
             <Btn className='md:w-full' danger>
               Поддержка
             </Btn>

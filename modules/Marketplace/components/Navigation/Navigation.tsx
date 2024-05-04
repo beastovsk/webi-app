@@ -14,7 +14,7 @@ interface NavigationProps {}
 export const Navigation: FC<NavigationProps> = () => {
   const pathname = usePathname();
 
-  const token = getCookie('token');
+  const token = localStorage.getItem('token');
 
   const navigationMenu = [
     {
@@ -66,17 +66,19 @@ export const Navigation: FC<NavigationProps> = () => {
           )}
         </div>
       </div>
-      <Link
-        href={'/marketplace/auth'}
-        className='hover:text-[#6F4FF2] transition-[all] text-[#6C7AA0] md:hidden'
-        onClick={() => {
-          deleteCookie('token');
-          deleteCookie('refreshToken');
-          deleteCookie('username');
-        }}
-      >
-        <ImportOutlined className='text-2xl cursor-pointer' color='#111' />
-      </Link>
+      {token ? (
+        <Link
+          href={'/marketplace/auth'}
+          className='hover:text-[#6F4FF2] transition-[all] text-[#6C7AA0] md:hidden'
+          onClick={() => {
+            deleteCookie('token');
+            deleteCookie('refreshToken');
+            deleteCookie('username');
+          }}
+        >
+          <ImportOutlined className='text-2xl cursor-pointer' color='#111' />
+        </Link>
+      ) : null}
     </div>
   );
 };

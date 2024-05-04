@@ -21,7 +21,7 @@ import image from 'public/image/card-banner.png';
 interface BasketProps {}
 
 export const Basket: FC<BasketProps> = () => {
-  const token = getCookie('token');
+  const token = localStorage.getItem('token');
   const basketList = localStorage.getItem('basketList');
   const [open, setOpen] = useState(false);
 

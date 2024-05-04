@@ -15,7 +15,7 @@ interface HeaderProps {}
 
 export const Header: FC<HeaderProps> = () => {
   // const router = useRouter();
-  const token = getCookie('token');
+  const token = localStorage.getItem('token');
   // const refresh = getCookie('refreshToken');
   const username = 'Username';
   // getCookie('username');
@@ -46,9 +46,11 @@ export const Header: FC<HeaderProps> = () => {
           <ShoppingCartOutlined className='text-[#6C7AA0] text-2xl ' />
         </Badge>
       </Link>
-      <Link href='/marketplace/create'>
-        <Btn>Добавить товар</Btn>
-      </Link>
+      {token ? (
+        <Link href='/marketplace/create'>
+          <Btn>Добавить товар</Btn>
+        </Link>
+      ) : null}
       {token ? (
         <div className='flex gap-10 items-end'>
           <Link

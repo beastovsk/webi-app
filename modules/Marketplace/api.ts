@@ -131,7 +131,7 @@ export const GetServiceById = async ({serviceId}) => {
   });
 };
 
-export const GetServices = async ({name, priceFrom, priceTo}) => {
+export const GetServices = async ({name, priceFrom, priceTo}: {name: string; priceFrom: string; priceTo: string}) => {
   return await fetch(
     `http://localhost:3001/api/service/getServices?name=${name}&priceFrom=${priceFrom}&priceTo=${priceTo}`,
     {
@@ -141,5 +141,8 @@ export const GetServices = async ({name, priceFrom, priceTo}) => {
       },
       method: 'GET'
     }
-  );
+  ).then((data) => {
+    if (!data.ok) return;
+    return data.json();
+  });
 };

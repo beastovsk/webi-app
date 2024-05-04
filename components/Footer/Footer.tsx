@@ -7,7 +7,7 @@ import s from './Footer.module.scss';
 interface FooterProps {}
 
 export const Footer: FC<FooterProps> = (props) => {
-  const token = getCookie('token');
+  const token = localStorage.getItem('token');
   const linksList = [
     {
       title: 'Домашняя',

@@ -6,7 +6,7 @@ export default async function Page() {
   return (
     <>
       <MarketplaceBanner />
-      <PopularContent title='Список товаров' />{' '}
+      <PopularContent title='Последние добавления' />{' '}
     </>
   );
 }

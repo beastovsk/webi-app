@@ -18,14 +18,12 @@ export const PopularContent: FC<PopularContentProps> = ({title, ...props}) => {
 
   useEffect(() => {
     mutate(
-      {name: '', priceFrom: 0, priceTo: 99999999},
+      {name: '', priceFrom: '0', priceTo: '99999999'},
       {
         onSuccess: (data) => {
-          data.json().then((data) => {
-            if (!data?.services) return;
+          if (!data?.services) return;
 
-            setProducts(data?.services);
-          });
+          setProducts(data?.services.reverse().slice(0, 6));
         }
       }
     );
