@@ -26,7 +26,7 @@ export const ConfirmEmailModal = () => {
 
           if (data?.token) {
             router.push('/marketplace');
-            localStorage.setItem('token', `Bearer ${data?.token}`);
+            localStorage.setItem('token', data?.token);
           }
 
           customNotification('info', 'top', 'Информация', data?.message);

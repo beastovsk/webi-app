@@ -41,7 +41,7 @@ export const Auth: FC<AuthProps> = () => {
 
           if (data?.token) {
             router.push('/marketplace');
-            localStorage.setItem('token', `Bearer ${data?.token}`);
+            localStorage.setItem('token', data?.token);
           }
 
           customNotification('info', 'top', 'Информация', data?.message);
