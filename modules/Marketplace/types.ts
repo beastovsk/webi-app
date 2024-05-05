@@ -1,6 +1,6 @@
 export interface IService {
   id: string;
-  ownerId: string;
+  owner_id: string;
   title: string;
   price: number;
   images: string[];

@@ -10,7 +10,7 @@ import s from './ProductsList.module.scss';
 import image from 'public/image/card-banner.png';
 import {useStore} from '../../store';
 import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
-import {CheckOutlined} from '@ant-design/icons';
+import {CheckOutlined, EditOutlined} from '@ant-design/icons';
 
 import {animated, useInView} from '@react-spring/web';
 
@@ -24,6 +24,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsL
   const basketList = localStorage.getItem('basketList');
   // const {data, isLoading, isSuccess} = useQuery('productsList', GetProducts);
 
+  const profileId = localStorage.getItem('id');
   const copyList = useStore((store) => store.basketList);
   const setCopyList = useStore((store) => store.setBasketList);
 
@@ -75,7 +76,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsL
 
       <div className={s.list}>
         {productsList.length ? (
-          productsList.map(({id, title, price, images}) => (
+          productsList.map(({owner_id, id, title, price, images}) => (
             <Link href={`/marketplace/products/${id}`} className={s.item} key={id}>
               <PreloaderImage
                 src={images[0]}
@@ -86,7 +87,14 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsL
                 className='h-[170px] w-full object-cover md:w-full rounded-3xl'
               />
 
-              <h2 className='my-5 text-lg font-medium'>{title}</h2>
+              <h2 className='my-5 text-lg font-medium'>
+                {title}
+                {profileId == owner_id ? (
+                  <Link href={`/marketplace/products/${id}/update`}>
+                    <EditOutlined className='text-[#6F4FF2] ml-3 hover:opacity-70 transition-opacity' />
+                  </Link>
+                ) : null}
+              </h2>
 
               <div className='flex justify-end mb-5'>
                 <span className='flex flex-col items-end'>

@@ -20,7 +20,6 @@ interface ProductBannerProps {
 
 export const ProductBanner: FC<ProductBannerProps> = ({title, price, images}) => {
   const slider = useRef();
-  console.log(slider);
 
   return (
     <div className={s.container}>

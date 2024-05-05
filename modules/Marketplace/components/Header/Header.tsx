@@ -15,7 +15,7 @@ interface HeaderProps {}
 
 export const Header: FC<HeaderProps> = () => {
   // const router = useRouter();
-  const token = localStorage.getItem('token');
+  const token = getCookie('token');
   // const refresh = getCookie('refreshToken');
   const username = 'Username';
   // getCookie('username');

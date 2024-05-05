@@ -63,7 +63,7 @@ export const ChangeEmail = async (args: {currentEmail: string; newEmail: string;
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${getCookie('token')}`
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -75,10 +75,24 @@ export const ChangePassword = async (args: {password: string; currentPassword: s
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${getCookie('token')}`
     },
     method: 'POST',
     body: JSON.stringify(args)
+  });
+};
+
+export const GetUser = async () => {
+  return await fetch('http://localhost:3001/api/user/getUser', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('token')}`
+    },
+    method: 'GET'
+  }).then((data) => {
+    if (!data.ok) return;
+    return data.json();
   });
 };
 
@@ -87,7 +101,7 @@ export const CreateService = async (args) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${getCookie('token')}`
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -99,7 +113,7 @@ export const UpdateService = async (args) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${getCookie('token')}`
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -111,7 +125,7 @@ export const RemoveService = async (args) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${getCookie('token')}`
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -142,6 +156,34 @@ export const GetServices = async ({name, priceFrom, priceTo}: {name: string; pri
       method: 'GET'
     }
   ).then((data) => {
+    if (!data.ok) return;
+    return data.json();
+  });
+};
+
+export const GetPersonalServices = async () => {
+  return await fetch(`http://localhost:3001/api/service/getPersonalServices`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('token')}`
+    },
+    method: 'GET'
+  }).then((data) => {
+    if (!data.ok) return;
+    return data.json();
+  });
+};
+
+export const SupportRequest = async (data) => {
+  return await fetch(`http://localhost:3001/api/auth/supportRequest`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(data)
+  }).then((data) => {
     if (!data.ok) return;
     return data.json();
   });

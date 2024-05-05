@@ -11,6 +11,7 @@ export const SearchProducts = () => {
   const [services, setServices] = useState([]);
 
   const handleFilters = (value: {name: string; priceFrom: string; priceTo: string}) => {
+    console.log(value);
     mutate(
       {...value},
       {

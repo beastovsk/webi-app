@@ -14,7 +14,7 @@ interface NavigationProps {}
 export const Navigation: FC<NavigationProps> = () => {
   const pathname = usePathname();
 
-  const token = localStorage.getItem('token');
+  const token = getCookie('token');
 
   const navigationMenu = [
     {

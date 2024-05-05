@@ -5,8 +5,9 @@ import React, {FC} from 'react';
 
 import s from './Feedback.module.scss';
 import {useMutation} from 'react-query';
-import {SendQuestion} from '@/modules/Marketplace/api';
+import {SupportRequest} from '@/modules/Marketplace/api';
 import {animated, useInView} from '@react-spring/web';
+import {customNotification} from '@/src/helpers/customNotification';
 
 interface FeedbackProps {}
 
@@ -19,10 +20,16 @@ export const Feedback: FC<FeedbackProps> = () => {
     {rootMargin: '-20% 0%'}
   );
 
-  const {mutate, isLoading} = useMutation(SendQuestion);
+  const {mutate, isLoading} = useMutation(SupportRequest);
 
   const onFinish = (values: any) => {
-    mutate(values);
+    mutate(values, {
+      onSuccess: (data) => {
+        if (!data?.message) return;
+
+        customNotification('info', 'top', 'Информация', data?.message);
+      }
+    });
   };
 
   return (
@@ -45,7 +52,7 @@ export const Feedback: FC<FeedbackProps> = () => {
             </Form.Item>
             <Form.Item
               label={'Вопрос'}
-              name={'question'}
+              name={'body'}
               rules={[{required: true, message: 'Поле с вопросом осталось пустым!'}]}
             >
               <Input.TextArea
