@@ -7,10 +7,8 @@ import React, {FC, useEffect} from 'react';
 import {IService} from '../../types';
 import s from './ProductsList.module.scss';
 
-import image from 'public/image/card-banner.png';
-import {useStore} from '../../store';
 import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
-import {CheckOutlined, EditOutlined} from '@ant-design/icons';
+import { EditOutlined} from '@ant-design/icons';
 
 import {animated, useInView} from '@react-spring/web';
 
@@ -21,20 +19,7 @@ interface ProductsListProps {
 }
 
 export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsList}) => {
-  const basketList = localStorage.getItem('basketList');
-  // const {data, isLoading, isSuccess} = useQuery('productsList', GetProducts);
-
   const profileId = localStorage.getItem('id');
-  const copyList = useStore((store) => store.basketList);
-  const setCopyList = useStore((store) => store.setBasketList);
-
-  useEffect(() => {
-    if (basketList?.length || basketList) {
-      return setCopyList(JSON.parse(basketList) || []);
-    }
-
-    localStorage.setItem('basketList', JSON.stringify([]));
-  }, []);
 
   const [ref, springs] = useInView(
     () => ({
@@ -102,32 +87,15 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsL
                 </span>
               </div>
 
-              <Btn
-                disabled={!!copyList?.filter((item) => item.id === id).length}
-                className='w-full mt-auto'
-                onClick={(e: any) => {
-                  e.preventDefault();
-                  const basketArray = JSON.parse(basketList);
-
-                  localStorage.setItem(
-                    'basketList',
-                    JSON.stringify([
-                      ...(basketArray?.length ? basketArray : []),
-                      productsList.filter((item) => item.id === id).at(-1)
-                    ])
-                  );
-
-                  setCopyList([...basketArray, productsList.filter((item) => item.id === id).at(-1)]);
-                }}
-              >
-                {copyList?.filter((item) => item.id === id).length ? (
-                  <>
-                    <CheckOutlined /> Добавлено
-                  </>
-                ) : (
-                  'Добавить в корзину'
-                )}
-              </Btn>
+              {owner_id != profileId ? (
+                <Link href={`/marketplace/purchase?serviceId=${id}`}>
+                  <Btn className='w-full mt-auto'>Оформить заказ</Btn>
+                </Link>
+              ) : (
+                <Link href={`/marketplace/products/${id}/update`}>
+                  <Btn className='w-full'>Обновить сервис</Btn>
+                </Link>
+              )}
             </Link>
           ))
         ) : isLoading ? (
