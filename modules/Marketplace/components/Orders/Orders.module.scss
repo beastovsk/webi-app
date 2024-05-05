@@ -1,0 +1,28 @@
+.item {
+  @apply rounded-3xl;
+  padding: 20px;
+  background: #1d1932;
+  transition: $trn;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    box-shadow: rgba(105, 0, 209, 0.5) 0px 2px 4px 0px inset;
+  }
+}
+.list {
+  margin-top: 20px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+
+  @media screen and (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media screen and (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}

@@ -179,10 +179,69 @@ export const SupportRequest = async (data) => {
   return await fetch(`http://localhost:3001/api/auth/supportRequest`, {
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('token')}`
     },
     method: 'POST',
     body: JSON.stringify(data)
+  }).then((data) => {
+    if (!data.ok) return;
+    return data.json();
+  });
+};
+
+export const CreateOrder = async (serviceId) => {
+  return await fetch(`http://localhost:3001/api/order/createOrder`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify(serviceId)
+  }).then((data) => {
+    if (!data.ok) return;
+    return data.json();
+  });
+};
+
+export const CloseOrder = async (orderId) => {
+  return await fetch(`http://localhost:3001/api/order/closeOrder`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify(orderId)
+  }).then((data) => {
+    if (!data.ok) return;
+    return data.json();
+  });
+};
+
+export const GetOrderById = async ({orderId}) => {
+  return await fetch(`http://localhost:3001/api/order/getOrderById?orderId=${orderId}`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('token')}`
+    },
+    method: 'GET'
+  }).then((data) => {
+    if (!data.ok) return;
+    return data.json();
+  });
+};
+
+export const GetOrders = async () => {
+  return await fetch(`http://localhost:3001/api/order/getOrders`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('token')}`
+    },
+    method: 'GET'
   }).then((data) => {
     if (!data.ok) return;
     return data.json();

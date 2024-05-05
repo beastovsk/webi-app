@@ -42,11 +42,12 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
     });
   };
 
-  const onChangeEmail = (value) => {
-    changeEmail(value, {
+  const onChangeEmail = (email) => {
+    changeEmail(email, {
       onSuccess: (data) => {
         data.json().then((data) => {
           if (!data?.message) return;
+          localStorage.setItem('email', email.email);
 
           customNotification('info', 'top', 'Информация', data?.message);
         });
@@ -80,7 +81,7 @@ export const SettingsMenu: FC<SettingsMenuProps> = () => {
 
       <div className='w-full'>
         <h2 className='text-xl font-medium'>Изменить email</h2>
-        <Form className={s.item} layout='vertical' onFinish={onChangePassword}>
+        <Form className={s.item} layout='vertical' onFinish={onChangeEmail}>
           <Form.Item
             name='currentEmail'
             label='Текущая почта'

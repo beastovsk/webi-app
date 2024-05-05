@@ -13,8 +13,8 @@ import {animated, useInView} from '@react-spring/web';
 import Link from 'next/link';
 import parse from 'html-react-parser';
 
-import {useSearchParams} from 'next/navigation';
-import {GetServiceById} from '../../api';
+import {useRouter, useSearchParams} from 'next/navigation';
+import {CreateOrder, GetServiceById} from '../../api';
 import Loading from '@/app/loading';
 import {Skeleton} from 'antd';
 
@@ -23,13 +23,22 @@ interface BasketProps {}
 export const Basket: FC<BasketProps> = () => {
   const searchParams = useSearchParams();
   const serviceId = searchParams.get('serviceId');
-  const {data, isSuccess, isLoading} = useQuery('product', () => GetServiceById({serviceId}));
+  const {data, isSuccess} = useQuery('product', () => GetServiceById({serviceId}));
+  const {mutate} = useMutation(CreateOrder);
+  const router = useRouter();
 
-  useEffect(() => {
-    // customNotification('success', 'top', 'Заказ успешно создан', 'с вами свяжутся');
-  }, []);
+  const createOrder = () => {
+    mutate(
+      {serviceId},
+      {
+        onSuccess: (data) => {
+          if (!data?.orderId) return;
 
-  const createOrder = () => {};
+          router.push(`/marketplace/order?orderId=${data?.orderId}`);
+        }
+      }
+    );
+  };
 
   const [ref, springs] = useInView(
     () => ({
@@ -102,7 +111,7 @@ export const Basket: FC<BasketProps> = () => {
             чтобы обезопасить ваши средства
           </div>
           <div className='mt-10'>
-            <Btn onClick={() => createOrder()} className='w-full'>
+            <Btn onClick={createOrder} className='w-full'>
               Продолжить
             </Btn>
           </div>

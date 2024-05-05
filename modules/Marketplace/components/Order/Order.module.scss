@@ -1,0 +1,16 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+
+  @media screen and (max-width: $breakpoint-lg) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+.item {
+  background: #1d1932;
+  border-radius: 18px;
+  padding: 20px;
+  height: max-content;
+}

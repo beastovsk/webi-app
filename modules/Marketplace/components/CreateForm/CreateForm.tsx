@@ -133,6 +133,7 @@ export const CreateForm: FC<CreateFormProps> = ({mutate, isLoading, service}) =>
               onPreview={onPreview}
               // @ts-ignore
               previewFile={onPreview}
+              className='h-auto'
             >
               <Button icon={<UploadOutlined />}>Загрузить</Button>
             </Upload.Dragger>

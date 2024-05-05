@@ -8,7 +8,7 @@ import {IService} from '../../types';
 import s from './ProductsList.module.scss';
 
 import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
-import { EditOutlined} from '@ant-design/icons';
+import {EditOutlined} from '@ant-design/icons';
 
 import {animated, useInView} from '@react-spring/web';
 
@@ -93,7 +93,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsL
                 </Link>
               ) : (
                 <Link href={`/marketplace/products/${id}/update`}>
-                  <Btn className='w-full'>Обновить сервис</Btn>
+                  <Btn className='w-full'>Изменить сервис</Btn>
                 </Link>
               )}
             </Link>

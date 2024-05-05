@@ -85,3 +85,13 @@
   border-start-start-radius: 13px !important;
   border-end-start-radius: 13px !important;
 }
+
+.ant-steps-finish-icon {
+  svg {
+    fill: #fff !important;
+  }
+}
+
+.ant-upload-wrapper .ant-upload-drag {
+  height: max-content !important;
+}
