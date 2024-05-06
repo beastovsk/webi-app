@@ -10,18 +10,28 @@ import {useMutation} from 'react-query';
 import {GetUser} from './Marketplace/api';
 import {usePathname, useRouter} from 'next/navigation';
 import {deleteCookie} from 'cookies-next';
+import io from 'socket.io-client';
+import {customNotification} from '@/src/helpers/customNotification';
 
 dayjs.locale('ru');
+// @ts-ignore
+const socket = io.connect('http://localhost:3001');
 
 function AntdThemeProvider({children}: {children: React.ReactNode}) {
   const [mounted, setMounted] = useState(false);
   const {mutate} = useMutation(GetUser);
   const router = useRouter();
   const pathname = usePathname();
+  const profileId = localStorage.getItem('id');
 
   useEffect(() => {
     setMounted(true);
     if (pathname.split('/')[1] !== 'marketplace') return;
+    socket.on('create_order', (data) => {
+      console.log(data);
+      // if (data?.seller_id !== profileId) return
+      customNotification('info', 'top', 'Информация', data?.orderId);
+    });
 
     mutate({} as any, {
       onSuccess: (data) => {
