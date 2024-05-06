@@ -12,6 +12,7 @@ import {usePathname, useRouter} from 'next/navigation';
 import {deleteCookie} from 'cookies-next';
 import io from 'socket.io-client';
 import {customNotification} from '@/src/helpers/customNotification';
+import Btn from '@/components/UI/Btn/Btn';
 
 dayjs.locale('ru');
 // @ts-ignore
@@ -28,9 +29,13 @@ function AntdThemeProvider({children}: {children: React.ReactNode}) {
     setMounted(true);
     if (pathname.split('/')[1] !== 'marketplace') return;
     socket.on('create_order', (data) => {
-      console.log(data);
-      // if (data?.seller_id !== profileId) return
-      customNotification('info', 'top', 'Информация', data?.orderId);
+      if (data?.sellerId != profileId) return;
+      customNotification(
+        'info',
+        'bottomRight',
+        `Вам пришел новый заказ № ${data?.orderId}`,
+        'Перейдите к заказу в личном кабинете'
+      );
     });
 
     mutate({} as any, {
