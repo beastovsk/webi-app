@@ -205,6 +205,36 @@ export const CreateOrder = async (serviceId) => {
   });
 };
 
+export const UpdateOrder = async ({orderId, status, repository_link}) => {
+  return await fetch(`http://localhost:3001/api/order/updateOrder`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify({orderId, status, repository_link})
+  }).then((data) => {
+    if (!data.ok) return;
+    return data.json();
+  });
+};
+
+export const ResendOrderDetails = async ({orderId}) => {
+  return await fetch(`http://localhost:3001/api/order/resendOrderDetails`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify({orderId})
+  }).then((data) => {
+    if (!data.ok) return;
+    return data.json();
+  });
+};
+
 export const CloseOrder = async (orderId) => {
   return await fetch(`http://localhost:3001/api/order/closeOrder`, {
     headers: {

@@ -7,6 +7,7 @@ import {useMutation} from 'react-query';
 import {ConfirmEmail} from '../../api';
 import {customNotification} from '@/src/helpers/customNotification';
 import {useRouter} from 'next/navigation';
+import {setCookie} from 'cookies-next';
 
 export const ConfirmEmailModal = () => {
   const router = useRouter();
@@ -26,12 +27,7 @@ export const ConfirmEmailModal = () => {
 
           if (data?.token) {
             router.push('/marketplace');
-            if (typeof window !== 'undefined') {
-              localStorage.setItem('token', data?.token);
-            }
-            if (typeof window !== 'undefined') {
-              localStorage.setItem('token', data?.token);
-            }
+            setCookie('token', data?.token);
           }
 
           customNotification('info', 'top', 'Информация', data?.message);

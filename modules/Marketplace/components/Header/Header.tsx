@@ -35,7 +35,9 @@ export const Header: FC<HeaderProps> = () => {
             href={'/marketplace/profile'}
             className='bg-[#6F4FF2] w-10 h-10 rounded-full transition-opacity hover:opacity-70'
           >
-            <h2 className='text-xl h-full text-white flex justify-center items-center'>{email[0].toUpperCase()}</h2>
+            <h2 className='text-xl h-full text-white flex justify-center items-center'>
+              {email ? email[0].toUpperCase() : null}
+            </h2>
           </Link>
         </div>
       ) : (

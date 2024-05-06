@@ -8,7 +8,7 @@ import 'dayjs/locale/ru';
 import {useTheme} from 'next-themes';
 import {useMutation} from 'react-query';
 import {GetUser} from './Marketplace/api';
-import {useRouter} from 'next/navigation';
+import {usePathname, useRouter} from 'next/navigation';
 import {deleteCookie} from 'cookies-next';
 
 dayjs.locale('ru');
@@ -17,9 +17,11 @@ function AntdThemeProvider({children}: {children: React.ReactNode}) {
   const [mounted, setMounted] = useState(false);
   const {mutate} = useMutation(GetUser);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     setMounted(true);
+    if (pathname.split('/')[1] !== 'marketplace') return;
 
     mutate({} as any, {
       onSuccess: (data) => {
@@ -27,7 +29,7 @@ function AntdThemeProvider({children}: {children: React.ReactNode}) {
           deleteCookie('token');
           localStorage.removeItem('email');
           localStorage.removeItem('id');
-          return router.push('/auth');
+          return router.push('/marketplace/auth');
         }
 
         const {email, id} = data.user;

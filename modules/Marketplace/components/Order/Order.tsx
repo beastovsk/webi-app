@@ -13,12 +13,13 @@ import Link from 'next/link';
 import parse from 'html-react-parser';
 
 import {useSearchParams} from 'next/navigation';
-import {CloseOrder, GetOrderById, GetServiceById} from '../../api';
+import {CloseOrder, GetOrderById, GetServiceById, ResendOrderDetails, UpdateOrder} from '../../api';
 import Loading from '@/app/loading';
-import {Button, Input, Skeleton, Steps, Upload, UploadFile, UploadProps} from 'antd';
+import {Button, Form, Input, Skeleton, Steps, Upload, UploadFile, UploadProps} from 'antd';
 import {Banner} from '@/components/Banner/Banner';
 import {UploadOutlined} from '@ant-design/icons';
 import {onPreview} from '@/src/helpers/onPreview';
+import {customNotification} from '@/src/helpers/customNotification';
 
 interface OrderProps {}
 
@@ -29,18 +30,14 @@ export const Order: FC<OrderProps> = () => {
   const {data, isSuccess, refetch} = useQuery('order', () => GetOrderById({orderId}));
   const {mutate, isSuccess: isServiceSuccess} = useMutation(GetServiceById);
   const {mutate: close} = useMutation(CloseOrder);
+  const {mutate: update} = useMutation(UpdateOrder);
+  const {mutate: resend} = useMutation(ResendOrderDetails);
 
   const [service, setService] = useState(null);
   const [statusStep, setStatusStep] = useState(0);
   const [order, setOrder] = useState(null);
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const onChange: UploadProps['onChange'] = ({fileList: newFileList}) => {
-    setFileList(newFileList);
-  };
-  console.log(fileList);
   const profileId = localStorage.getItem('id');
   const isCancelButtonDisabled = data?.order.status === 'done' || data?.order.status === 'cancel';
-  const isConfirmButtonDisabled = data?.order.status === 'done' || data?.order.status === 'cancel';
 
   const handleCloseOrder = () => {
     close(
@@ -63,8 +60,26 @@ export const Order: FC<OrderProps> = () => {
 
     setOrder(data?.order);
 
-    if (status === 'cancel') {
-      setStatusStep(4);
+    switch (status) {
+      case 'done':
+        setStatusStep(4);
+        break;
+      case 'cancel':
+        setStatusStep(4);
+        break;
+      case 'await_payment':
+        setStatusStep(0);
+        break;
+      case 'service_delievery':
+        setStatusStep(1);
+        break;
+      case 'service_confirmation':
+        setStatusStep(2);
+        break;
+
+      default:
+        setStatusStep(0);
+        break;
     }
 
     mutate(
@@ -79,6 +94,10 @@ export const Order: FC<OrderProps> = () => {
     );
   }, [isSuccess, data]);
 
+  useEffect(() => {
+    setOrder(null);
+  }, []);
+
   const [ref, springs] = useInView(
     () => ({
       from: {opacity: 0.7, y: 40},
@@ -86,6 +105,8 @@ export const Order: FC<OrderProps> = () => {
     }),
     {rootMargin: '-20% 0%'}
   );
+
+  if (!isSuccess) return <Loading />;
 
   return (
     <animated.div ref={ref} style={springs} className={s.container}>
@@ -149,6 +170,14 @@ export const Order: FC<OrderProps> = () => {
               <Link href='/' className='text-sm text-[#6C7AA0] underline'>
                 http://localhost:3000
               </Link>
+
+              <Btn
+                onClick={() =>
+                  update({orderId: order?.id, repository_link: order?.repository_link, status: 'service_delievery'})
+                }
+              >
+                Тест успешный платеж
+              </Btn>
             </div>
           ) : null}
 
@@ -164,13 +193,21 @@ export const Order: FC<OrderProps> = () => {
                   <li>.readme файл</li>
                 </ul>
               </div>
-              <div className='mt-5'>
-                <Input style={{background: '#131129'}} />
-              </div>
+              <Form
+                layout='vertical'
+                onFinish={({repository_link}) => {
+                  update({orderId: order?.id, repository_link, status: 'service_confirmation'});
+                  resend({orderId: order?.id});
+                }}
+              >
+                <Form.Item name='repository_link' className='mt-5'>
+                  <Input style={{background: '#131129'}} />
+                </Form.Item>
 
-              <Btn onClick={() => {}} className='mt-3'>
-                Отправить
-              </Btn>
+                <Btn htmlTypeButton='submit' className='mt-3'>
+                  Отправить
+                </Btn>
+              </Form>
             </div>
           ) : null}
 
@@ -185,8 +222,32 @@ export const Order: FC<OrderProps> = () => {
                 Если хотите изменить почту получателя - отредактируйте почту в настройках и нажмите на "Отправить еще"
               </div>
               <div className='flex gap-3 mt-10'>
-                <Btn>Подтвердить</Btn>
-                <Btn primary>Отправить еще</Btn>
+                <Btn
+                  onClick={() =>
+                    update({
+                      orderId: order?.id,
+                      repository_link: order?.repository_link,
+                      status: 'done'
+                    })
+                  }
+                >
+                  Подтвердить
+                </Btn>
+                <Btn
+                  primary
+                  onClick={() =>
+                    resend(
+                      {orderId: order?.id},
+                      {
+                        onSuccess: (data) => {
+                          customNotification('info', 'top', 'Информация', data?.message);
+                        }
+                      }
+                    )
+                  }
+                >
+                  Отправить еще
+                </Btn>
               </div>
             </div>
           ) : null}
