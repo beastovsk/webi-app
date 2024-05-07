@@ -16,7 +16,7 @@ import Btn from '@/components/UI/Btn/Btn';
 
 dayjs.locale('ru');
 // @ts-ignore
-const socket = io.connect('http://localhost:3001');
+const socket = io.connect('http://webi-server-production.up.railway.app');
 
 function AntdThemeProvider({children}: {children: React.ReactNode}) {
   const [mounted, setMounted] = useState(false);

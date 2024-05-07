@@ -4,7 +4,7 @@ import {getCookie, setCookie} from 'cookies-next';
 import {useStore} from './store';
 
 export const Login = async (args: {email: string; password: string}) => {
-  return await fetch('http://localhost:3001/api/auth/login', {
+  return await fetch('http://webi-server-production.up.railway.app/api/auth/login', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -15,7 +15,7 @@ export const Login = async (args: {email: string; password: string}) => {
 };
 
 export const Register = async (args: {password: string; email: string}) => {
-  return await fetch('http://localhost:3001/api/auth/register', {
+  return await fetch('http://webi-server-production.up.railway.app/api/auth/register', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ export const Register = async (args: {password: string; email: string}) => {
 };
 
 export const ConfirmEmail = async (args: {confirmToken: string}) => {
-  return await fetch('http://localhost:3001/api/auth/confirmEmail', {
+  return await fetch('http://webi-server-production.up.railway.app/api/auth/confirmEmail', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ export const ConfirmEmail = async (args: {confirmToken: string}) => {
 };
 
 export const SendResetCode = async (args: {email: string}) => {
-  return await fetch('http://localhost:3001/api/auth/sendResetCode', {
+  return await fetch('http://webi-server-production.up.railway.app/api/auth/sendResetCode', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ export const SendResetCode = async (args: {email: string}) => {
 };
 
 export const ResetPassword = async (args: {password: string; confirmToken: string}) => {
-  return await fetch('http://localhost:3001/api/auth/resetPassword', {
+  return await fetch('http://webi-server-production.up.railway.app/api/auth/resetPassword', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ export const ResetPassword = async (args: {password: string; confirmToken: strin
 };
 
 export const ChangeEmail = async (args: {currentEmail: string; newEmail: string; password: string}) => {
-  return await fetch('http://localhost:3001/api/user/changePassword', {
+  return await fetch('http://webi-server-production.up.railway.app/api/user/changePassword', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export const ChangeEmail = async (args: {currentEmail: string; newEmail: string;
 };
 
 export const ChangePassword = async (args: {password: string; currentPassword: string}) => {
-  return await fetch('http://localhost:3001/api/user/changeEmail', {
+  return await fetch('http://webi-server-production.up.railway.app/api/user/changeEmail', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export const ChangePassword = async (args: {password: string; currentPassword: s
 };
 
 export const GetUser = async () => {
-  return await fetch('http://localhost:3001/api/user/getUser', {
+  return await fetch('http://webi-server-production.up.railway.app/api/user/getUser', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export const GetUser = async () => {
 };
 
 export const CreateService = async (args) => {
-  return await fetch('http://localhost:3001/api/service/createService', {
+  return await fetch('http://webi-server-production.up.railway.app/api/service/createService', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export const CreateService = async (args) => {
 };
 
 export const UpdateService = async (args) => {
-  return await fetch('http://localhost:3001/api/service/updateService', {
+  return await fetch('http://webi-server-production.up.railway.app/api/service/updateService', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ export const UpdateService = async (args) => {
 };
 
 export const RemoveService = async (args) => {
-  return await fetch('http://localhost:3001/api/service/removeService', {
+  return await fetch('http://webi-server-production.up.railway.app/api/service/removeService', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ export const RemoveService = async (args) => {
 };
 
 export const GetServiceById = async ({serviceId}) => {
-  return await fetch(`http://localhost:3001/api/service/getServiceById?serviceId=${serviceId}`, {
+  return await fetch(`http://webi-server-production.up.railway.app/api/service/getServiceById?serviceId=${serviceId}`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -147,7 +147,7 @@ export const GetServiceById = async ({serviceId}) => {
 
 export const GetServices = async ({name, priceFrom, priceTo}: {name: string; priceFrom: string; priceTo: string}) => {
   return await fetch(
-    `http://localhost:3001/api/service/getServices?name=${name}&priceFrom=${priceFrom}&priceTo=${priceTo}`,
+    `http://webi-server-production.up.railway.app/api/service/getServices?name=${name}&priceFrom=${priceFrom}&priceTo=${priceTo}`,
     {
       headers: {
         Accept: 'application/json',
@@ -162,7 +162,7 @@ export const GetServices = async ({name, priceFrom, priceTo}: {name: string; pri
 };
 
 export const GetPersonalServices = async () => {
-  return await fetch(`http://localhost:3001/api/service/getPersonalServices`, {
+  return await fetch(`http://webi-server-production.up.railway.app/api/service/getPersonalServices`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -176,7 +176,7 @@ export const GetPersonalServices = async () => {
 };
 
 export const SupportRequest = async (data) => {
-  return await fetch(`http://localhost:3001/api/auth/supportRequest`, {
+  return await fetch(`http://webi-server-production.up.railway.app/api/auth/supportRequest`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -191,7 +191,7 @@ export const SupportRequest = async (data) => {
 };
 
 export const CreateOrder = async (serviceId) => {
-  return await fetch(`http://localhost:3001/api/order/createOrder`, {
+  return await fetch(`http://webi-server-production.up.railway.app/api/order/createOrder`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -206,7 +206,7 @@ export const CreateOrder = async (serviceId) => {
 };
 
 export const UpdateOrder = async ({orderId, status, repository_link}) => {
-  return await fetch(`http://localhost:3001/api/order/updateOrder`, {
+  return await fetch(`http://webi-server-production.up.railway.app/api/order/updateOrder`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -221,7 +221,7 @@ export const UpdateOrder = async ({orderId, status, repository_link}) => {
 };
 
 export const ResendOrderDetails = async ({orderId, repository_link}) => {
-  return await fetch(`http://localhost:3001/api/order/resendOrderDetails`, {
+  return await fetch(`http://webi-server-production.up.railway.app/api/order/resendOrderDetails`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -236,7 +236,7 @@ export const ResendOrderDetails = async ({orderId, repository_link}) => {
 };
 
 export const CloseOrder = async (orderId) => {
-  return await fetch(`http://localhost:3001/api/order/closeOrder`, {
+  return await fetch(`http://webi-server-production.up.railway.app/api/order/closeOrder`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -251,7 +251,7 @@ export const CloseOrder = async (orderId) => {
 };
 
 export const GetOrderById = async ({orderId}) => {
-  return await fetch(`http://localhost:3001/api/order/getOrderById?orderId=${orderId}`, {
+  return await fetch(`http://webi-server-production.up.railway.app/api/order/getOrderById?orderId=${orderId}`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -265,7 +265,7 @@ export const GetOrderById = async ({orderId}) => {
 };
 
 export const GetOrders = async () => {
-  return await fetch(`http://localhost:3001/api/order/getOrders`, {
+  return await fetch(`http://webi-server-production.up.railway.app/api/order/getOrders`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

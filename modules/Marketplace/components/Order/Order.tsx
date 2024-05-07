@@ -25,7 +25,7 @@ import {OrderStatus} from '../../enums';
 
 interface OrderProps {}
 // @ts-ignore
-const socket = io.connect('http://localhost:3001');
+const socket = io.connect('http://webi-server-production.up.railway.app');
 
 export const Order: FC<OrderProps> = () => {
   const searchParams = useSearchParams();
