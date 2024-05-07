@@ -56,7 +56,12 @@ export const Orders = () => {
             <Link href={`/marketplace/order?orderId=${id}`} key={id} className={s.item}>
               <h3>Заказ №{id}</h3>
               <p className='text-sm text-[#6C7AA0] mt-3'>тип: {buyer_id == profileId ? 'Покупка' : 'Продажа'}</p>
-              <p className='text-sm text-[#6C7AA0]'>статус: {OrderStatus[status]}</p>
+              <p className={`text-sm text-[#6C7AA0] `}>
+                статус:{' '}
+                <span className={`${status === 'done' ? s.success : status === 'cancel' ? s.danger : s.await}`}>
+                  {OrderStatus[status]}
+                </span>
+              </p>
             </Link>
           ))
         ) : isLoading ? (

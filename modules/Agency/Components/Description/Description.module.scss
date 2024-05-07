@@ -1,0 +1,22 @@
+.title {
+  @include fluid(font-size, 38px, 56px);
+  font-weight: bold;
+}
+.container {
+}
+.slide {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  width: 30%;
+
+  // width: 50% !important;
+  background: #1d1932;
+  border-radius: 14px;
+  padding: 30px;
+
+  @media screen and (max-width: $breakpoint-md) {
+    // width: 100% !important;
+    width: 100%;
+  }
+}

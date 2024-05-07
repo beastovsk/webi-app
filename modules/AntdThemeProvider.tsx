@@ -23,12 +23,13 @@ function AntdThemeProvider({children}: {children: React.ReactNode}) {
   const {mutate} = useMutation(GetUser);
   const router = useRouter();
   const pathname = usePathname();
-  const profileId = localStorage.getItem('id');
 
   useEffect(() => {
     setMounted(true);
     if (pathname.split('/')[1] !== 'marketplace') return;
     socket.on('create_order', (data) => {
+      const profileId = localStorage.getItem('id');
+
       if (data?.sellerId != profileId) return;
       customNotification(
         'info',

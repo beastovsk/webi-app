@@ -1,0 +1,19 @@
+.title {
+  @include fluid(font-size, 38px, 56px);
+  font-weight: bold;
+}
+.wrapper {
+  background: #1d1932;
+  padding: 20px;
+  border-radius: 15px;
+  width: 50%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  @media screen and (max-width: $breakpoint-md) {
+    width: 100%;
+  }
+}

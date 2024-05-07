@@ -34,7 +34,7 @@ const gilroy = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Webi agency',
+    default: 'Webi',
     template: `%s | Webi`
   },
   description: 'Купить веб сайт или веб приложение',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   ],
   robots: {
     index: true,
-    follow: true,
+    follow: true
   },
   icons: {
     icon: '/favicon.ico'

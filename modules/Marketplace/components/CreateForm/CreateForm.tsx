@@ -43,7 +43,7 @@ export const CreateForm: FC<CreateFormProps> = ({mutate, isLoading, service}) =>
   );
 
   const onFinish = (value) => {
-    const request = {...value, description, images: fileList.length ? fileList.map((file) => file.thumbUrl) : []};
+    const request = {...value, description, images: fileList?.length ? fileList.map((file) => file.thumbUrl) : []};
 
     mutate(request, {
       onSuccess: (data) => {

@@ -60,7 +60,7 @@ export const Basket: FC<BasketProps> = () => {
                 <div className='flex gap-10 md:flex-col'>
                   <Link href={`/marketplace/products/${data?.service.id}`}>
                     <PreloaderImage
-                      src={data?.service.images.length ? data?.service.images[0] : ''}
+                      src={data?.service.images?.length ? data?.service.images[0] : ''}
                       objectFit='cover'
                       alt=''
                       width={200}

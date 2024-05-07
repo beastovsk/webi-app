@@ -12,7 +12,7 @@ export const PersonalServices = () => {
   useEffect(() => {
     mutate({} as any, {
       onSuccess: (data) => {
-        if (!data?.services.length) return;
+        if (!data?.services?.length) return;
 
         setServices(data?.services);
       }

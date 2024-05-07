@@ -220,7 +220,7 @@ export const UpdateOrder = async ({orderId, status, repository_link}) => {
   });
 };
 
-export const ResendOrderDetails = async ({orderId}) => {
+export const ResendOrderDetails = async ({orderId, repository_link}) => {
   return await fetch(`http://localhost:3001/api/order/resendOrderDetails`, {
     headers: {
       Accept: 'application/json',
@@ -228,7 +228,7 @@ export const ResendOrderDetails = async ({orderId}) => {
       Authorization: `Bearer ${getCookie('token')}`
     },
     method: 'POST',
-    body: JSON.stringify({orderId})
+    body: JSON.stringify({orderId, repository_link})
   }).then((data) => {
     if (!data.ok) return;
     return data.json();

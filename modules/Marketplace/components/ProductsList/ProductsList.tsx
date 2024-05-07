@@ -60,7 +60,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsL
       </div>
 
       <div className={s.list}>
-        {productsList.length ? (
+        {productsList?.length ? (
           productsList.map(({owner_id, id, title, price, images}) => (
             <Link href={`/marketplace/products/${id}`} className={s.item} key={id}>
               <PreloaderImage
