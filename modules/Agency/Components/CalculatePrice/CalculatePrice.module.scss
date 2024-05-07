@@ -1,0 +1,13 @@
+.item {
+  @apply rounded-xl;
+  padding: 20px;
+  background: #1d1932;
+  transition: $trn;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: rgba(105, 0, 209, 0.5) 0px 2px 4px 0px inset;
+  }
+}

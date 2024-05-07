@@ -36,7 +36,7 @@ export const Feedback: FC<FeedbackProps> = () => {
     <animated.div ref={ref} style={springs} className={s.container} id='feedback'>
       <div className='mb-[40px] text-center'>
         <h1 className={s.title}>
-          Остались вопросы или нужна помощь по маркетплейсу <span className='text-primary-500 ml-2'>?</span>
+          Остались вопросы или нужна помощь<span className='text-primary-500 ml-2'>?</span>
         </h1>
         <p className='text-gray-500'>Заполните форму ниже и мы свяжемся с вами</p>
       </div>

@@ -26,26 +26,25 @@ export const Description: FC<DescriptionProps> = () => {
   const descriptionList = [
     {
       id: 0,
-      title: 'Покупка готового IT сервиса',
-      description: 'На нашей площадке продается готовые решения для рынка IT, которые готовы для размещения и рекламы'
+      title: 'Обсуждаем детали заказа',
+      description: 'Продумываем проект, предоставляем визуальный результат и приблизительные сроки выполнения'
     },
     {
       id: 1,
-      title: 'Размещение качественных продуктов',
-      description:
-        'Вы можете разместить предложения о покупке ваших решения для IT рынка и связаться с потенциальными покупателями'
+      title: 'Процесс разработки',
+      description: 'С фото и видео-отчетом раз в спринт (каждую неделю)'
     },
     {
       id: 2,
-      title: 'Помощь сервиса',
-      description: 'При успешной покупке - мы можем помочь вам разместить ваш новый продукт'
+      title: 'Релиз',
+      description: 'Передаем данные от облачного сервиса вашего нового проекта'
     }
   ];
   return (
     <animated.div ref={ref} style={springs} className={s.container}>
       <div className='flex justify-between md:flex-col'>
         <h1 className={s.title}>
-          Как <span className='text-primary-500'>Webi</span> - помогает развивать IT бизнес
+          Как происходит <span className='text-primary-500'>соотрудничество</span> c нами
           <span className='text-primary-500 ml-2'>?</span>
         </h1>
 

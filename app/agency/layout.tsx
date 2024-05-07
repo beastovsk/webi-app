@@ -8,7 +8,7 @@ import React from 'react';
 export const metadata: Metadata = {
   title: {
     default: 'Webi Agency',
-    template: `%s | Webi Marketplace`
+    template: `%s | Webi`
   },
   description: 'Купить веб сайт или веб приложение',
   keywords: [
