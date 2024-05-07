@@ -1,0 +1,21 @@
+.title {
+  @include fluid(font-size, 38px, 56px);
+  font-weight: bold;
+  margin: 40px 0;
+}
+.container {
+}
+.item {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  // flex-grow: 1;
+  position: absolute;
+  // top: 20%;
+  // left: 20%;
+  width: 50%;
+  z-index: 3;
+  background: #1d1932;
+  border-radius: 14px;
+  padding: 30px;
+}
