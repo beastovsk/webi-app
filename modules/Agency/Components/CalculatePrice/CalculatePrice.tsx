@@ -67,6 +67,8 @@ export const CalculatePrice = () => {
           if (!data?.message) return;
 
           customNotification('success', 'top', 'Информация', data?.message);
+          setOpenCalculatePrice(false);
+          setStep('type');
         }
       }
     );

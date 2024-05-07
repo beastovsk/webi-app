@@ -9,9 +9,9 @@ import {Player} from '@lottiefiles/react-lottie-player';
 import {animated, useInView} from '@react-spring/web';
 
 // @ts-ignore
-import banner from '/public/image/banner-image.json';
+import banner from '/public/image/agency-image.json';
 import Link from 'next/link';
-import { useStore } from '../store';
+import {useStore} from '../store';
 
 interface BannerProps {}
 
@@ -41,7 +41,7 @@ export const Banner: FC<BannerProps> = () => {
           </Btn>
         </Link>
       </div>
-      <Player src={banner} className='player' loop autoplay />
+      <Player src={banner} className='player w-[400px]' loop autoplay />
     </animated.div>
   );
 };

@@ -2,10 +2,13 @@
 import React, {FC} from 'react';
 
 import s from './Faq.module.scss';
+import { SendContact } from '../api';
+import { useMutation } from 'react-query';
 
 interface FaqProps {}
 
 export const Faq: FC<FaqProps> = () => {
+
   return (
     <div className={s.container}>
       <h1 className={s.title}>

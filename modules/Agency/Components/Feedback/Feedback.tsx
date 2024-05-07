@@ -8,6 +8,7 @@ import {useMutation} from 'react-query';
 import {SupportRequest} from '@/modules/Marketplace/api';
 import {animated, useInView} from '@react-spring/web';
 import {customNotification} from '@/src/helpers/customNotification';
+import {SendContact} from '../api';
 
 interface FeedbackProps {}
 
@@ -20,7 +21,7 @@ export const Feedback: FC<FeedbackProps> = () => {
     {rootMargin: '-20% 0%'}
   );
 
-  const {mutate, isLoading} = useMutation(SupportRequest);
+  const {mutate, isLoading} = useMutation(SendContact);
 
   const onFinish = (values: any) => {
     mutate(values, {
