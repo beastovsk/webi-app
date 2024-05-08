@@ -62,7 +62,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsL
       <div className={s.list}>
         {productsList?.length ? (
           productsList.map(({owner_id, id, title, price, images}) => (
-            <Link href={`/marketplace/products/${id}`} className={s.item} key={id}>
+            <Link href='/marketplace/products/[id]' as={`/marketplace/products/${id}`} className={s.item} key={id}>
               <PreloaderImage
                 src={images[0]}
                 objectFit='cover'
@@ -75,7 +75,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsL
               <h2 className='my-5 text-lg font-medium'>
                 {title}
                 {profileId == owner_id ? (
-                  <Link href={`/marketplace/products/${id}/update`}>
+                  <Link href='/marketplace/products/[id]/update' as={`/marketplace/products/${id}/update`}>
                     <EditOutlined className='text-[#6F4FF2] ml-3 hover:opacity-70 transition-opacity' />
                   </Link>
                 ) : null}
@@ -92,7 +92,7 @@ export const ProductsList: FC<ProductsListProps> = ({title, isLoading, productsL
                   <Btn className='w-full mt-auto'>Оформить заказ</Btn>
                 </Link>
               ) : (
-                <Link href={`/marketplace/products/${id}/update`}>
+                <Link href='/marketplace/products/[id]/update' as={`/marketplace/products/${id}/update`}>
                   <Btn className='w-full'>Изменить сервис</Btn>
                 </Link>
               )}
