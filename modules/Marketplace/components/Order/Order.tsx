@@ -25,7 +25,7 @@ import {OrderStatus} from '../../enums';
 
 interface OrderProps {}
 // @ts-ignore
-const socket = io.connect('http://webi-server-production.up.railway.app');
+const socket = io.connect('https://webi-server-production.up.railway.app');
 
 export const Order: FC<OrderProps> = () => {
   const searchParams = useSearchParams();
@@ -208,7 +208,7 @@ export const Order: FC<OrderProps> = () => {
               <h2>Ссылка на платежный сервис</h2>
               <p className='mt-3 mb-5 text-sm text-[#6C7AA0]'>После оплаты - сделка продолжится автоматически</p>
               <Link href='/' className='text-sm text-[#6C7AA0] underline'>
-                http://localhost:3000
+                https://localhost:3000
               </Link>
 
               <Btn
