@@ -41,7 +41,7 @@ export const Banner: FC<BannerProps> = () => {
           </Btn>
         </Link>
       </div>
-      <Player src={banner} className='player w-[400px]' loop autoplay />
+      <Player src={banner} className='player w-[400px] md:hidden' loop autoplay />
     </animated.div>
   );
 };

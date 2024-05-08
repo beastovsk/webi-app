@@ -45,10 +45,12 @@ export const Services: FC<ServicesProps> = () => {
         Как происходит процесс <span className='text-primary-500'>разработки</span> сервиса
       </h1>
       <div className={s.list}>
-        {servicesList.map(({title, description, image}) => (
+        {servicesList.map(({title, description, image}, i) => (
           <div className='flex flex-grow flex-col items-center' key={title}>
-            <PreloaderImage src={image} alt='' width={50} height={50} />
-            <h2 className='text-xl mt-5'>{title}</h2>
+            {/* <PreloaderImage src={image} alt='' width={50} height={50} /> */}
+            <h1 className='text-primary-500 text-xl font-bold'>
+              {i + 1}. <span className='text-white'>{title}</span>
+            </h1>
             <p className='text-gray-500 mt-3'>{description}</p>
           </div>
         ))}

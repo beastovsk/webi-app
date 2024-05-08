@@ -4,9 +4,9 @@ import React, {FC} from 'react';
 import s from './Services.module.scss';
 import {animated, useInView} from '@react-spring/web';
 
-import dev from '/public/image/dev-icon.svg';
-import design from '/public/image/design-icon.svg';
-import support from '/public/image/support-icon.svg';
+import dev from '@/public/image/dev-icon.svg';
+import design from '@/public/image/design-icon.svg';
+import support from '@/public/image/support-icon.svg';
 import Image from 'next/image';
 import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 
@@ -23,31 +23,34 @@ export const Services: FC<ServicesProps> = () => {
 
   const servicesList = [
     {
-      title: 'Оплата',
-      description: 'После добавление желаемого сервиса в корзину - вы приобретаете товар через платежную систему',
+      title: 'Подготовка',
+      description:
+        'После обсуждения деталей с заказчиком - мы внимательно изучаем требования и планируемся строго по фичам',
       image: dev
     },
     {
-      title: 'Получение сервиса от продавца',
-      description: 'Мы запрашиваем репозиторий сервиса от продавца и передаем вам',
+      title: 'Реализация',
+      description: 'Следуя нашему планированию - разрабатываем по дизайну и постановке',
       image: design
     },
     {
-      title: 'Выплата продавцу',
-      description: 'Продавец сервиса получает оплату',
+      title: 'Правки и дополнения',
+      description: 'Демонстрируем проект заказчику и вносим коррективы, если таковые имеются',
       image: support
     }
   ];
   return (
     <animated.div ref={ref} style={springs} className={s.container} id='services'>
       <h1 className={s.title}>
-        Как происходит процесс <span className='text-primary-500'>оплаты и получения сервиса</span>
+        Как происходит процесс <span className='text-primary-500'>разработки</span> сервиса
       </h1>
       <div className={s.list}>
-        {servicesList.map(({title, description, image}) => (
+        {servicesList.map(({title, description, image}, i) => (
           <div className='flex flex-grow flex-col items-center' key={title}>
-            <PreloaderImage src={image} alt='' width={50} height={50} />
-            <h2 className='text-xl mt-5'>{title}</h2>
+            {/* <PreloaderImage src={image} alt='' width={50} height={50} /> */}
+            <h1 className='text-primary-500 text-xl font-bold'>
+              {i + 1}. <span className='text-white'>{title}</span>
+            </h1>
             <p className='text-gray-500 mt-3'>{description}</p>
           </div>
         ))}

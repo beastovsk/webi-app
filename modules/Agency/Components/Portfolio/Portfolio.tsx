@@ -66,14 +66,11 @@ export const Portfolio: FC<PortfolioProps> = () => {
 
       <div className='flex flex-col gap-5'>
         {projectList.map(({label, description, subtitle, image}) => (
-          <div>
+          <div key={label}>
             <div className={s.item}>
               <h2 className='text-3xl font-bold text-primary-500'>{label}</h2>
               <h3 className='mt-3 text-xl'>{subtitle}</h3>
-              <p className='mt-2 text-sm text-[#6C7AA0]'>{description}</p>
-            </div>
-            <div className='p-10 bg-[#1d1932] rounded-3xl relative'>
-              <PreloaderImage src={image} alt='' className='flex-grow relative' />
+              <PreloaderImage src={image} alt='' className='flex-grow mt-10' />
             </div>
           </div>
         ))}
