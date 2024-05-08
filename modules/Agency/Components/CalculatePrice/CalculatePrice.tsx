@@ -28,28 +28,28 @@ export const CalculatePrice = () => {
     setForm((form) => ({...form, [step]: value}));
 
     switch (step) {
-      case 'type':
-        setStep('projectStatus');
-        break;
-      case 'projectStatus':
-        setStep('pageInfo');
-        break;
-      case 'pageInfo':
-        setStep('companyNiche');
-        break;
-      case 'companyNiche':
-        setStep('projectDescription');
-        break;
-      case 'projectDescription':
-        setStep('projectBudjet');
-        break;
+    case 'type':
+      setStep('projectStatus');
+      break;
+    case 'projectStatus':
+      setStep('pageInfo');
+      break;
+    case 'pageInfo':
+      setStep('companyNiche');
+      break;
+    case 'companyNiche':
+      setStep('projectDescription');
+      break;
+    case 'projectDescription':
+      setStep('projectBudjet');
+      break;
 
-      case 'projectBudjet':
-        setStep('contact');
-        break;
+    case 'projectBudjet':
+      setStep('contact');
+      break;
 
-      default:
-        break;
+    default:
+      break;
     }
   };
 

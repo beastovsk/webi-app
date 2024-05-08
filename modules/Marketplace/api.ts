@@ -1,13 +1,12 @@
-import {customNotification} from '@/src/helpers/customNotification';
-import axios from 'axios';
-import {getCookie, setCookie} from 'cookies-next';
-import {useStore} from './store';
+import {getCookie} from 'cookies-next';
 
 export const Login = async (args: {email: string; password: string}) => {
   return await fetch('https://webi-server-production.up.railway.app/api/auth/login', {
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -18,7 +17,9 @@ export const Register = async (args: {password: string; email: string}) => {
   return await fetch('https://webi-server-production.up.railway.app/api/auth/register', {
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -29,7 +30,9 @@ export const ConfirmEmail = async (args: {confirmToken: string}) => {
   return await fetch('https://webi-server-production.up.railway.app/api/auth/confirmEmail', {
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -40,7 +43,9 @@ export const SendResetCode = async (args: {email: string}) => {
   return await fetch('https://webi-server-production.up.railway.app/api/auth/sendResetCode', {
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -51,7 +56,9 @@ export const ResetPassword = async (args: {password: string; confirmToken: strin
   return await fetch('https://webi-server-production.up.railway.app/api/auth/resetPassword', {
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -63,7 +70,9 @@ export const ChangeEmail = async (args: {currentEmail: string; newEmail: string;
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -75,7 +84,9 @@ export const ChangePassword = async (args: {password: string; currentPassword: s
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -87,7 +98,9 @@ export const GetUser = async () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'GET'
   }).then((data) => {
@@ -101,7 +114,9 @@ export const CreateService = async (args) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -113,7 +128,9 @@ export const UpdateService = async (args) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -125,7 +142,9 @@ export const RemoveService = async (args) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(args)
@@ -138,7 +157,9 @@ export const GetServiceById = async ({serviceId}) => {
     {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+        'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
       },
       method: 'GET'
     }
@@ -154,7 +175,9 @@ export const GetServices = async ({name, priceFrom, priceTo}: {name: string; pri
     {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+        'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
       },
       method: 'GET'
     }
@@ -165,11 +188,13 @@ export const GetServices = async ({name, priceFrom, priceTo}: {name: string; pri
 };
 
 export const GetPersonalServices = async () => {
-  return await fetch(`https://webi-server-production.up.railway.app/api/service/getPersonalServices`, {
+  return await fetch('https://webi-server-production.up.railway.app/api/service/getPersonalServices', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'GET'
   }).then((data) => {
@@ -179,11 +204,13 @@ export const GetPersonalServices = async () => {
 };
 
 export const SupportRequest = async (data) => {
-  return await fetch(`https://webi-server-production.up.railway.app/api/auth/supportRequest`, {
+  return await fetch('https://webi-server-production.up.railway.app/api/auth/supportRequest', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(data)
@@ -194,11 +221,13 @@ export const SupportRequest = async (data) => {
 };
 
 export const CreateOrder = async (serviceId) => {
-  return await fetch(`https://webi-server-production.up.railway.app/api/order/createOrder`, {
+  return await fetch('https://webi-server-production.up.railway.app/api/order/createOrder', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(serviceId)
@@ -208,14 +237,18 @@ export const CreateOrder = async (serviceId) => {
   });
 };
 
+// eslint-disable-next-line camelcase
 export const UpdateOrder = async ({orderId, status, repository_link}) => {
-  return await fetch(`https://webi-server-production.up.railway.app/api/order/updateOrder`, {
+  return await fetch('https://webi-server-production.up.railway.app/api/order/updateOrder', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
+    // eslint-disable-next-line camelcase
     body: JSON.stringify({orderId, status, repository_link})
   }).then((data) => {
     if (!data.ok) return;
@@ -223,14 +256,18 @@ export const UpdateOrder = async ({orderId, status, repository_link}) => {
   });
 };
 
+// eslint-disable-next-line camelcase
 export const ResendOrderDetails = async ({orderId, repository_link}) => {
-  return await fetch(`https://webi-server-production.up.railway.app/api/order/resendOrderDetails`, {
+  return await fetch('https://webi-server-production.up.railway.app/api/order/resendOrderDetails', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
+    // eslint-disable-next-line camelcase
     body: JSON.stringify({orderId, repository_link})
   }).then((data) => {
     if (!data.ok) return;
@@ -239,11 +276,13 @@ export const ResendOrderDetails = async ({orderId, repository_link}) => {
 };
 
 export const CloseOrder = async (orderId) => {
-  return await fetch(`https://webi-server-production.up.railway.app/api/order/closeOrder`, {
+  return await fetch('https://webi-server-production.up.railway.app/api/order/closeOrder', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'POST',
     body: JSON.stringify(orderId)
@@ -258,7 +297,9 @@ export const GetOrderById = async ({orderId}) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'GET'
   }).then((data) => {
@@ -268,11 +309,13 @@ export const GetOrderById = async ({orderId}) => {
 };
 
 export const GetOrders = async () => {
-  return await fetch(`https://webi-server-production.up.railway.app/api/order/getOrders`, {
+  return await fetch('https://webi-server-production.up.railway.app/api/order/getOrders', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getCookie('token')}`
+      Authorization: `Bearer ${getCookie('token')}`,
+      'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+      'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
     },
     method: 'GET'
   }).then((data) => {
