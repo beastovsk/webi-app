@@ -3,7 +3,7 @@ import s from './Logo.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import logo from 'public/logo.svg';
+import logo from '@/public/logo.svg';
 import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 
 interface LogoProps {

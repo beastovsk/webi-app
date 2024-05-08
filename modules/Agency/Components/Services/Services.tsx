@@ -4,9 +4,9 @@ import React, {FC} from 'react';
 import s from './Services.module.scss';
 import {animated, useInView} from '@react-spring/web';
 
-import dev from '/public/image/dev-icon.svg';
-import design from '/public/image/design-icon.svg';
-import support from '/public/image/support-icon.svg';
+import dev from '@/public/image/dev-icon.svg';
+import design from '@/public/image/design-icon.svg';
+import support from '@/public/image/support-icon.svg';
 import Image from 'next/image';
 import PreloaderImage from '@/components/PreloaderImage/PreloaderImage';
 
