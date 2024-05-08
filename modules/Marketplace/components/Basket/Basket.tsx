@@ -58,7 +58,7 @@ export const Basket: FC<BasketProps> = () => {
             <div className={s.item}>
               <div className='flex justify-between md:flex-col'>
                 <div className='flex gap-10 md:flex-col'>
-                  <Link href='/marketplace/products/[id]' as={`/marketplace/products/${data?.service.id}`}>
+                  <Link href='/marketplace/(content)/products/[id]' as={`/marketplace/products/${data?.service.id}`}>
                     <PreloaderImage
                       src={data?.service.images?.length ? data?.service.images[0] : ''}
                       objectFit='cover'
@@ -69,7 +69,7 @@ export const Basket: FC<BasketProps> = () => {
                     />
                   </Link>
                   <div className='w-1/2'>
-                    <Link href='/marketplace/products/[id]' as={`/marketplace/products/${data?.service.id}`}>
+                    <Link href='/marketplace/(content)/products/[id]' as={`/marketplace/products/${data?.service.id}`}>
                       <h2 className='text-lg font-normal hover:opacity-70 transition-opacity'>{data?.service.title}</h2>
 
                       <div className='max-h-[100px] overflow-y-auto break-all	text-ellipsis text-[#6C7AA0]'>

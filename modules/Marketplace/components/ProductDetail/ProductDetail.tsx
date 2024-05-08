@@ -15,8 +15,6 @@ export const ProductDetail: FC<ProductDetailProps> = ({id}) => {
   const {data, isLoading, isSuccess} = useQuery(['product', id], () => GetServiceById({serviceId: id}));
   const [service, setService] = useState(null);
 
-  console.log(service);
-
   useEffect(() => {
     if (!isSuccess) return;
 
