@@ -4,14 +4,14 @@ import {useMutation} from 'react-query';
 import {CreateForm} from '../CreateForm/CreateForm';
 import {GetServiceById, UpdateService} from '../../api';
 import {useEffect, useState} from 'react';
-import {usePathname} from 'next/navigation';
+import { useSearchParams} from 'next/navigation';
 import Loading from '@/app/loading';
 
 export const UpdateServiceForm = () => {
+  const searchParams = useSearchParams();
+  const serviceId = searchParams.get('id');
   const {mutate, isLoading} = useMutation(UpdateService);
   const {mutate: getService, isSuccess} = useMutation(GetServiceById);
-  const pathname = usePathname();
-  const serviceId = pathname.split('/').at(-3);
   const [service, setService] = useState(null);
 
   useEffect(() => {

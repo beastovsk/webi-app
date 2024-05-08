@@ -6,12 +6,13 @@ import {GetServiceById} from '../../api';
 import {ProductBanner} from '../ProductBanner/ProductBanner';
 import {ProductDescription} from '../ProductDescription/ProductDescription';
 import s from './ProductDetail.module.scss';
+import {useSearchParams} from 'next/navigation';
 
-interface ProductDetailProps {
-  id: string;
-}
+interface ProductDetailProps {}
 
-export const ProductDetail: FC<ProductDetailProps> = ({id}) => {
+export const ProductDetail: FC<ProductDetailProps> = () => {
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
   const {data, isLoading, isSuccess} = useQuery(['product', id], () => GetServiceById({serviceId: id}));
   const [service, setService] = useState(null);
 

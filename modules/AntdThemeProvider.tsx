@@ -2,17 +2,15 @@
 import React, {useEffect, useState} from 'react';
 import {ConfigProvider} from 'antd';
 import locale from 'antd/locale/ru_RU';
-import {darkTheme, lightTheme} from '@/src/helpers/theme';
+import {darkTheme} from '@/src/helpers/theme';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
-import {useTheme} from 'next-themes';
 import {useMutation} from 'react-query';
 import {GetUser} from './Marketplace/api';
 import {usePathname, useRouter} from 'next/navigation';
 import {deleteCookie} from 'cookies-next';
 import io from 'socket.io-client';
 import {customNotification} from '@/src/helpers/customNotification';
-import Btn from '@/components/UI/Btn/Btn';
 
 dayjs.locale('ru');
 // @ts-ignore
