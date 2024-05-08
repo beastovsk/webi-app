@@ -104,6 +104,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         </Script>
         <noscript>
           <div>
+            {/* @ts-ignore */}
             <img src='https://mc.yandex.ru/watch/94315700' style='position:absolute; left:-9999px;' alt='' />
           </div>
         </noscript>
