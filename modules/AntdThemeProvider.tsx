@@ -18,10 +18,10 @@ dayjs.locale('ru');
 // @ts-ignore
 const socket = io.connect('https://webi-server-production.up.railway.app', {
   transports: ['websocket', 'polling', 'flashsocket'],
-  extraHeaders: {
-    'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
-    'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
-  }
+  // extraHeaders: {
+  'Access-Control-Allow-Origin': 'https://webi-server-production.up.railway.app',
+  'Access-Control-Allow-Headers': 'https://webi-server-production.up.railway.app'
+  // }
 });
 
 function AntdThemeProvider({children}: {children: React.ReactNode}) {
