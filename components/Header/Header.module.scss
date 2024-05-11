@@ -11,6 +11,8 @@
 .link {
   @apply text-gray-500;
   transition: $trn;
+
+  cursor: not-allowed;
 }
 
 .link:hover {
